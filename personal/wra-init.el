@@ -4,7 +4,6 @@
 
 ;;; Code
 
-
 ;; install require packages through prelude
 (prelude-require-package 'yasnippet)
 (prelude-require-package 'image+)
@@ -38,34 +37,19 @@
 (global-hl-line-mode nil)
 
 
-;;;; Apperance on Startup
-;; inhibit start screen
-;;(setq inhibit-startup-message t inhibit-startup-echo-area-message t)
-
-;; inhibit tool-bar
-;;(tool-bar-mode -1)
-
-;; set default scratch mode to fundamental mode
-;;(setq initial-major-mode 'fundamental-mode)
-
 
 ;;----------------------------------------------------------------------------;;
 ;; Modes                                                                      ;;
 ;;----------------------------------------------------------------------------;;
 
-;; avy
-;;(global-set-key (kbd "M-s") 'avy-goto-char)
-;;(global-set-key (kbd "M-S") 'avy-goto-char-timer)
-;;(global-set-key (kbd "M-l") 'avy-goto-line)
-
-;; ace-window
-;;(global-set-key (kbd "M-W") 'ace-window)
+;; avy & ace window
+(global-set-key (kbd "M-s") 'avy-goto-char)
+(global-set-key (kbd "M-S") 'avy-goto-char-timer)
+(global-set-key (kbd "M-l") 'avy-goto-line)
+(global-set-key (kbd "M-W") 'ace-window)
 
 ;; Whitespace-Mode (shows whitespaces)
 ;;(setq whitespace-style '(face tabs spaces newline indentation space-mark tab-mark newline-mark))
-
-;; global column-number-mode
-;;(setq column-number-mode t)
 
 ;; Smart Tabs
 ;;(smart-tabs-insinuate 'java)

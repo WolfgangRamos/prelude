@@ -1,0 +1,15 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: standalone tikz graphic
+# key: standalone-tikz
+# --
+\documentclass[tikz, convert={density=72,outext=.png, outfile=$1.png}]{standalone}
+
+\usetikzlibrary{backgrounds}
+
+\begin{document}
+
+\begin{tikzpicture}[background rectangle/.style={fill=white}, show background rectangle]
+$0
+\end{tikzpicture}
+
+\end{document}

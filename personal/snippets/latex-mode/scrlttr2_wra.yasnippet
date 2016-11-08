@@ -1,0 +1,82 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: scrlttr2 (wra)
+# key: scrlttr2
+# group: skeleton
+# expand-env: ((yas-indent-line 'fixed)
+# --
+\documentclass[%
+  fontsize=12pt,
+  version=last,
+%
+%% Platzierung des Absenders
+  firsthead=false,        % Briefkopf mit Adresse setzen
+  firstfoot=${1:false},        % Briefbogenfuß mit Bankverbindung setzen
+  fromalign=${2:Position Absender$(yas-choose-value '("locationleft" "locationright" "left" "center" "right" "false"))}, % locationleft/locationright: links/rechtsbündig in der Absendererweiterung; left/center/right: links/zentriert/rechts im Briefkopf
+  fromrule=${3:Position Trennlinie$(yas-choose-value '("false" "afteraddress" "aftername"))}, % afteraddress: unter dem Briefkopf; aftername: unter dem Namen)
+  addrfield=true          % Addressfeld für Fensterbriefumschläge setzen
+%
+%% Absenderdaten im Briefkopf
+%   fromemail=true,
+%   fromphone=true,
+%   frommobilephone=true,
+%   fromfax=true,
+%   fromurl=true,
+%   fromlogo=true
+]{scrlttr2}
+
+\LoadLetterOption{DIN}
+\LoadLetterOption{wra_private}
+
+% Pakete
+
+\begin{document}
+
+% Variablen für alle Briefe setzen
+
+\begin{letter}{%
+% Empfänger
+${5:Name}\\\\
+${6:Straße} ${7:Nr}\\\\
+${8:PLZ} ${9:Ort}%
+}
+
+% Geschäftszeichenzeile
+\setkomavar{yourref}{}          % Ihr Zeichen
+\setkomavar{yourmail}{}         % Ihr Schreiben vom
+\setkomavar{myref}{}            % Unser Zeichen
+\setkomavar{customer}{}         % Kundennummer
+\setkomavar{invoice}{}          % Rechnungsnummer
+\setkomavar{place}{Kiel}        % Ort
+\setkomavar{date}{\today}       % Datum
+
+% Titel
+%\setkomavar{title}{...}
+
+% Betreff
+\setkomavar{subject}{${10:Betreff}}
+
+\opening{Sehr ${11:$$(yas-choose-value '("geehrte Frau " "geehrter Herr " "geehrte Damen und Herren"))},}
+
+${12:Text}
+
+\closing{Mit freundlichen Grüßen,}
+
+%% Postskriptum
+% \ps PS: <Text>
+
+%% Anlagen
+% \setkomavar*{enclseparator}{Anlage}
+% \encl{%
+%   <Anlage 1>\\\\
+%   <Anlage 2>%
+% }
+
+%% Verteilerangaben
+% \setkomavar*{ccseparator}{Kopie an}
+% \cc{%
+%   <Verteiler 1>\\\\
+%   <Verteiler 2>%
+% }
+
+\end{letter}
+\end{document}
