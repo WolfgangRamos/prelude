@@ -7,6 +7,7 @@
 ;; install require packages through prelude
 (prelude-require-package 'yasnippet)
 (prelude-require-package 'image+)
+(prelude-require-package 'dired+)
 
 ;;;; TODO move general setup stuff from wra-emacs-setup.el to this file (init.el)
 (add-to-list 'load-path (expand-file-name "wra" prelude-personal-dir))
@@ -16,10 +17,12 @@
 ;; require personalizations in 'wra' subdir
 (require 'wra-helm)
 (require 'wra-essh)
-;;(require 'wra-dired)
+(require 'wra-dired)
 
 ;; set home directory
 (setq default-directory "/home/wra/")
+
+(menu-bar-mode 1)
 
 ;; Tabs
 ;; tab stops at: 4, 8, 12, ..., 80

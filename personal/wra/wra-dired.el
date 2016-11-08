@@ -1,4 +1,8 @@
-(provide 'wra-dired)
+;;; wra-dired.el --- My dired config
+
+;;; Commentary
+
+;;; Code
 
 ;; dired
 (require 'dired)
@@ -27,6 +31,8 @@
 
 ;; X-dired
 (require 'dired-x)
+(add-hook 'dired-load-hook
+          (function (lambda () (load "dired-x"))))
 
 ;; dired+
 (require 'dired+)
@@ -53,3 +59,5 @@
 ;;   (add-hook 'dired-mode-hook
 ;;             (lambda () (guide-key/add-local-guide-key-sequence "%"))))
 
+(provide 'wra-dired)
+;;; wra-dired.el ends here
