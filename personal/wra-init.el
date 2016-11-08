@@ -10,9 +10,13 @@
 
 ;;;; TODO move general setup stuff from wra-emacs-setup.el to this file (init.el)
 (add-to-list 'load-path (expand-file-name "wra" prelude-personal-dir))
+(let ((default-directory (expand-file-name "lisp" prelude-personal-dir)))
+  (normal-top-level-add-subdirs-to-load-path))
 
 ;; require personalizations in 'wra' subdir
 (require 'wra-helm)
+(require 'wra-essh)
+;;(require 'wra-dired)
 
 ;; set home directory
 (setq default-directory "/home/wra/")
@@ -48,61 +52,6 @@
 (global-set-key (kbd "M-l") 'avy-goto-line)
 (global-set-key (kbd "M-W") 'ace-window)
 
-;; Whitespace-Mode (shows whitespaces)
-;;(setq whitespace-style '(face tabs spaces newline indentation space-mark tab-mark newline-mark))
-
-;; Smart Tabs
-;;(smart-tabs-insinuate 'java)
-
-;; ;; Helm
-;; (require 'helm-config)
-;; (helm-mode 1)
-;; (define-key global-map [remap find-file] 'helm-find-files)
-;; (define-key global-map [remap occur] 'helm-occur)
-;; (define-key global-map [remap list-buffers] 'helm-buffers-list)
-;; (define-key global-map [remap dabbrev-expand] 'helm-dabbrev)
-;; (global-set-key (kbd "M-x") 'helm-M-x)
-;; (unless (boundp 'completion-in-region-function)
-;;   (define-key lisp-interaction-mode-map [remap completion-at-point] 'helm-lisp-completion-at-point)
-;;   (define-key emacs-lisp-mode-map       [remap completion-at-point] 'helm-lisp-completion-at-point))
-;; (add-hook 'kill-emacs-hook #'(lambda () (and (file-exists-p "/tmp/helm-cfg.el") (delete-file "/tmp/helm-cfg.el"))))
-
-;; ;; automatically resize suggestion window
-;; (helm-autoresize-mode t)
-
-;; (autoload 'helm-bibtex "helm-bibtex" "" t)
-
-;; bindings
-;; (add-hook 'org-mode-hook
-;;           (lambda ()
-;;             (local-set-key "\C-x[" 'helm-bibtex)))
-
-;; setting searchable bib files for helm-bibtex
-;;(setq bibtex-completion-bibliography '("/path/to/bibtex-file-1.bib" "/path/to/bibtex-file-2.bib"))
-
-;; (setq bibtex-completion-format-citation-functions
-;;       '((org-mode      . bibtex-completion-format-citation-cite)
-;;         (latex-mode    . bibtex-completion-format-citation-cite)
-;;         (markdown-mode . bibtex-completion-format-citation-pandoc-citeproc)
-;;         (default       . bibtex-completion-format-citation-default)))
-
-;; make 'insert citation' the default action (carried out on <ENTER>)
-;;(helm-delete-action-from-source "Insert citation" helm-source-bibtex)
-;;(helm-add-action-to-source "Insert citation" 'bibtex-completion-insert-citation helm-source-bibtex 0)
-
-;; disable prompting for optional arguments in citations
-;;(setq bibtex-completion-cite-prompt-for-optional-arguments nil)
-
-;; add natbib citation commands
-;;(add-to-list 'bibtex-completion-cite-commands "citep")
-;;(add-to-list 'bibtex-completion-cite-commands "citet")
-
-;; make \citet the default citation command (and not added to mini-buffer suggestions)
-;;(setq bibtex-completion-cite-default-command "citet")
-;;(setq bibtex-completion-cite-default-as-initial-input nil)
-
-;; Dired
-;; (require 'wra-dired)
 
 ;; Recent files
 ;; (require 'recentf)
@@ -393,16 +342,5 @@ Toggles between: “all lower”, “Init Caps”, “ALL CAPS”."
 ;;(setq comint-scroll-to-bottom-on-output nil) ; always add output at the bottom
 ;;(setq comint-scroll-show-maximum-output t) ; scroll to show max possible output
 
-
-;; Emacs Speaks Shell
-;; (require 'essh)
-;; (defun essh-sh-hook ()
-;;   (define-key sh-mode-map "\C-c\C-r" 'pipe-region-to-shell)
-;;   (define-key sh-mode-map "\C-c\C-b" 'pipe-buffer-to-shell)
-;;   (define-key sh-mode-map "\C-c\C-j" 'pipe-line-to-shell)
-;;   (define-key sh-mode-map "\C-c\C-n" 'pipe-line-to-shell-and-step)
-;;   (define-key sh-mode-map "\C-c\C-f" 'pipe-function-to-shell)
-;;   (define-key sh-mode-map "\C-c\C-d" 'shell-cd-current-directory))
-;; (add-hook 'sh-mode-hook 'essh-sh-hook)
 
 ;;; init.el ends here
