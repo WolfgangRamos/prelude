@@ -8,6 +8,8 @@
 (prelude-require-package 'yasnippet)
 (prelude-require-package 'image+)
 (prelude-require-package 'dired+)
+(prelude-require-package 'cdlatex)
+(prelude-require-package 'auctex)
 
 ;;;; TODO move general setup stuff from wra-emacs-setup.el to this file (init.el)
 (add-to-list 'load-path (expand-file-name "wra" prelude-personal-dir))
@@ -16,8 +18,14 @@
 
 ;; require personalizations in 'wra' subdir
 (require 'wra-helm)
+(require 'wra-image)
+;;(require 'wra-ispell)
 (require 'wra-essh)
 (require 'wra-dired)
+(require 'wra-org)
+;;(require 'wra-yasnippet)
+;;(require 'wra-auctex)
+
 
 ;; set home directory
 (setq default-directory "/home/wra/")
