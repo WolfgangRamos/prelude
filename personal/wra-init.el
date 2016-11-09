@@ -7,6 +7,10 @@
 ;; install require packages through prelude
 (prelude-require-package 'yasnippet)
 (prelude-require-package 'image+)
+(prelude-require-package 'dired+)
+(prelude-require-package 'cdlatex)
+(prelude-require-package 'auctex)
+(prelude-require-package 'helm-c-yasnippet)
 
 ;;;; TODO move general setup stuff from wra-emacs-setup.el to this file (init.el)
 (add-to-list 'load-path (expand-file-name "wra" prelude-personal-dir))
@@ -15,11 +19,20 @@
 
 ;; require personalizations in 'wra' subdir
 (require 'wra-helm)
+(require 'wra-image)
+;;(require 'wra-ispell)
 (require 'wra-essh)
-;;(require 'wra-dired)
+(require 'wra-dired)
+(require 'wra-org)
+(require 'wra-yasnippet) ;; must  be loaded before auto complete?
+(require 'wra-auctex)
+(require 'wra-cdlatex)
+(require 'wra-shell)
 
 ;; set home directory
 (setq default-directory "/home/wra/")
+
+(menu-bar-mode 1)
 
 ;; Tabs
 ;; tab stops at: 4, 8, 12, ..., 80
@@ -40,6 +53,9 @@
 ;; enable global hl-line-mode
 (global-hl-line-mode nil)
 
+;; keybindings for movement by paragraph
+(global-set-key (kbd "M-n") 'forward-paragraph)
+(global-set-key (kbd "M-p") 'backward-paragraph)
 
 
 ;;----------------------------------------------------------------------------;;
@@ -53,25 +69,6 @@
 (global-set-key (kbd "M-W") 'ace-window)
 
 
-;; Recent files
-;; (require 'recentf)
-
-;; enable recent files mode.
-;;(recentf-mode t)
-
-;; ispell
-;; (require 'wra-ispell)
-
-;; yasnippet
-;; CAUTION: should be loaded before auto complete so that they can work together
-;; (require 'wra-yasnippet)
-
-;; cdlatex minor mode
-;; (require 'wra-cdlatex)
-
-;; org-mode
-;; (require 'wra-org)
-
 ;; DocView Mode (pdf viewer)
 ;; (put 'set-goal-column 'disabled nil) ;; enable continuous scrolling
 
@@ -83,20 +80,6 @@
 
 ;; ;; Paren-Mode (shows matching brackets)
 ;; (setq show-paren-delay 0)
-
-;; AucTeX
-;; (require 'wra-auctex)
-
-;; move line up/down with M-<up>/<down>
-;;(require 'move-text)
-;;(move-text-default-bindings)
-
-
-;; Lisp
-;; (add-hook 'emacs-lisp-mode-hook
-;; 	  (lambda ()
-;; 	    (show-paren-mode 1)
-;; 	    (whitespace-mode 1)))
 
 
 ;; Haskell
@@ -125,24 +108,6 @@
 ;; (setq auto-mode-alist (append '(("\\.pl$" . prolog-mode)
 ;;                                 ("\\.m$" . mercury-mode))
 ;;                               auto-mode-alist))
-
-
-;; CC-Mode
-;; (add-hook 'c-mode-hook
-;; 	  (lambda ()
-;; 	    (show-paren-mode 1)
-;; 	    (whitespace-mode 1)))
-
-
-
-;; Java-mode
-;; (add-hook 'java-mode-hook
-;; 	  (lambda ()
-;; 	    (show-paren-mode 1)
-;; 	    (whitespace-mode 1)))
-
-;; (add-hook 'java-mode-hook #'yas-minor-mode)
-
 
 
 ;; Math preview
@@ -193,24 +158,10 @@
 
 
 
-;; Magit
-;; (setq magit-last-seen-setup-instructions "1.4.0")
-
-
 ;; make RET auto indent
 ;; (define-key global-map (kbd "RET") 'newline-and-indent)
 
-;; make C-n insert new lines at the end of a file
-;; (setq next-line-add-newlines t)
 
-;; keybindings for movement by paragraph
-;; (global-set-key (kbd "M-n") 'forward-paragraph)
-;; (global-set-key (kbd "M-p") 'backward-paragraph)
-
-
-
-;; webkit
-;;(require 'webkit)
 
 
 
@@ -227,32 +178,6 @@
 ;;   (exchange-point-and-mark)
 ;;   (deactivate-mark nil))
 ;; (define-key global-map [remap exchange-point-and-mark] 'exchange-point-and-mark-no-activate)
-
-
-
-;; duplicate line with C-<down> od C-<up>
-;; (defun duplicate-line-down()
-;;   (interactive)
-;;   (move-beginning-of-line 1)
-;;   (kill-line)
-;;   (yank)
-;;   (open-line 1)
-;;   (next-line 1)
-;;   (yank)
-;;   )
-;; (global-set-key (kbd "<C-down>") 'duplicate-line-down)
-
-;; (defun duplicate-line-up()
-;;   (interactive)
-;;   (move-beginning-of-line 1)
-;;   (kill-line)
-;;   (yank)
-;;   (open-line 1)
-;;   (next-line 1)
-;;   (yank)
-;;   (previous-line 1)
-;;   )
-;; (global-set-key (kbd "<C-up>") 'duplicate-line-up)
 
 
 ;; toggle the case of a word with M-ö
@@ -317,9 +242,8 @@ Toggles between: “all lower”, “Init Caps”, “ALL CAPS”."
 (global-set-key (kbd "C-)") 'wra-insert-char-right-chevron)
 
 
-
 ;; display ascii table in a buffer
-(defun wra-ascii-table ()
+(defun wra-display-ascii-table ()
   "Display basic ASCII table (0 thru 128)."
   (interactive)
   (switch-to-buffer "*ASCII*")
@@ -336,11 +260,5 @@ Toggles between: “all lower”, “Init Caps”, “ALL CAPS”."
                                       (setq i (+ 32 i)) i (single-key-description i)
                                       (setq i (+ 32 i)) i (single-key-description i)))
                       (setq i (- i 96))))))
-
-;; configure shell buffer
-;;(setq comint-scroll-to-bottom-on-input t)  ; always insert at the bottom
-;;(setq comint-scroll-to-bottom-on-output nil) ; always add output at the bottom
-;;(setq comint-scroll-show-maximum-output t) ; scroll to show max possible output
-
 
 ;;; init.el ends here

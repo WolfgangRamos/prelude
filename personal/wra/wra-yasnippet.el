@@ -1,4 +1,8 @@
-(provide 'wra-yasnippet)
+;;; wra-yasnippet.el --- My Yasnippet Configuration
+
+;;; Commentary
+
+;;; Code
 
 ;; should be loaded before auto complete so that they can work together
 (require 'yasnippet)
@@ -8,10 +12,13 @@
 
 ;; snippets dirs (new snippets are stored in the first one)
 (setq yas-snippet-dirs
-	  '("~/.emacs.d/snippets"                 ;; personal snippets
-		"~/.emacs.d/elpa/yasnippet-20150811.1222/snippets"         ;; the default collection that lives in the yasnippet directory
-		))
+      (list
+       (expand-file-name "snippets" prelude-personal-dir) ;; personal snippet collection))
+       yas-installed-snippets-dir)) ;; build in snippet collection
 
 ;; i activate yasnippet on per-mode basis
 ;; use `(yas-global-mode 1)` to activate yasnippet in all modes
 (yas-reload-all)
+
+(provide 'wra-yasnippet)
+;;; wra-yasnippet.el ends here
