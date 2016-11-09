@@ -1,4 +1,8 @@
-(provide 'wra-auctex)
+;;; wra-auctex.el --- My AucTeX Configuration
+
+;;; Commentary
+
+;;; Code
 
 ;; AucTeX
 ;;(require 'tex-site)
@@ -18,7 +22,7 @@
   '(add-to-list 'TeX-command-list
 				'("latexmk -pdf" "latexmk -pdf %s" TeX-run-command t t :help "run latexmk with option -pdf") t))
 ;; make
-(add-hook 'TeX-mode-hook '(lambda () (setq TeX-command-default "lualatex (latexmk)")))
+;;(add-hook 'TeX-mode-hook '(lambda () (setq TeX-command-default "lualatex (latexmk)")))
 
 ;; Reftex einflechten und laden
 (setq reftex-plug-into-AUCTeX t)
@@ -56,3 +60,5 @@
 ;;(add-hook 'TeX-language-de-hook
 ;;(function (lambda () (ispell-change-dictionary "german8"))))
 
+(provide 'wra-auctex)
+;;; wra-auctex.el ends here
