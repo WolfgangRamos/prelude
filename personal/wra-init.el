@@ -28,6 +28,8 @@
 (require 'wra-auctex)
 (require 'wra-cdlatex)
 (require 'wra-shell)
+(require 'wra-company)
+(require 'x-dict)
 
 ;; set home directory
 (setq default-directory "/home/wra/")
