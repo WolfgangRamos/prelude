@@ -11,6 +11,7 @@
 (prelude-require-package 'cdlatex)
 (prelude-require-package 'auctex)
 (prelude-require-package 'helm-c-yasnippet)
+(prelude-require-package 'restclient)
 
 ;;;; TODO move general setup stuff from wra-emacs-setup.el to this file (init.el)
 (add-to-list 'load-path (expand-file-name "wra" prelude-personal-dir))
@@ -30,11 +31,13 @@
 (require 'wra-shell)
 (require 'wra-company)
 (require 'x-dict)
+(require 'wra-restclient)
 
 ;; set home directory
 (setq default-directory "/home/wra/")
 
 (menu-bar-mode 1)
+(add-to-list 'default-frame-alist '(fullscreen . fullboth)) ;; start in fullscreen mode (toggle with <F11>)
 
 ;; Tabs
 ;; tab stops at: 4, 8, 12, ..., 80
@@ -65,9 +68,9 @@
 ;;----------------------------------------------------------------------------;;
 
 ;; avy & ace window
-(global-set-key (kbd "M-s") 'avy-goto-char)
-(global-set-key (kbd "M-S") 'avy-goto-char-timer)
-(global-set-key (kbd "M-l") 'avy-goto-line)
+;; (global-set-key (kbd "M-s") 'avy-goto-word-1)
+;; (global-set-key (kbd "M-S") 'avy-goto-char-timer)
+;; (global-set-key (kbd "M-l") 'avy-goto-line)
 (global-set-key (kbd "M-W") 'ace-window)
 
 
