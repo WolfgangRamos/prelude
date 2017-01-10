@@ -12,6 +12,7 @@
 (prelude-require-package 'auctex)
 (prelude-require-package 'helm-c-yasnippet)
 (prelude-require-package 'restclient)
+;;(prelude-require-package 'sunrise-commander)
 
 ;;;; TODO move general setup stuff from wra-emacs-setup.el to this file (init.el)
 (add-to-list 'load-path (expand-file-name "wra" prelude-personal-dir))
@@ -23,6 +24,7 @@
 (require 'wra-image)
 ;;(require 'wra-ispell)
 (require 'wra-essh)
+(require 'wra-ess)
 (require 'wra-dired)
 (require 'wra-org)
 (require 'wra-yasnippet) ;; must  be loaded before auto complete?
@@ -32,12 +34,19 @@
 (require 'wra-company)
 (require 'x-dict)
 (require 'wra-restclient)
+(require 'wra-nameses)
+(require 'wra-sunrise-commander)
 
 ;; set home directory
 (setq default-directory "/home/wra/")
 
 (menu-bar-mode 1)
 (add-to-list 'default-frame-alist '(fullscreen . fullboth)) ;; start in fullscreen mode (toggle with <F11>)
+(setq display-time-default-load-average nil) ;; hide system load
+(setq display-time-format "%a, %d.%m.%Y %H:%M")
+(display-time-mode 1)
+
+(setq guru-warn-only nil)
 
 ;; Tabs
 ;; tab stops at: 4, 8, 12, ..., 80
@@ -60,6 +69,7 @@
 
 ;; keybindings for movement by paragraph
 (global-set-key (kbd "M-n") 'forward-paragraph)
+
 (global-set-key (kbd "M-p") 'backward-paragraph)
 
 
