@@ -11,6 +11,7 @@
 | =C-x r l= | list bookmarks            |
 | =M-/=     | =hippie-exand=              |
 | =C-c .=   | thing at point operations |
+| C-c t   | run eshell                |
 |         |                           |
 
 
@@ -48,3 +49,10 @@ Enter Debugger with =(debug)= or =(debug-on-entry 'f)=. Debugger Commands:
 | =M-.=            | =find-tag=     |
 | =M-*=            | =pop-tag-mark= |
 | =visit-tag-file= | load TAGS file |
+
+** .dir-locals.el
+
+Each entry is either
+
+- a mode name or =nil= to set variables in all modes
+- a string specifing a directory

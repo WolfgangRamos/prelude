@@ -77,6 +77,7 @@
 (define-key prelude-mode-map [(shift return)] nil) ;; masks org-table-copy-down
 (define-key prelude-mode-map [(meta shift up)] nil)
 (define-key prelude-mode-map [(meta shift down)] nil)
+(define-key prelude-mode-map (kbd "C-c t") 'eshell) ;; replaced default ansi-term with eshell :)
 
 (setq register-preview-delay 0)
 
