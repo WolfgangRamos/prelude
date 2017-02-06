@@ -5,6 +5,9 @@
 
 ;;; Code:
 (require 'sunrise-commander)
+(require 'sunrise-x-checkpoints)
+(require 'sunrise-x-modeline) ; show full path in modeline
+
 ;; disable mouse
 (setq sr-cursor-follows-mouse nil)
 (define-key sr-mode-map [mouse-1] nil)

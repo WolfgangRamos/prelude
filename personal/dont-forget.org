@@ -1,0 +1,50 @@
+#+TITLE: Emacs Keys and Commands I Want to Remember
+
+* Global (with Prelude)
+
+| =C-h b=   | display key-bindings      |
+| =C-^=     | join two lines            |
+| =M-z=     | =zap-to-char=               |
+| =j j=     | =avy-goto-word=             |
+| =j k=     | =avy-goto-char=             |
+| =j l=     | =avy-goto-line=             |
+| =C-x r l= | list bookmarks            |
+| =M-/=     | =hippie-exand=              |
+| =C-c .=   | thing at point operations |
+|         |                           |
+
+
+** Registers
+
+| =C-x r s a=       | copy region to register =a=               |
+| =C-x r i a=       | insert content from register =a= at point |
+| =C-u 9 C-x r n a= | insert =9= into register =a=                |
+| =C-x C-k x a=     | save last kmacro to regrister =a=         |
+| C - x r j a=    | execute macro from register =a=           |
+
+
+
+** Searching
+
+| =M-e=   | edit search string                    |
+| =M-r=   | toggle regex                          |
+| =M-%=   | run =query-replace=                     |
+| =C-M-%= | run =query-replace-regex=               |
+| =C-w=   | insert word at point in search string |
+
+** Functions
+
+| =insert= | insert string at point |
+
+** Debugging
+
+Enter Debugger with =(debug)= or =(debug-on-entry 'f)=. Debugger Commands:
+
+| =R= | evaluate lisp expression |
+| =d= | step                     |
+
+** Working with TAGS
+
+| =M-.=            | =find-tag=     |
+| =M-*=            | =pop-tag-mark= |
+| =visit-tag-file= | load TAGS file |

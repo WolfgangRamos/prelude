@@ -36,6 +36,8 @@
 (require 'wra-restclient)
 (require 'wra-nameses)
 (require 'wra-sunrise-commander)
+(require 'wra-savehist)
+(require 'wra-isearch)
 
 ;; set home directory
 (setq default-directory "/home/wra/")
@@ -69,10 +71,17 @@
 
 ;; keybindings for movement by paragraph
 (global-set-key (kbd "M-n") 'forward-paragraph)
-
 (global-set-key (kbd "M-p") 'backward-paragraph)
 
+;; delete bindings from prelude-mode-map
+(define-key prelude-mode-map [(shift return)] nil) ;; masks org-table-copy-down
+(define-key prelude-mode-map [(meta shift up)] nil)
+(define-key prelude-mode-map [(meta shift down)] nil)
 
+(setq register-preview-delay 0)
+
+;; bind pop-tag-mark
+(global-set-key (kbd "M-*") 'pop-tag-mark)
 ;;----------------------------------------------------------------------------;;
 ;; Modes                                                                      ;;
 ;;----------------------------------------------------------------------------;;
@@ -89,7 +98,7 @@
 
 ;; PDF Tools
 ;; (pdf-tools-install)
-;; (add-hook 'doc-view-mode-hook
+;; (add-Hook 'doc-view-mode-hook
 ;;           (lambda()
 ;;             (pdf-view-mode)))
 

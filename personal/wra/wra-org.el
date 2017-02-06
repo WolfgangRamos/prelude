@@ -1,7 +1,7 @@
 ;;; wra-org --- Summary
 ;;; TODO
 
-;;; Commentary
+;;; Commentary:
 
 ;;; Code
 (require 'org)
@@ -168,7 +168,8 @@
 
 ;; additional packages
 ;;(add-to-list 'org-latex-packages-alist '("" "wraorgpreview" t))
-(add-to-list 'org-latex-packages-alist '("" "hyperref" t))
+;;(add-to-list 'org-latex-packages-alist '("" "hyperref" t))
+(setq org-latex-packages-alist '(("" "wrabscpreview" t) ("" "siunitx" t))) ;; for bsc thesis
 
 ;; add latex class 'kcssproposal'
 (add-to-list 'org-latex-classes
