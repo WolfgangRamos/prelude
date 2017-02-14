@@ -2,17 +2,17 @@
 
 * Global (with Prelude)
 
-| =C-h b=   | display key-bindings      |
-| =C-^=     | join two lines            |
-| =M-z=     | =zap-to-char=               |
-| =j j=     | =avy-goto-word=             |
-| =j k=     | =avy-goto-char=             |
-| =j l=     | =avy-goto-line=             |
-| =C-x r l= | list bookmarks            |
-| =M-/=     | =hippie-exand=              |
-| =C-c .=   | thing at point operations |
-| C-c t   | run eshell                |
-|         |                           |
+| =C-h b=       | display key-bindings      |
+| =C-^=         | join two lines            |
+| =M-z=         | =zap-to-char=               |
+| =j j=         | =avy-goto-word=             |
+| =j k=         | =avy-goto-char=             |
+| =j l=         | =avy-goto-line=             |
+| =C-x r l=     | list bookmarks            |
+| =M-/=         | =hippie-exand=              |
+| =C-c .=       | thing at point operations |
+| C-c t       | run eshell                |
+| C-Backspace | reverse kill line         |
 
 
 ** Registers
