@@ -8,7 +8,7 @@
 (require 'yasnippet)
 (require 'cdlatex)
 (require 'org-wc) ;; provides function 'org-word-count
-(require 'org-ref)
+(prelude-require-package 'org-ref)
 
 
 ;; allow alphabetical lists, like a), b) ... or a., b. ...
