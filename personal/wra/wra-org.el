@@ -140,6 +140,10 @@
 ;; enable yasnippet
 (add-hook 'org-mode-hook #'yas-minor-mode)
 
+;; map org-time-stamp to
+(add-hook 'org-mode-hook (lambda ()
+                           (define-key org-mode-map (kbd "C-c .") nil)))
+
 ;; enable evaluation of code blocks for specific languages
 (org-babel-do-load-languages
  'org-babel-load-languages
@@ -169,7 +173,7 @@
 ;; additional packages
 ;;(add-to-list 'org-latex-packages-alist '("" "wraorgpreview" t))
 ;;(add-to-list 'org-latex-packages-alist '("" "hyperref" t))
-(setq org-latex-packages-alist '(("" "wrabscpreview" t) ("" "siunitx" t))) ;; for bsc thesis
+(setq org-latex-packages-alist '(("" "wrabscpreview" t) ("binary-units = true" "siunitx" t))) ;; for bsc thesis
 
 ;; add latex class 'kcssproposal'
 (add-to-list 'org-latex-classes
