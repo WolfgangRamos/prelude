@@ -177,8 +177,8 @@
 
 ;; add latex class 'kcssproposal'
 (add-to-list 'org-latex-classes
-             '("kcssproposal"
-               "\\documentclass{kcssproposal}
+             '("kcss"
+               "\\documentclass{kcss}
                 [NO-DEFAULT-PACKAGES]
                 [NO-PACKAGES]
                 [EXTRA]"
@@ -216,6 +216,16 @@
   (when (org-export-derived-backend-p backend 'latex)
     (replace-regexp-in-string "\\\\label{sec-[0-9][^}]*}\n" "" string)))
 
+(defun wra-org-export-remove-orgref-labels (backend)
+  "Remove all orgref labels before parsing"
+  (when (org-export-derived-backend-p backend 'ascii)
+    (beginning-of-buffer)
+    (wra-remove-labels)))
+
+(defun wra-remove-labels ()
+ ;; (interactive)
+  (while (re-search-forward "^label:.*\\s-" nil t)
+    (replace-match "")))
 ;; (add-to-list 'org-export-filter-final-output-functions 'remove-orgmode-latex-labels)
 
 
