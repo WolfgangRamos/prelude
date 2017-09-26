@@ -40,9 +40,15 @@
 (require 'wra-isearch)
 
 ;; set home directory
-(setq default-directory (if (equal system-type 'windows-nt)
-                            "c:/Users/wra/"
-                          "/home/wra/"))
+(defun wra-try-get-home-dir ()
+  "Returns environment variable HOME if set. Otherwise guess Wolfgang's standard wra directory"
+  (if (getenv "HOME")
+      (getenv "HOME")
+    (if (equal system-type 'windows-nt)
+        "c:/Users/wra/"
+      "/home/wra"/)))
+
+(setq default-directory (wra-try-get-home-dir))
 
 (menu-bar-mode 1)
 (add-to-list 'default-frame-alist '(fullscreen . fullboth)) ;; start in fullscreen mode (toggle with <F11>)
