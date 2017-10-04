@@ -38,6 +38,7 @@
 (require 'wra-sunrise-commander)
 (require 'wra-savehist)
 (require 'wra-isearch)
+(require 'wra-xml)
 
 ;; set home directory
 (defun wra-try-get-home-dir ()
