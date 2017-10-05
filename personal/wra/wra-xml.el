@@ -17,10 +17,15 @@
                "<!--"
                sgml-skip-tag-forward
                nil))
+;; set indetation to 2 spaces
+(setq nxml-child-indent 2)
 
+(add-hook 'nxml-mode-hook
+          (lambda ()
+            (hs-minor-mode 1) ;; enable hide-show
+            (whitespace-mode -1)
 
-
-(add-hook 'nxml-mode-hook 'hs-minor-mode)
+            ))
 
 ;; optional key bindings, easier than hs defaults
 (define-key nxml-mode-map (kbd "C-c h") 'hs-toggle-hiding)
