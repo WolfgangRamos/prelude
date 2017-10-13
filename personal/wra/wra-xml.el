@@ -24,7 +24,7 @@
           (lambda ()
             (hs-minor-mode 1) ;; enable hide-show
             (whitespace-mode -1)
-
+            (flycheck-mode -1)
             ))
 
 ;; optional key bindings, easier than hs defaults
