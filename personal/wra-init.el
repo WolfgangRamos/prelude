@@ -11,7 +11,6 @@
 (prelude-require-package 'cdlatex)
 (prelude-require-package 'auctex)
 (prelude-require-package 'helm-c-yasnippet)
-(prelude-require-package 'restclient)
 ;;(prelude-require-package 'sunrise-commander)
 
 ;;;; TODO move general setup stuff from wra-emacs-setup.el to this file (init.el)
@@ -33,7 +32,8 @@
 (require 'wra-shell)
 (require 'wra-company)
 (require 'x-dict)
-(require 'wra-restclient)
+(require 'restclient)
+;;(require 'wra-restclient)
 (require 'wra-nameses)
 (require 'wra-sunrise-commander)
 (require 'wra-savehist)
@@ -92,6 +92,11 @@
 
 ;; bind pop-tag-mark
 (global-set-key (kbd "M-*") 'pop-tag-mark)
+
+
+;; set re-builder style to 'read (needs double escaping)
+(setq reb-re-syntax 'read)
+
 ;;----------------------------------------------------------------------------;;
 ;; Modes                                                                      ;;
 ;;----------------------------------------------------------------------------;;
