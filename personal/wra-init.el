@@ -34,6 +34,7 @@
 (require 'x-dict)
 (require 'restclient)
 ;;(require 'wra-restclient)
+(require 'gearup-ms-windows)
 (require 'wra-nameses)
 (require 'wra-sunrise-commander)
 (require 'wra-savehist)
