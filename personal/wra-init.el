@@ -95,6 +95,7 @@
 
 
 ;; set re-builder style to 'read (needs double escaping)
+(require 're-builder)
 (setq reb-re-syntax 'read)
 
 ;;----------------------------------------------------------------------------;;
