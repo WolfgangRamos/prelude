@@ -40,7 +40,8 @@
                         (find-file file)))
       (find-file-other-window file))))
 
-;; TODO bind this to "o"
+(define-key dired-mode-map "o" 'gearup-find-file-ace-window)
+
 
 ;; X-dired
 (require 'dired-x)
