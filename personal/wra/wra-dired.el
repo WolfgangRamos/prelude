@@ -6,6 +6,7 @@
 
 ;; dired
 (require 'dired)
+(prelude-require-package 'ace-window)
 
 ;; configure default shell commands for (a)synchronous shell commands with ! or &
 (setq dired-guess-shell-alist-user
@@ -28,6 +29,18 @@
 (require 'find-dired)
 (setq find-ls-option '("-print0 | xargs -0 ls -ld" . "-ld"))
 
+;; find-file in specific buffer
+(defun gearup-find-file-ace-window ()
+  "Select a window."
+  (interactive)
+  (let ((file (dired-get-file-for-visit)))
+    (if (> (length (aw-window-list)) 1)
+        (aw-select "" (lambda (window)
+                        (aw-switch-to-window window)
+                        (find-file file)))
+      (find-file-other-window file))))
+
+;; TODO bind this to "o"
 
 ;; X-dired
 (require 'dired-x)
