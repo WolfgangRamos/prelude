@@ -48,9 +48,16 @@
       (getenv "HOME")
     (if (equal system-type 'windows-nt)
         "c:/Users/wra/"
-      "/home/wra"/)))
+      "/home/wra/")))
 
 (setq default-directory (wra-try-get-home-dir))
+
+(prelude-require-package 'ace-window)
+;; use home row for window selection
+(setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+
+;; disable graphical effects
+(setq aw-background nil) 
 
 (menu-bar-mode 1)
 (add-to-list 'default-frame-alist '(fullscreen . fullboth)) ;; start in fullscreen mode (toggle with <F11>)
