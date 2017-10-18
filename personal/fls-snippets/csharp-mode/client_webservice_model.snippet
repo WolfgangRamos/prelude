@@ -1,0 +1,28 @@
+# contributor: Wolfgang Ramos
+# key: webservice
+# name: WebService model class blueprint
+# group: client
+# type: snippet
+# condition: 'in-code
+# --
+using Fls.Base;
+using Fls.VisiTourClient.Settings;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Xml.Serialization;
+
+namespace Fls.VisiTourClient.WebService.Model
+{
+    [XmlRoot("$1Request", Namespace = CICD.WebserviceNamespace)]
+    public class ${1:}Request : WebRequestModelBase
+    {
+        $0
+    }
+
+    [XmlRoot("$1Response", Namespace = CICD.WebserviceNamespace)]
+    public class $1Response : WebRequestModelBase
+    {
+
+    }
+}

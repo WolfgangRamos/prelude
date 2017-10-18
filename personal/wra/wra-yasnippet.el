@@ -20,5 +20,12 @@
 ;; use `(yas-global-mode 1)` to activate yasnippet in all modes
 (yas-reload-all)
 
+(add-hook 'snippet-mode-hook
+          (lambda ()
+            (whitespace-mode -1); TODO tabs should be highlighted
+                                ; though
+            (show-paren-mode)   ; highlight matching brackets
+            ))
+
 (provide 'wra-yasnippet)
 ;;; wra-yasnippet.el ends here
