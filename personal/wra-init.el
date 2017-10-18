@@ -1,8 +1,8 @@
 ;;; wra-init.el --- My Prelude User Init File
 
-;;; Commentary
+;;; Commentary:
 
-;;; Code
+;;; Code:
 
 ;; install require packages through prelude
 (prelude-require-package 'yasnippet)
@@ -43,7 +43,9 @@
 
 ;; set home directory
 (defun wra-try-get-home-dir ()
-  "Returns environment variable HOME if set. Otherwise guess Wolfgang's standard wra directory"
+  "Return environment variable HOME if set.
+
+If not set, try to guess Wolfgang's standard wra directory."
   (if (getenv "HOME")
       (getenv "HOME")
     (if (equal system-type 'windows-nt)
@@ -57,7 +59,7 @@
 (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
 
 ;; disable graphical effects
-(setq aw-background nil) 
+(setq aw-background nil)
 
 (menu-bar-mode 1)
 (add-to-list 'default-frame-alist '(fullscreen . fullboth)) ;; start in fullscreen mode (toggle with <F11>)
