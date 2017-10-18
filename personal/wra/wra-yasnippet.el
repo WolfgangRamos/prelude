@@ -1,8 +1,8 @@
 ;;; wra-yasnippet.el --- My Yasnippet Configuration
 
-;;; Commentary
+;;; Commentary:
 
-;;; Code
+;;; Code:
 
 ;; should be loaded before auto complete so that they can work together
 (require 'yasnippet)
@@ -19,6 +19,18 @@
 ;; i activate yasnippet on per-mode basis
 ;; use `(yas-global-mode 1)` to activate yasnippet in all modes
 (yas-reload-all)
+
+;; configure snippet-mode
+
+;; whitespace highlighting configuration
+
+(setq gearup-snippet-mode-whitespace-style '(face trailing tabs newline space-mark tab-mark newline-mark))
+
+(setq gearup-snippet-mode-whitespace-display-mappings ;; all numbers are unicode codepoint in decimal. e.g. (insert-char 182 1)
+'((space-mark 32 [183] [46]) ;
+(newline-mark 10 [182 10]) ; LINE FEED,
+(tab-mark 9 [9655 9] [92 9]) ; tab
+))
 
 (add-hook 'snippet-mode-hook
           (lambda ()
