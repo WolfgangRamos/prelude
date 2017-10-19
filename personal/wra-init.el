@@ -1,8 +1,8 @@
 ;;; wra-init.el --- My Prelude User Init File
 
-;;; Commentary
+;;; Commentary:
 
-;;; Code
+;;; Code:
 
 ;; install require packages through prelude
 (prelude-require-package 'yasnippet)
@@ -58,7 +58,6 @@
       (gearup-try-get-home-dir-windows)
     (getenv "HOME")))
 
-
 (setq default-directory (wra-try-get-home-dir))
 
 (prelude-require-package 'ace-window)
@@ -69,7 +68,7 @@
 (setq aw-background nil)
 
 (menu-bar-mode 1)
-(add-to-list 'default-frame-alist '(fullscreen . fullboth)) ;; start in fullscreen mode (toggle with <F11>)
+(if (equal system-type 'windows-nt) (add-to-list 'default-frame-alist '(fullscreen . maximized)) (add-to-list 'default-frame-alist '(fullscreen . fullboth))) ;; start in fullscreen mode (toggle with <F11>)
 (setq display-time-default-load-average nil) ;; hide system load
 (setq display-time-format "%a, %d.%m.%Y %H:%M")
 (display-time-mode 1)

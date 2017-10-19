@@ -1,0 +1,17 @@
+# contributor: Wolfgang Ramos
+# key: list
+# name: Xml comment list
+# group: comment
+# type: snippet
+# condition: 'in-comment
+# --
+<list type="${1:$$(yas-choose-value '("bullet" "number" "table"))">  
+    ${2:<listheader>
+        <term>term</term>
+        <description>description</description>
+    </listheader>} 
+    <item>
+        <term>term</term>  
+        <description>description</description>  
+    </item>  
+</list>  
