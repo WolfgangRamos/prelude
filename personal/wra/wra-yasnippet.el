@@ -23,6 +23,9 @@
 
 ;; configure snippet-mode
 
+;;
+(add-to-list 'auto-mode-alist '("\\.snippet\\'" . snippet-mode))
+
 ;; whitespace highlighting configuration
 
 (setq gearup-snippet-mode-whitespace-style '(face trailing tabs newline space-mark tab-mark newline-mark))
@@ -38,9 +41,10 @@
 
 (add-hook 'snippet-mode-hook
           (lambda ()
-            (set (make-local-variable 'whitespace-style) gearup-snippet-mode-whitespace-style)
-            (set (make-local-variable 'whitespace-display-mappings) gearup-snippet-mode-whitespace-display-mappings)
-            (whitespace-mode)
+            (whitespace-mode 0)
+            (setq-local whitespace-style gearup-snippet-mode-whitespace-style)
+            (setq-local whitespace-display-mappings gearup-snippet-mode-whitespace-display-mappings)
+            (whitespace-mode 1)
             (show-paren-mode)   ; highlight matching brackets
             ))
 
