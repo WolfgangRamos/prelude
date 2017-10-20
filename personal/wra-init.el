@@ -42,15 +42,21 @@
 (require 'wra-xml)
 
 ;; set home directory
-(defun wra-try-get-home-dir ()
-  "Return environment variable HOME if set.
+(defun gearup-try-get-home-dir-windows ()
+  "Returns environment variable HOME if set. Otherwise guess Wolfgang's standard wra directory"
+  (let ((home (getenv "HOME")))
+    (if home
+        (if (string= (substring home -2) "\\")
+            home
+          (concat home "\\"))
+      "c:\\Users\\wra\\")))
 
-If not set, try to guess Wolfgang's standard wra directory."
-  (if (getenv "HOME")
-      (getenv "HOME")
-    (if (equal system-type 'windows-nt)
-        "c:/Users/wra/"
-      "/home/wra/")))
+
+(defun wra-try-get-home-dir ()
+  "Returns environment variable HOME if set. Otherwise guess Wolfgang's standard wra directory"
+  (if (equal system-type 'windows-nt)
+      (gearup-try-get-home-dir-windows)
+    (getenv "HOME")))
 
 (setq default-directory (wra-try-get-home-dir))
 
