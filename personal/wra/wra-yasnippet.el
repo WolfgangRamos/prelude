@@ -23,7 +23,7 @@
 
 ;; configure snippet-mode
 
-;;
+;; associate snippet mode with *.snippt files
 (add-to-list 'auto-mode-alist '("\\.snippet\\'" . snippet-mode))
 
 ;; whitespace highlighting configuration
