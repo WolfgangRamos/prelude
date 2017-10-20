@@ -13,5 +13,8 @@
             (setq truncate-lines t)
             (whitespace-mode 0)))
 
+(add-hook 'restclient-mode-hook 
+(lambda (
+(yas-minor-mode))))
 (provide 'wra-restclient)
 ;;; wra-restclient.el ends here
