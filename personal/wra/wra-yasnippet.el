@@ -41,6 +41,7 @@
             (set (make-local-variable 'whitespace-style) gearup-snippet-mode-whitespace-style)
             (set (make-local-variable 'whitespace-display-mappings) gearup-snippet-mode-whitespace-display-mappings)
             (whitespace-mode)
+            (whitespace-toggle-options 'lines-tail) ;; disable long line visualization
             (show-paren-mode)   ; highlight matching brackets
             ))
 

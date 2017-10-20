@@ -62,7 +62,9 @@ If not set, try to guess Wolfgang's standard wra directory."
 (setq aw-background nil)
 
 (menu-bar-mode 1)
-(add-to-list 'default-frame-alist '(fullscreen . fullboth)) ;; start in fullscreen mode (toggle with <F11>)
+(if (equal system-type 'windows-nt)
+    (add-to-list 'default-frame-alist '(fullscreen . maximized))
+  (add-to-list 'default-frame-alist '(fullscreen . fullboth))) ;; start in fullscreen mode (toggle with <F11>)
 (setq display-time-default-load-average nil) ;; hide system load
 (setq display-time-format "%a, %d.%m.%Y %H:%M")
 (display-time-mode 1)
