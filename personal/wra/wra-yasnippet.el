@@ -21,6 +21,13 @@
 ;; use `(yas-global-mode 1)` to activate yasnippet in all modes
 (yas-reload-all)
 
+;; create a snippet from region
+(setq gearup-ido-args '(("contributor:")))
+
+(defun gearup-create-yasnippet (text)
+  (interactive)
+  (let ((arg (ido-completing-read "Select from list: " list))))
+     nil)
 ;; configure snippet-mode
 
 ;; associate snippet mode with *.snippet files
