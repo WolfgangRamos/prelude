@@ -83,17 +83,22 @@ element are used as in the 2-element case."
                   (setq values
                         (append values (list (list prompt input)))))))))))))
 
-(defun gearup-new-yasnippet ()
+(defun gearup-new-yasnippet (begin end)
   "Opens a new buffer for writing snippets.
 
 Queries the user for most commonly snippet properties."
-  (interactive)
-  (let ((props (gearup-ido-multi-completing-read gearup-yasnippet-property-queries)))
+  (interactive (if (use-region-p) 
+                   (list (region-beginning) (region-end))
+                 (list nil nil)))
+  (let ((props (gearup-ido-multi-completing-read gearup-yasnippet-property-queries))
+        (selection ""))
+    (when (and begin end) 
+        (setq selection (buffer-substring-no-properties begin end)))
     (yas-new-snippet t)
     (goto-char (point-min))
     (dolist (prop props)
       (insert "# " (car prop) ": " (cadr prop) "\n"))
-    (insert "# --\n")))
+    (insert "# --\n" selection)))
 
 ;;(gearup-new-yasnippet)
 
