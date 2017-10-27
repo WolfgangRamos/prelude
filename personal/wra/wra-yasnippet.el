@@ -93,7 +93,8 @@ Queries the user for most commonly snippet properties."
   (let ((props (gearup-ido-multi-completing-read gearup-yasnippet-property-queries))
         (selection ""))
     (when (and begin end) 
-        (setq selection (buffer-substring-no-properties begin end)))
+        (setq selection (buffer-substring-no-properties begin end))
+        (deactivate-mark))
     (yas-new-snippet t)
     (goto-char (point-min))
     (dolist (prop props)
@@ -110,8 +111,110 @@ Queries the user for most commonly snippet properties."
 ;; associate snippet mode with *.snippet files
 (add-to-list 'auto-mode-alist '("\\.snippet\\'" . snippet-mode))
 
-;; whitespace highlighting configuration
+(setq gearup-yas-known-properties '("condition" "contributor" "expand-env" "group" "key"  "name" "type"))
 
+(defun gearup-yas-find-props ()
+"Detect yasnippet properties in current buffer.
+Return an alist with all found properties. The keys of this list are the property names. The valies are the property values."
+(if (not (eq major-mode 'snippet-mode))
+(error "Buffer is not in snippet-mode")
+(save-excursion
+(goto-char (point-min))
+(let ((props nil)
+      (bound (search-forward "# --" nil t)))
+(if (not bound)
+nil
+(progn
+(goto-char (point-min))
+(while (re-search-forward "^# \\([^:]+?\\): \\([[:print:]]*\\)[[:blank:]]*$" (- bound 3) t)
+(setq props (cons (list :name (match-string 1) :start (match-beginning 0) :line (what-line) :value (match-string 2)) props)))
+(cl-stable-sort props (lambda (p q) 
+              (let ((pname (plist-get p :name))
+                    (ppos (plist-get p :start))
+                    (qname (plist-get :name))
+                    (qpos (plist-get :start)))
+                 (or (string< pname qname) (and (string= pname qname) (< ppos qpos)))))))))))
+)
+
+
+(defun gearup-util-create-compare (geta getb compare)
+"Return a function to compare two arbitrary data structures. 
+GETA and GETB must be functions that generate compareable values from the desired input data structures. COMPARE must be a function that takes two comparable values.
+The returned function takes two data structures A and B and compares them using the following procedure:
+1. call GETA on A to get the first comparable value
+2. call GETB on B to get the second compareable value
+3. compare the first and second value using COMPARE amd return the result."
+
+(lambda (a b)
+(funcall compare (funcall geta a) (funcall getb b))))
+
+
+(defun gearup-yas-classify-props (present getname)
+"Detect duplicate, unknown, and missing properties.
+PRESENT must be a list structure containing property names. PRESENT must be sorted by property names and - in second order - by property positions. GETNAME must be a function that extracts yas property names from PRESENT as string. The return value is a plist. Property 
+
+- `:nodups' contains the valid and non-duplicate elements from PRESENT
+- `:dups' lists the valid but duplicate
+- `:unknown' lists the unknown
+- `:missing' lists property names that are recognized by yasnippet but were not found in PRESENT."
+
+(let ((names gearup-yas-known-properties)
+      (current (car-safe present))
+      (rst (cdr-safe present))
+      nodups dups missing unknown p n)
+  (while (and (setq p (funcall getname current)) 
+              (setq n (car-safe names)))
+    (cond
+      ((string< p n)
+       (while (string< p n)
+         (setq unknown (cons current unknown))
+         (setq current (car-safe rst))
+         (setq p (funcall getname current))
+         (setq rst (cdr-safe rst))))
+      ((string= n p)
+       (setq nodups (cons current nodups))
+       (setq current (car-safe rst))
+       (setq p (funcall getname current))
+       (setq rst (cdr rst))
+       (while (string= p n)
+         (setq dups (cons current dups))
+         (setq current (car-safe rst))
+         (setq p (funcall getname current))
+         (setq rst (cdr rst)))
+       (setq names (cdr-safe names)))
+      (t ;; p > n
+       (setq missing (cons n missing))
+       (setq names (cdr names)))))
+  (list
+    (cons :nodups nodups)
+    (cons :dups dups)
+    (cons :missing (append missing names))
+    (cons :unknown (append unknown present)))))
+
+;;;(defun gearup-yas-generate-error-messages ()
+;;""
+;;(let ((classification (gearup-yas-classify-props)))))
+
+
+(defun gearup-yas-check-buffer ()
+""
+(interactive)
+(let ((input-buffer (current-buffer))
+      (filename (buffer-file-name))
+      props
+      validation-result
+      (getname (lambda (x) (plist-get x :name)))
+      (output-buffer (get-buffer-create "*Snippet Validation Result*")))
+  (if (not (eq (major-mode) 'snippet-mode)))
+      (message "Current buffer's major mode is not snippet-mode")
+    (setq props (gearup-yas-find-props))
+    (setq validation-result (gearup-yas-classify-props props getname))
+    (set-buffer output-buffer)
+    (insert )
+    (switch-to-buffer-other-windows output-buffer)
+))
+
+;; whitespace highlighting configuration
 (setq gearup-snippet-mode-whitespace-style
       '(face trailing tabs newline space-mark tab-mark newline-mark))
 
