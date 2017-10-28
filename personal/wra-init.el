@@ -19,6 +19,7 @@
   (normal-top-level-add-subdirs-to-load-path))
 
 ;; require personalizations in 'wra' subdir
+(require 'gearup-utils) ;; load this first
 (require 'wra-helm)
 (require 'wra-image)
 ;;(require 'wra-ispell)
