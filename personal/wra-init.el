@@ -42,6 +42,10 @@
 (require 'wra-isearch)
 (require 'wra-xml)
 
+;; Windows doesn't know how to gracefully exit emacs daemon.
+;;
+(add-hook 'delete-terminal-functions (lambda (terminal) (recentf-save-list)))
+
 ;; set home directory
 (defun gearup-try-get-home-dir-windows ()
   "Returns environment variable HOME if set. Otherwise guess Wolfgang's standard wra directory"
