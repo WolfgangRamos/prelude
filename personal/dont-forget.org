@@ -27,11 +27,17 @@
 
 ** Searching
 
-| =M-e=   | edit search string                    |
-| =M-r=   | toggle regex                          |
-| =M-%=   | run =query-replace=                     |
-| =C-M-%= | run =query-replace-regex=               |
-| =C-w=   | insert word at point in search string |
+*** Isearch
+
+| =M-e=   | edit search string                                                                      |
+| =M-r=   | toggle regex                                                                            |
+| =M-%=   | run =query-replace=                                                                       |
+| =C-M-%= | run =query-replace-regex=                                                                 |
+| =C-w=   | insert word at point in search string; press multiple times to insert consecutive words |
+
+*** ag
+
+| command line arg |
 
 ** Functions
 

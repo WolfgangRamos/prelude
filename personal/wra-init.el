@@ -41,9 +41,9 @@
 (require 'wra-savehist)
 (require 'wra-isearch)
 (require 'wra-xml)
+(require 'gearup-prelude)
 
 ;; Windows doesn't know how to gracefully exit emacs daemon.
-;;
 (add-hook 'delete-terminal-functions (lambda (terminal) (recentf-save-list)))
 
 ;; set home directory
