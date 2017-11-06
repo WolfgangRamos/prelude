@@ -13,10 +13,20 @@
 (prelude-require-package 'helm-c-yasnippet)
 ;;(prelude-require-package 'sunrise-commander)
 
+
 ;;;; TODO move general setup stuff from wra-emacs-setup.el to this file (init.el)
 (add-to-list 'load-path (expand-file-name "wra" prelude-personal-dir))
 (let ((default-directory (expand-file-name "lisp" prelude-personal-dir)))
   (normal-top-level-add-subdirs-to-load-path))
+
+;; set save file for abbrev mode (i think ess is somehow using it???)
+(setq abbrev-file-name (expand-file-name "savefile/abbrev_defs" prelude-personal-dir))
+
+;; newort security manager
+(setq nsm-settings-file (expand-file-name "savefile/network-security.data" prelude-personal-dir))
+
+;; set auth directory for emacs daemon
+(setq server-auth-dir (expand-file-name "server/" prelude-personal-dir))
 
 ;; require personalizations in 'wra' subdir
 (require 'gearup-utils) ;; load this first
@@ -41,7 +51,12 @@
 (require 'wra-savehist)
 (require 'wra-isearch)
 (require 'wra-xml)
+(require 'gearup-lisp)
 (require 'gearup-prelude)
+(require 'gearup-rebox2)
+(require 'gearup-smart-mode-line)
+
+(beacon-mode -1) ;; don't need beacon mode if we use hl-mode
 
 ;; Windows doesn't know how to gracefully exit emacs daemon.
 (add-hook 'delete-terminal-functions (lambda (terminal) (recentf-save-list)))

@@ -62,3 +62,28 @@ Each entry is either
 
 - a mode name or =nil= to set variables in all modes
 - a string specifing a directory
+* Help Mode
+
+| key | action     |
+|-----+------------|
+| l   | go back    |
+| r   | go forward |
+
+* Ace window
+
+- actions to trigger after =ace-window= was called
+
+| key | action                            |
+|-----+-----------------------------------|
+| x   | delete selected window            |
+| m   | swap current window with selected |
+| v   | split window vertically           |
+| b   | split window horizontally         |
+| i   | maximize selected window          |
+
+* Winner mode
+
+| key         | command     | action                              |
+|-------------+-------------+-------------------------------------|
+| C-c <LEFT>  | winner-undo | undo change to window configuration |
+| C-C <RIGHT> | winner-redo | redo change to window configuration |

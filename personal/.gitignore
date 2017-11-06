@@ -1,4 +1,5 @@
 !savefile/
+savefile/abbrev_defs
 
 # emacs server socket file directory
 server/
