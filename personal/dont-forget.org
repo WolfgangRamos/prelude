@@ -87,3 +87,41 @@ Each entry is either
 |-------------+-------------+-------------------------------------|
 | C-c <LEFT>  | winner-undo | undo change to window configuration |
 | C-C <RIGHT> | winner-redo | redo change to window configuration |
+* Text Selection
+
+| key | command          | action                                               |
+|-----+------------------+------------------------------------------------------|
+| M-= | er/expand-region | expand region to next word, sentence, paragraph, ... |
+| M-w | easy-kill        | expand selection by                                  |
+|     |                  | e: line                                              |
+|     |                  | w: word                                              |
+|     |                  | s: sexp                                              |
+|     |                  | d: defun                                             |
+|     |                  | b: buffer-file-name                                  |
+|     |                  | other (z.B. j): save selection and exit              |
+|     |                  |                                                      |
+
+* Movement
+
+| key | command            | action |
+|-----+--------------------+--------|
+| M-e | forward-sentence   | same   |
+| M-a | forward-sentence   |        |
+| M-n | forward-paragraph  | same   |
+| M-p | backward-paragraph | same   |
+|     |                    |        |
+
+- under windows combining these commands with SHIFT expands region
+
+* Debugging
+
+| key       | command    | action                                                         |
+|-----------+------------+----------------------------------------------------------------|
+| C-u C-M-x | eval-defun | evaluate current defun expression and instrument it for edebug |
+| C-M-x     | eval-defun | evaluate current defun expression and instrument if for edebug |
+* Lisp coding
+
+| key     | command                                   | action                   |
+|---------+-------------------------------------------+--------------------------|
+| C-h C-f | find-function                             | goto function definition |
+| M-.     | elisp-slime-nav-find-elisp-thing-at-point | goto function definition |

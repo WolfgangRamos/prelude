@@ -30,6 +30,7 @@
 
 ;; require personalizations in 'wra' subdir
 (require 'gearup-utils) ;; load this first
+(require 'gearup-ace-window)
 (require 'wra-helm)
 (require 'wra-image)
 ;;(require 'wra-ispell)
@@ -56,6 +57,8 @@
 (require 'gearup-rebox2)
 (require 'gearup-smart-mode-line)
 
+
+
 (beacon-mode -1) ;; don't need beacon mode if we use hl-mode
 
 ;; Windows doesn't know how to gracefully exit emacs daemon.
@@ -71,6 +74,14 @@
           (concat home "\\"))
       "c:\\Users\\wra\\")))
 
+(global-set-key (kbd "M-SPC") 'hippie-expand)
+(global-set-key (kbd "C-,") 'just-one-space)
+
+(defun gearup-avy-goto-line ()
+  (interactive)
+  (avy-goto-line)
+  (crux-move-beginning-of-line 1))
+(key-chord-define-global "jl" 'gearup-avy-goto-line)
 
 (defun wra-try-get-home-dir ()
   "Returns environment variable HOME if set. Otherwise guess Wolfgang's standard wra directory"
@@ -79,13 +90,6 @@
     (getenv "HOME")))
 
 (setq default-directory (wra-try-get-home-dir))
-
-(prelude-require-package 'ace-window)
-;; use home row for window selection
-(setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
-
-;; disable graphical effects
-(setq aw-background nil)
 
 (menu-bar-mode 1)
 (if (equal system-type 'windows-nt)
@@ -144,8 +148,7 @@
 ;; (global-set-key (kbd "M-s") 'avy-goto-word-1)
 ;; (global-set-key (kbd "M-S") 'avy-goto-char-timer)
 ;; (global-set-key (kbd "M-l") 'avy-goto-line)
-(global-set-key (kbd "M-W") 'ace-window)
-
+(global-set-key (kbd "M-=") 'er/expand-region)
 
 ;; DocView Mode (pdf viewer)
 ;; (put 'set-goal-column 'disabled nil) ;; enable continuous scrolling
