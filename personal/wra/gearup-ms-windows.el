@@ -28,5 +28,8 @@ This command does nothing if the `system-type' is not `windows-nt'."
 ;; actually perform the changes to the configuration
 (gearup-for-windows)
 
+;; claim some keybindings (this is planned to work again in Emacs 26)
+;;(w32-register-hot-key [C-=])
+
 (provide 'gearup-ms-windows)
 ;;; gearup-ms-windows.el ends here

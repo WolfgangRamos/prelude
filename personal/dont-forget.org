@@ -27,11 +27,17 @@
 
 ** Searching
 
-| =M-e=   | edit search string                    |
-| =M-r=   | toggle regex                          |
-| =M-%=   | run =query-replace=                     |
-| =C-M-%= | run =query-replace-regex=               |
-| =C-w=   | insert word at point in search string |
+*** Isearch
+
+| =M-e=   | edit search string                                                                      |
+| =M-r=   | toggle regex                                                                            |
+| =M-%=   | run =query-replace=                                                                       |
+| =C-M-%= | run =query-replace-regex=                                                                 |
+| =C-w=   | insert word at point in search string; press multiple times to insert consecutive words |
+
+*** ag
+
+| command line arg |
 
 ** Functions
 
@@ -56,3 +62,66 @@ Each entry is either
 
 - a mode name or =nil= to set variables in all modes
 - a string specifing a directory
+* Help Mode
+
+| key | action     |
+|-----+------------|
+| l   | go back    |
+| r   | go forward |
+
+* Ace window
+
+- actions to trigger after =ace-window= was called
+
+| key | action                            |
+|-----+-----------------------------------|
+| x   | delete selected window            |
+| m   | swap current window with selected |
+| v   | split window vertically           |
+| b   | split window horizontally         |
+| i   | maximize selected window          |
+
+* Winner mode
+
+| key         | command     | action                              |
+|-------------+-------------+-------------------------------------|
+| C-c <LEFT>  | winner-undo | undo change to window configuration |
+| C-C <RIGHT> | winner-redo | redo change to window configuration |
+* Text Selection
+
+| key | command          | action                                               |
+|-----+------------------+------------------------------------------------------|
+| M-= | er/expand-region | expand region to next word, sentence, paragraph, ... |
+| M-w | easy-kill        | expand selection by                                  |
+|     |                  | e: line                                              |
+|     |                  | w: word                                              |
+|     |                  | s: sexp                                              |
+|     |                  | d: defun                                             |
+|     |                  | b: buffer-file-name                                  |
+|     |                  | other (z.B. j): save selection and exit              |
+|     |                  |                                                      |
+
+* Movement
+
+| key | command            | action |
+|-----+--------------------+--------|
+| M-e | forward-sentence   | same   |
+| M-a | forward-sentence   |        |
+| M-n | forward-paragraph  | same   |
+| M-p | backward-paragraph | same   |
+|     |                    |        |
+
+- under windows combining these commands with SHIFT expands region
+
+* Debugging
+
+| key       | command    | action                                                         |
+|-----------+------------+----------------------------------------------------------------|
+| C-u C-M-x | eval-defun | evaluate current defun expression and instrument it for edebug |
+| C-M-x     | eval-defun | evaluate current defun expression and instrument if for edebug |
+* Lisp coding
+
+| key     | command                                   | action                   |
+|---------+-------------------------------------------+--------------------------|
+| C-h C-f | find-function                             | goto function definition |
+| M-.     | elisp-slime-nav-find-elisp-thing-at-point | goto function definition |
