@@ -19,12 +19,14 @@
                nil))
 ;; set indetation to 2 spaces
 (setq nxml-child-indent 2)
-
+(setq rng-nxml-auto-validate-flag nil)
+(setq rng-complete-end-tags-after-< nil)
 (add-hook 'nxml-mode-hook
           (lambda ()
             (hs-minor-mode 1) ;; enable hide-show
             (whitespace-mode -1)
             (flycheck-mode -1)
+            (rng-validate-mode 0) ;; disable validation
             ))
 
 ;; optional key bindings, easier than hs defaults
