@@ -56,8 +56,17 @@
 (require 'gearup-prelude)
 (require 'gearup-rebox2)
 (require 'gearup-smart-mode-line)
+(require 'hl-tags-mode)
 
+(set-face-attribute 'hl-tags-face nil :background "turquoise")
 
+;; smartparens-mode freezes emacs when enabled in large files
+;; (add-hook 'change-major-mode-after-body-hook
+;;           (lambda ()
+;;             (when (> (buffer-size) 80000)
+;;               (turn-off-show-smartparens-mode)
+;;               ;;(flycheck-mode -1)
+;;               )))
 
 (beacon-mode -1) ;; don't need beacon mode if we use hl-mode
 
