@@ -1,6 +1,6 @@
 #+TITLE: Emacs Keys and Commands I Want to Remember
 
-* Global (with Prelude)
+* Global
 
 | =C-h b=       | display key-bindings      |
 | =C-^=         | join two lines            |
@@ -9,10 +9,11 @@
 | =j k=         | =avy-goto-char=             |
 | =j l=         | =avy-goto-line=             |
 | =C-x r l=     | list bookmarks            |
-| =M-/=         | =hippie-exand=              |
+| =M-SPC=       | =hippie-exand=              |
 | =C-c .=       | thing at point operations |
 | C-c t       | run eshell                |
 | C-Backspace | reverse kill line         |
+| C-,         | just-one-space            |
 
 
 ** Registers
