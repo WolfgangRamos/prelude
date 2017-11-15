@@ -126,3 +126,15 @@ Each entry is either
 |---------+-------------------------------------------+--------------------------|
 | C-h C-f | find-function                             | goto function definition |
 | M-.     | elisp-slime-nav-find-elisp-thing-at-point | goto function definition |
+
+* Git Svn
+
+| commamds | actions |
+|----------+---------|
+| =git svn clone <svn repo>= | clone svn repo; equivalent to runnig =git svn init= followed by =git svn fetch=; options: =-T= trunk directory name, =-b= branch directory name, =-tags= tags directory name |
+| =git commit= | commit to your local git repo |
+| =git svn dcommit= | push local commits to remote svn repo; equivalent to svn commit |
+| =git svn rebase= | equivalent to =svn update=; use option =--interactive= for interactive rebasing |
+| =git svn show-ignore= | print svn ignores to stdout in gitignore format |
+
+- Nested branches/tags layouts can be specified in git's config file. In this case do =git svn init=, edit config file, and then do =git avn fetch=
