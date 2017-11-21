@@ -121,6 +121,7 @@ Each entry is either
 |-----------+------------+----------------------------------------------------------------|
 | C-u C-M-x | eval-defun | evaluate current defun expression and instrument it for edebug |
 | C-M-x     | eval-defun | evaluate current defun expression and instrument if for edebug |
+
 * Lisp coding
 
 | key     | command                                   | action                   |
