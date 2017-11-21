@@ -35,6 +35,7 @@
 | =M-%=   | run =query-replace=                                                                       |
 | =C-M-%= | run =query-replace-regex=                                                                 |
 | =C-w=   | insert word at point in search string; press multiple times to insert consecutive words |
+| =C-o= | run helm-occure from isearch |
 
 *** ag
 
