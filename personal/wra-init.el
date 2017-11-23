@@ -13,7 +13,6 @@
 (prelude-require-package 'helm-c-yasnippet)
 ;;(prelude-require-package 'sunrise-commander)
 
-
 ;;;; TODO move general setup stuff from wra-emacs-setup.el to this file (init.el)
 (add-to-list 'load-path (expand-file-name "wra" prelude-personal-dir))
 (let ((default-directory (expand-file-name "lisp" prelude-personal-dir)))
@@ -24,9 +23,6 @@
 
 ;; newort security manager
 (setq nsm-settings-file (expand-file-name "savefile/network-security.data" prelude-personal-dir))
-
-;; set auth directory for emacs daemon
-(setq server-auth-dir (expand-file-name "server/" prelude-personal-dir))
 
 ;; require personalizations in 'wra' subdir
 (require 'gearup-utils) ;; load this first
@@ -57,6 +53,8 @@
 (require 'gearup-rebox2)
 (require 'gearup-smart-mode-line)
 (require 'hl-tags-mode)
+(require 'gearup-host-config)
+(require 'gearup-misc-prelude-tips)
 
 (set-face-attribute 'hl-tags-face nil :background "turquoise")
 (require 'gearup-org-attach-screenshot)
