@@ -1,0 +1,63 @@
+(defun tmp-set-minor-modes ()
+  "Enable a set of potential trouble maker minor modes."
+  (interactive)
+
+  (nxml-mode)
+
+  ;; successfully tested
+  (auto-composition-mode 1)
+  (auto-compression-mode 1)
+  (auto-encryption-mode 1)
+  (electric-indent-mode 1)
+  (file-name-shadow-mode 1)
+  (font-lock-mode 1)
+  (global-eldoc-mode 1)
+  (global-font-lock-mode 1)
+  (line-number-mode 1)
+  (menu-bar-mode 1)
+  (mouse-wheel-mode 1)
+  (tooltip-mode 1)
+  (transient-mark-mode 1)
+
+  (show-smartparens-global-mode 1)
+  (show-smartparens-mode 0)
+
+  ;; potential trouble makers
+  (winner-mode 1)
+  (which-key-mode 0)
+  (which-function-mode 0)
+  (volatile-highlights-mode 0)
+  (undo-tree-mode 0)
+  (size-indication-mode 0)
+
+
+  (shell-dirtrack-mode 0)
+  (savehist-mode 0)
+  (save-place-mode 0)
+  (recentf-mode 1)
+  (projectile-mode 0)
+  (prelude-global-mode 0)
+  (prelude-mode 0)
+  (hs-minor-mode 0)
+  (helm-descbinds-mode 0)
+  (helm-mode 0)
+  (global-undo-tree-mode 0)
+  (global-hl-line-mode 0)
+  (global-flycheck-mode 0)
+  (global-diff-hl-mode 0)
+  (global-company-mode 0)
+  (global-auto-revert-mode 0)
+  (global-anzu-mode 0)
+  (display-time-mode 0)
+  (diff-hl-mode 0)
+  (diff-auto-refine-mode 0)
+  (delete-selection-mode 1)
+  (company-mode 0)
+  (column-number-mode 1)
+  (async-bytecomp-package-mode 0)
+  (anzu-mode 0)
+  (abbrev-mode 1)
+
+  ;; uninteresting
+  (blink-cursor-mode 0)
+  (tool-bar-mode 0))
