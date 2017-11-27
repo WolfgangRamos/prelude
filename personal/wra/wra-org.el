@@ -11,6 +11,8 @@
 (prelude-require-package 'org-ref)
 
 
+(setq org-image-actual-width nil)
+
 ;; allow alphabetical lists, like a), b) ... or a., b. ...
 (setq org-list-allow-alphabetical t)
 
