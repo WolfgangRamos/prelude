@@ -13,5 +13,8 @@
 (require 'helm-config)
 (setq helm-move-to-line-cycle-in-source nil)
 
+;; prelude tips
+(push "Hit <C-c h b> to run helm-resume." prelude-tips)
+
 (provide 'wra-helm)
 ;;; wra-helm.el ends here
