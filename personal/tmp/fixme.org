@@ -1,0 +1,3 @@
+* Problems
+
+vc-do-command: Running svn --non-interactive diff --diff-cmd=diff -x -U0 UIConfig_Wolf.xml...FAILED (status 1)
