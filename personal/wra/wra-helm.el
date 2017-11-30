@@ -32,6 +32,13 @@
 (push "Press <C-c => to diff current buffer with seleced buffer/file." prelude-tips)
 (push "Press <C-c C-p> to edit saved helm-occur results. Press <C-x C-s> to save." prelude-tips)
 (push "Hit <C-c h b> to run helm-resume." prelude-tips)
+(push "Hit <C-t> in any helm session to toggle horizontal/vertical split." prelude-tips)
+(push "Hit <C-x C-f> in any helm session to call helm-find-files." prelude-tips)
+(push "Hit <C-c C-k> in any helm session to copy candidate display value to kill ring. Use prefix argument to copy real value." prelude-tips)
+(push "Hit <C-c TAB> in any helm session to copy candidate display value to current buffer." prelude-tips)
+(push "Hit <C-o> to jump between groups in helm commands." prelude-tips)
+(push "Hit <C-x b> in any helm session to call helm-resume." prelude-tips)
+(push "Hit <C-x C-b> in any helm session to display a list of resumable helm sessions." prelude-tips)
 
 (provide 'wra-helm)
 ;;; wra-helm.el ends here
