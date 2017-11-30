@@ -25,12 +25,12 @@
           (lambda ()
             (hs-minor-mode 1) ;; enable hide-show
             (whitespace-mode -1)
-            ;;(flycheck-mode -1)
             (rng-validate-mode 0) ;; disable validation
+            (yas-minor-mode-on)
             (when (> (buffer-size) 80000)
               (turn-off-show-smartparens-mode)
               (hl-tags-mode 1)
-              ;;(flycheck-mode -1)
+              (flycheck-mode -1)
               )))
 
 ;; optional key bindings, easier than hs defaults

@@ -4,6 +4,11 @@
 
 ;;; Code:
 
+;; copy buffer file name (full path) to kill ring and clipboard
+(defun gearup-buffer-file-name-to-clipboard ()
+  (interactive)
+  (kill-new (buffer-file-name)))
+
 ;; Whitespace mode configuration
 (setq whitespace-display-mappings ;; all numbers are unicode codepoint in decimal. e.g. (insert-char 182 1)
       '((space-mark 32 [183] [46])

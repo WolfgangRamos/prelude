@@ -1,0 +1,12 @@
+# contributor: Wolfgang Ramos
+# name: new entity property
+# key: prop
+# group: entity
+# condition: t
+# type: snippet
+# --
+<Property Name="$1" Type="${2:$$(yas-choose-value '("Byte" "Int16" "Int32" "Int64" "UInt64" "Double" "Date" "Time" "DateTime" "Bool" "List" "String" "Blob" "Formatted" "GUID"))}" IsVisible="${3:$$(yas-choose-value '("true" "false"))}">  ${4:
+  <Description>$5</Description>}${6:
+  <MaxStringLen>$7</MaxStringLen>}
+  <Field>${8:DB field name}</Field>
+</Property>
