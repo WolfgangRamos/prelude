@@ -39,6 +39,13 @@
 (push "Hit <C-o> to jump between groups in helm commands." prelude-tips)
 (push "Hit <C-x b> in any helm session to call helm-resume." prelude-tips)
 (push "Hit <C-x C-b> in any helm session to display a list of resumable helm sessions." prelude-tips)
+(push "In helm-find-files hit <C-c f> to create a dired buffer with selected file(s)." prelude-tips)
+(push "In helm-find-files hit <C-c a> to add selected file(s) to current dired buffer." prelude-tips)
+(push "In helm-find-files hit <C-c d> to remove selected file(s) from current dired buffer." prelude-tips)
+(push "Hit <C-c p s g> to run grep in project root." prelude-tips)
+(push "Ht <C-c p s s> to run ag in project root." prelude-tips)
+(push "In helm-mini use *<mode> to select buffers by major mode." prelude-tips)
+(push "In helm-mini use *!<mode> to exclude buffers by major mode." prelude-tips)
 
 (provide 'wra-helm)
 ;;; wra-helm.el ends here

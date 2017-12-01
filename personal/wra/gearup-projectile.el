@@ -14,3 +14,4 @@
 (push "In helm-find-files hit <C-=> to ediff file(s)." prelude-tips)
 (push "In helm-find-files hit <C-c => to emerge file(s)." prelude-tips)
 (push "In helm-find-dir hit <C-s> to run grep on directory." prelude-tips)
+(push "Hit <C-c p i> to invalide projectile project cache." prelude-tips)
