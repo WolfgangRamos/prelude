@@ -46,6 +46,10 @@
 (push "Ht <C-c p s s> to run ag in project root." prelude-tips)
 (push "In helm-mini use *<mode> to select buffers by major mode." prelude-tips)
 (push "In helm-mini use *!<mode> to exclude buffers by major mode." prelude-tips)
+(push "In helm-mini use /<dir> to select buffers by directory." prelude-tips)
+(push "In helm-mini use /!<dir> to exclude buffers by directory." prelude-tips)
+(push "In helm-mini use @<pattern> to select buffers containing <pattern>." prelude-tips)
+(push "Hit <C-s> in helm-mini to run helm-moccur on selected buffers." prelude-tips)
 
 (provide 'wra-helm)
 ;;; wra-helm.el ends here
