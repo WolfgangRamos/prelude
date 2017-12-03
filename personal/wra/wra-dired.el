@@ -1,6 +1,6 @@
 ;;; wra-dired.el --- My dired config
 
-;;; Commentary
+;;; Commentary:
 
 ;;; Code
 
