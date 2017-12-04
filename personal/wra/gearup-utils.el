@@ -30,5 +30,13 @@ If called from dired copy path of marked files to kill ring and clipboard."
 (set-face-attribute 'whitespace-newline nil :background nil :foreground gearup-whitespace-lighter-gray)
 (set-face-attribute 'whitespace-trailing nil :background "#ffffaa")
 
+;; smarparens is slow in large files
+;; see also https://github.com/syl20bnr/spacemacs/issues/3828
+(add-hook 'change-major-mode-after-body-hook
+          (lambda ()
+            (when (> (buffer-size) 80000)
+              (turn-off-show-smartparens-mode)
+              (flycheck-mode -1))))
+
 (provide 'gearup-utils)
 ;;; wra-yasnippet.el ends here

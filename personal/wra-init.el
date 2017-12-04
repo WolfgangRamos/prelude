@@ -55,6 +55,7 @@
 (require 'hl-tags-mode)
 (require 'gearup-host-config)
 (require 'gearup-misc-prelude-tips)
+(require 'gearup-undo-tree)
 
 (set-face-attribute 'hl-tags-face nil :background "turquoise")
 (require 'gearup-org-attach-screenshot)
