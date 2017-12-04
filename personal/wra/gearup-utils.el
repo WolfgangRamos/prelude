@@ -5,9 +5,15 @@
 ;;; Code:
 
 ;; copy buffer file name (full path) to kill ring and clipboard
-(defun gearup-buffer-file-name-to-clipboard ()
+(defun gearup-file-name-to-clipboard ()
+  "Copy buffer file name to kill ring and clipboard.
+If called from dired copy path of marked files to kill ring and clipboard."
   (interactive)
-  (kill-new (buffer-file-name)))
+  (cond
+   ((eq major-mode 'dired-mode)
+    (dired-copy-filename-as-kill 0))
+   (t
+    (kill-new (buffer-file-name)))))
 
 ;; Whitespace mode configuration
 (setq whitespace-display-mappings ;; all numbers are unicode codepoint in decimal. e.g. (insert-char 182 1)
