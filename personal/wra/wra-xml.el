@@ -57,5 +57,17 @@ path. from http://www.emacswiki.org/emacs/NxmlMode"
 
 (add-hook 'web-mode-hook  'my-web-mode-hook)
 
+;; tips
+(push "Hit <C-c C-e a> in web-mode to select element content." prelude-tips)
+(push "Hit <C-c C-e s> in web-mode to select element." prelude-tips)
+(push "Hit <C-c C-e b> to go to element beginning." prelude-tips)
+(push "Hit <C-c C-e e> to go to element end." prelude-tips)
+(push "Hit <C-c C-e p> to go to previous element." prelude-tips)
+(push "Hit <C-c C-e n> to go to next element." prelude-tips)
+(push "Hit <C-c C-e u> to go to parent element." prelude-tips)
+(push "Hit <C-c C-e d> to go to child element." prelude-tips)
+(push "Hit <C-c C-e m> to remove blank lines between child elements." prelude-tips)
+(push "Hit <C-c C-e t> to transpose elements." prelude-tips)
+
 (provide 'wra-xml)
 ;;; wra-xml.el ends here
