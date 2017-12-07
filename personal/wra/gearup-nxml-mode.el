@@ -8,7 +8,7 @@
 ;; set indetation to 2 spaces
 (setq nxml-child-indent 2)
 ;; pom files should be treated as xml files
-(add-to-list 'auto-mode-alist '("\\.pom$" . nxml-mode))
+;;(add-to-list 'auto-mode-alist '("\\.pom$" . nxml-mode))
 
 (setq nxml-attribute-indent 4)
 (setq nxml-auto-insert-xml-declaration-flag nil)
@@ -29,7 +29,6 @@
               (hl-tags-mode 1)
               (flycheck-mode -1)
               )))
-
 
 (defun gearup-nxml-where ()
   "Display the hierarchy of XML elements the point is on as a
@@ -54,3 +53,4 @@ path. from http://www.emacswiki.org/emacs/NxmlMode"
 
 (provide 'gearup-nxml-mode)
 ;;; gearup-nxml-mode.el ends here
+

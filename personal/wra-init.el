@@ -60,6 +60,21 @@
 (set-face-attribute 'hl-tags-face nil :background "turquoise")
 (require 'gearup-org-attach-screenshot)
 
+;; set UTF-8 as default encoding system for opening and saving
+(set-language-environment "UTF-8")
+
+(defun gearup-toggle-prelude-auto-save-command ()
+  "Toggle `prelude-auto-save' to disable `prelude-auto-save-command'."
+  (interactive)
+  (setq-local prelude-auto-save
+              (if prelude-auto-save
+                  (progn
+                    (message "Prelude-auto-save disabled")
+                    nil)
+                (progn
+                  (message "Prelude-auto-save enabled")
+                  t))))
+
 (prelude-require-package 'omnisharp)
 
 (setq omnisharp-server-executable-path "c:/Program Files/Omnisharp/omnisharp-win-x64/OmniSharp.exe")
