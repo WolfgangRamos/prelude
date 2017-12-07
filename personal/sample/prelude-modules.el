@@ -1,3 +1,4 @@
+;;; My prelude modules configuration
 ;;; Uncomment the modules you'd like to use and restart Prelude afterwards
 
 ;; Emacs IRC client
@@ -33,6 +34,6 @@
 ;; (require 'prelude-scheme)
 (require 'prelude-shell)
 ;; (require 'prelude-scss)
-;; (require 'prelude-web) ;; Emacs mode for web templates
-(require 'prelude-xml)
-;; (require 'prelude-yaml)
+(require 'prelude-web) ;; Emacs mode for web templates
+;; (require 'prelude-xml) ;; don't enable this; prelude-xml uses magic mode alist to open xml files in nxml-mode.
+(require 'prelude-yaml)

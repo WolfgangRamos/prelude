@@ -1,17 +1,21 @@
-;;; wra-xml.el --- My nXML Configuration
+;;; gearup-nxml-mode.el --- Prelude mode configuration
 
 ;;; Commentary:
 
-;;; Code
-
-;; configure hideshow minor mode for xml mode
-;;(require 'hideshow)
-;;(require 'sgml-mode)
+;;; Code:
 (require 'nxml-mode)
-(prelude-require-package 'web-mode)
 
 ;; set indetation to 2 spaces
 (setq nxml-child-indent 2)
+;; pom files should be treated as xml files
+(add-to-list 'auto-mode-alist '("\\.pom$" . nxml-mode))
+
+(setq nxml-attribute-indent 4)
+(setq nxml-auto-insert-xml-declaration-flag nil)
+(setq nxml-bind-meta-tab-to-complete-flag t)
+(setq nxml-slash-auto-complete-flag t)
+
+
 (setq rng-nxml-auto-validate-flag nil)
 (setq rng-complete-end-tags-after-< nil)
 (add-hook 'nxml-mode-hook
@@ -25,6 +29,7 @@
               (hl-tags-mode 1)
               (flycheck-mode -1)
               )))
+
 
 (defun gearup-nxml-where ()
   "Display the hierarchy of XML elements the point is on as a
@@ -47,15 +52,5 @@ path. from http://www.emacswiki.org/emacs/NxmlMode"
             (message "/%s" (mapconcat 'identity path "/"))
           (format "/%s" (mapconcat 'identity path "/")))))))
 
-;; use web-mode to edit xml files; it provides superior folding
-(add-to-list 'auto-mode-alist '("\\.xml\\'" . web-mode))
-
-(setq web-mode-enable-current-element-highlight t)
-(defun my-web-mode-hook ()
-  "Hooks for Web mode."
-  (setq web-mode-markup-indent-offset 2))
-
-(add-hook 'web-mode-hook  'my-web-mode-hook)
-
-(provide 'wra-xml)
-;;; wra-xml.el ends here
+(provide 'gearup-nxml-mode)
+;;; gearup-nxml-mode.el ends here

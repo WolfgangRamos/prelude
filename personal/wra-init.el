@@ -47,7 +47,7 @@
 (require 'wra-sunrise-commander)
 (require 'wra-savehist)
 (require 'wra-isearch)
-(require 'wra-xml)
+(require 'gearup-web-mode)
 (require 'gearup-lisp)
 (require 'gearup-prelude)
 (require 'gearup-rebox2)
