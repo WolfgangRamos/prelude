@@ -18,11 +18,12 @@ DIR. If DIR is a relative path, it is assumed to be in
          (expand-file-name system-name
                            (expand-file-name dir))))
     (when (file-exists-p (concat filename ".el"))
+      (message "Loading host init file %s" (concat filename ".el"))
       (condition-case
           err
           (load filename)
         (error
-         (message "Could not load host init file %s" filename))))))
+         (message "Error while loading host init file %s" filename))))))
 
 (gearup-require-host-config (expand-file-name "host-configs" prelude-personal-dir))
 

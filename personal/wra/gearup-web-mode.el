@@ -8,6 +8,7 @@
 
 ;; open .xml files in web-mode
 (add-to-list 'auto-mode-alist '("\\.xml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.xsd\\'" . web-mode))
 
 (setq web-mode-enable-current-element-highlight t)
 (defun my-web-mode-hook ()
@@ -27,6 +28,8 @@
 (push "Hit <C-c C-e d> to go to child element." prelude-tips)
 (push "Hit <C-c C-e m> to remove blank lines between child elements." prelude-tips)
 (push "Hit <C-c C-e t> to transpose elements." prelude-tips)
+
+;; FIXME search in web mode can fail because of folding
 
 (provide 'gearup-web-mode)
 ;;; gearup-web-mode.el ends here
