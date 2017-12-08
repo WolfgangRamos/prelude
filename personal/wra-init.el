@@ -48,6 +48,7 @@
 (require 'wra-savehist)
 (require 'wra-isearch)
 (require 'gearup-web-mode)
+;;(require 'gearup-nxml-mode)
 (require 'gearup-lisp)
 (require 'gearup-prelude)
 (require 'gearup-rebox2)
@@ -93,12 +94,11 @@
 
 
 ;; smartparens-mode freezes emacs when enabled in large files
-;; (add-hook 'change-major-mode-after-body-hook
-;;           (lambda ()
-;;             (when (> (buffer-size) 80000)
-;;               (turn-off-show-smartparens-mode)
-;;               ;;(flycheck-mode -1)
-;;               )))
+(add-hook 'change-major-mode-after-body-hook
+          (lambda ()
+            (when (> (buffer-size) 80000)
+              (turn-off-show-smartparens-mode)
+              (flycheck-mode -1))))
 
 (beacon-mode -1) ;; don't need beacon mode if we use hl-mode
 
