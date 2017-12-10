@@ -3,14 +3,17 @@
 
 ;;(dir-locals-set-directory-class "z:/entities/" 'fls-entity-description)
 
-(defun gearup-find-xml-node (tag attributes)
+(defun gearup-find-xml-node (tag &optional attributes start)
   "Find xml node by TAG name and ATTRIBUTES.
 TAG is the name of the xml tag, ATTRIBUTES is an alist of
 attribute names and values. E.g \"((\"name\" \"a-name\"))\"."
-  (interactive)
   (let (attr hit candidate)
     (save-excursion
-      (goto-char (point-min))
+      (if (integerp start)
+          (if (and (>= start (point-min)) (<= start (point-max)))
+              (goto-char start)
+            (error "%d is not a valid position in buffer %s" start (buffer-name (current-buffer))))
+        (goto-char (point-min)))
       (if attributes
           (while (and (not hit) (setq candidate (re-search-forward (concat "<" tag " \\([^>]*\\)>") nil t)))
             (setq attr (gearup-parse-xml-attributes (match-string-no-properties 1)))
@@ -18,9 +21,10 @@ attribute names and values. E.g \"((\"name\" \"a-name\"))\"."
               (setq hit candidate)))
         (setq hit (re-search-forward (concat "<" tag " ?\?>") nil t))))
     (if hit
-        (goto-char hit)
+        hit
       (if attributes
-          (error "Could not find tag <%s> with attributes %s" tag attributes)
+          (error "Could not find tag <%s> with attributes %s" tag
+                 (mapconcat (lambda (e) (format "%s=%s" (car-safe e) (car-safe (cdr-safe e)))) attributes " "))
         (error "Could not tag <%s>" tag)))))
 
 ;; TODO move to utils
@@ -136,6 +140,14 @@ Signal an error if point is not inside a form tag."
     (or
      (and (> prefix 1) (read-string "Form name: "))
      (fls-current-form-name))))
+
+;; (defun fls-jump-to-xml-node (name attributes incremental)
+;;   "Jump to."
+;;   (interactive (list name attributes prefix-arg))
+;;   (let ((start )))
+;;   (gearup-find-xml-node ))
+
+(defun fls-goto-entity-node (prefix))
 
 (defun fls-client-xml-layout-path (&optional usenames)
   "Return plist of xml nodes enclosing point.
