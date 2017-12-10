@@ -3,6 +3,101 @@
 
 ;;(dir-locals-set-directory-class "z:/entities/" 'fls-entity-description)
 
+(defun gearup-find-xml-node (tag attributes)
+  "Find xml node by TAG name and ATTRIBUTES.
+TAG is the name of the xml tag, ATTRIBUTES is an alist of
+attribute names and values. E.g \"((\"name\" \"a-name\"))\"."
+  (interactive)
+  (let (attr hit candidate)
+    (save-excursion
+      (goto-char (point-min))
+      (if attributes
+          (while (and (not hit) (setq candidate (re-search-forward (concat "<" tag " \\([^>]*\\)>") nil t)))
+            (setq attr (gearup-parse-xml-attributes (match-string-no-properties 1)))
+            (when (gearup-generic-list-subset-p attributes attr 'car-safe 'string-lessp 'string-equal)
+              (setq hit candidate)))
+        (setq hit (re-search-forward (concat "<" tag " ?\?>") nil t))))
+    (if hit
+        (goto-char hit)
+      (if attributes
+          (error "Could not find tag <%s> with attributes %s" tag attributes)
+        (error "Could not tag <%s>" tag)))))
+
+;; TODO move to utils
+(defun gearup-alist-get (key alist)
+  "Get KEY from ALIST using `equal'."
+  (car-safe (cdr-safe (assoc key alist))))
+
+(defun gearup-parse-xml-attributes (str)
+  "Parse xml attributes from string STR.
+STR must be the pure attributes string of an xml element. I.e. it
+must not include tags!
+
+Returns an alist of attribute-value-pairs where attibute is used as key."
+  (if (not (stringp str))
+      (error "STR was not a string")
+    (let ((start 0) match1 match2 result)
+      (while (string-match "\\([^=]+\\)=[[:space:]]*\"\\([^\"]*\\)\"" str start)
+        (setq match1 (match-string-no-properties 1 str) match2 (match-string-no-properties 2 str) start (match-end 0))
+        (push (list (string-trim match1) match2) result))
+      result)))
+
+(ert-deftest gearup-parse-xml-attributes-test ()
+  "Test xml attribute string parsing."
+  (should (equal (gearup-parse-xml-attributes "Name=\"Service\"") '(("Name" "Service"))))
+  (should (equal (gearup-parse-xml-attributes "UsedbyName=\"Layout\"  UsedbyName = \"Service\"	UsedByType=\"Form\" Attr=\"\"")
+                 '(("Attr" "") ("UsedByType" "Form") ("UsedbyName" "Service") ("UsedbyName" "Layout")))))
+
+(defun gearup-generic-list-subset-p (subset set extract lessp equalp)
+  "Test if a list structure SUBSET is a subset of a list structure SET.
+EXTRACT is called on each element of SUBSET and SET to generate
+the objects used for comparison. LESSP and EQUALP are functions
+used to compare two extracted objects. Each is called with two
+objects. LESSP should return non-nil, if the first object is less
+than the second. EQUALP schould return non-nil if the first
+object is equal to the second.
+
+Returns t if all elements of SUBSET are also elements of SET."
+  (let* ((subset-copy (copy-tree subset))
+         (set-copy (copy-tree set))
+         (subset-sorted (sort subset-copy (lambda (x y)
+                                            (funcall lessp (funcall extract x) (funcall extract y)))))
+         (set-sorted (sort set-copy (lambda (x y)
+                                      (funcall lessp (funcall extract x) (funcall extract y)))))
+         (subset-car (car-safe subset-sorted))
+         (subset-rest (cdr-safe subset-sorted))
+         (set-car (car-safe set-sorted))
+         (set-rest (cdr-safe set-sorted))
+         (continue t))
+    (while (and continue subset-car set-car)
+      (cond
+       ((funcall lessp (funcall extract set-car) (funcall extract subset-car))
+        (setq set-car (car-safe set-rest) set-rest (cdr-safe set-rest)))
+       ((funcall equalp (funcall extract set-car) (funcall extract subset-car))
+        (setq subset-car (car-safe subset-rest)
+              subset-rest (cdr-safe subset-rest)
+              set-car (car-safe set-rest)
+              set-rest (cdr-safe set-rest)))
+       (t
+        (setq continue nil))))
+    (if (and subset-car continue)
+        nil
+      t)))
+
+(ert-deftest gearup-generic-list-subset-p-test ()
+  "Test `gearup-generic-list-subset-p' with different list structures."
+  (should (gearup-generic-list-subset-p nil nil 'identity '< '=))
+  (should-not (gearup-generic-list-subset-p '(1) nil 'identity '< '=))
+  (should (gearup-generic-list-subset-p nil '(t) 'identity '< '=))
+  (should (gearup-generic-list-subset-p '(2 1) '(4 5 1 2) 'identity '< '=))
+  (should (gearup-generic-list-subset-p '("foo" "bar") '("foobar" "bar" "foo") 'identity 'string-lessp 'string-equal))
+  (should (gearup-generic-list-subset-p
+           '(("UsedbyType" "Form") ("UsedbyName" "Service"))
+           '(("UsedbyType" "Form") ("Name" "Layout") ("UsedbyName" "Service"))
+           'car-safe
+           'string-lessp 'string-equal)))
+
+
 (defun fls-current-form-name ()
   "Return name of the form point is cerrently in.
 Signal an error if point is not inside a form tag."

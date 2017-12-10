@@ -76,6 +76,8 @@
                   (message "Prelude-auto-save enabled")
                   t))))
 
+(prelude-require-package 'iedit)
+
 (prelude-require-package 'omnisharp)
 
 (setq omnisharp-server-executable-path "c:/Program Files/Omnisharp/omnisharp-win-x64/OmniSharp.exe")
