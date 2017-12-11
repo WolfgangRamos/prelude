@@ -25,5 +25,8 @@
 ;; emacsclient
 (push "Hit <C-x #> to close an emacs client frame." prelude-tips);; FIXME verify this
 
+;; dired
+(push "Hit <C-q> in dired to make the buffer writable; Hit <C-x C-s> to save." prelude-tips)
+
 (provide 'gearup-misc-prelude-tips)
 ;;; gearup-misc-prelude-tips.el ends here
