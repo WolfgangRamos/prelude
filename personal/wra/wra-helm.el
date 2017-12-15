@@ -18,12 +18,17 @@
 ;; enable tranversion group boundaries in helm buffers
 (setq helm-move-to-line-cycle-in-source nil)
 
-;; Tips
+;; helm-occure
 (push "Press <C-c h o> to launch helm-occur." prelude-tips)
 (push "Press <C-j> in helm-occur to jump to match." prelude-tips)
 (push "Press <C-c C-f> in helm-occur to follow matches." prelude-tips)
 (push "Press <C-x C-s> in helm-occur to save results." prelude-tips)
 (push "Press <g> in saved helm occur results to update results." prelude-tips)
+
+;; helm-info
+(push "Use helm-info to open specific info page." prelude-tips)
+
+;; general
 (push "Press <C-w> to successively yank words from point into helm minibuffer." prelude-tips)
 (push "Press <C-c o> to goto result in other window." prelude-tips)
 (push "Press <M-a> to select all results in a helm buffer." prelude-tips)
@@ -44,6 +49,8 @@
 (push "In helm-find-files hit <C-c d> to remove selected file(s) from current dired buffer." prelude-tips)
 (push "Hit <C-c p s g> to run grep in project root." prelude-tips)
 (push "Ht <C-c p s s> to run ag in project root." prelude-tips)
+
+;; helm-mini
 (push "In helm-mini use *<mode> to select buffers by major mode." prelude-tips)
 (push "In helm-mini use *!<mode> to exclude buffers by major mode." prelude-tips)
 (push "In helm-mini use /<dir> to select buffers by directory." prelude-tips)

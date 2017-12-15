@@ -6,13 +6,17 @@
 
 ;;; Code:
 
+;; undo-tree
 (push "Press <d> in undo-tree to toggle diff buffer (requires diff system command)" prelude-tips)
+
+;; vc-mode
 (push "In vc-mode-line '-' is shown when a file is unmodified." prelude-tips)
 (push "In vc-mode-line ':' is shown when a file has been modified." prelude-tips)
 (push "In vc-mode-line '!' is shown when a file contains conflicts." prelude-tips)
 
 ;; emacs help
-(push "Hit <C-h r> to read emacs' manual in emacs." prelude-tips)
+(push "Hit <C-h r> to show emacs maual." prelude-tips)
+(push "Hit <C-h r> to show emacs info page." prelude-tips)
 
 ;; ediff
 (push "Hit <n> in ediff to goto next difference." prelude-tips)
@@ -27,6 +31,21 @@
 
 ;; dired
 (push "Hit <C-q> in dired to make the buffer writable; Hit <C-x C-s> to save." prelude-tips)
+
+;; sexp
+(push "Hit <C-M-k> to forward kill sexp" prelude-tips)
+(push "Hit <C-M-- k> to backward kill sexp." prelude-tips)
+(push "Hit <C-M-b> to move backward over sexp." prelude-tips)
+(push "Hit <C-M-f> to move forward over sexp." prelude-tips)
+(push "Hit <C-M-t> to transpose sexp." prelude-tips)
+(push "Hit <C-M-SPC> to forward mark sexp." prelude-tips)
+(push "Hit <C-M-n> to move forward over sexp at the same level in sexp structure." prelude-tips)
+(push "Hit <C-M-p> to move backward over sexp at the same level in sexp structure." prelude-tips)
+(push "Hit <C-M-u> to move upward in sexp structure." prelude-tips)
+(push "Hit <C-M-d> to move downward in sexp structure." prelude-tips)
+
+;; prefix args
+(push "Hit <M--> or <C-u -> to enter negative prefix arg." prelude-tips)
 
 (provide 'gearup-misc-prelude-tips)
 ;;; gearup-misc-prelude-tips.el ends here
