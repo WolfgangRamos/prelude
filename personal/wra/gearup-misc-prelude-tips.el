@@ -26,6 +26,14 @@
 (push "Hit <v> in ediff to scroll up." prelude-tips)
 (push "Hit <V> in ediff to scroll down." prelude-tips)
 
+;; hideshow
+(push "Hit <C-c @ C-c> to toggle show/hide current block." prelude-tips)
+(push "Hit <C-c @ C-s> to show current block." prelude-tips)
+(push "Hit <C-c @ C-h> to hide current block." prelude-tips)
+(push "Hit <C-c @ C-M-h> to hide all top-level blocks." prelude-tips)
+(push "Hit <C-c @ C-M-s> to show all blocks." prelude-tips)
+(push "Hit <C-c @ C-l> to hide all blocks n levels below current block." prelude-tips)
+
 ;; emacsclient
 ;;(push "Hit <C-x #> to close an emacs client frame." prelude-tips);; FIXME verify this
 

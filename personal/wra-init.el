@@ -47,8 +47,8 @@
 (require 'wra-sunrise-commander)
 (require 'wra-savehist)
 (require 'wra-isearch)
-(require 'gearup-web-mode)
-;;(require 'gearup-nxml-mode)
+;;(require 'gearup-web-mode)
+(require 'gearup-nxml-mode)
 (require 'gearup-lisp)
 (require 'gearup-prelude)
 (require 'gearup-rebox2)
@@ -61,6 +61,9 @@
 
 (set-face-attribute 'hl-tags-face nil :background "turquoise")
 (require 'gearup-org-attach-screenshot)
+
+;; open comment AND code blocks on searching
+(setq hs-isearch-open t)
 
 ;; ediff configuration
 (setq ediff-split-window-function 'split-window-horizontally)
