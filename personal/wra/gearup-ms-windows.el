@@ -16,7 +16,9 @@
 
 This command does nothing if the `system-type' is not `windows-nt'."
   (when (equal system-type 'windows-nt)
-    (gearup-windows-set-path)))
+    (gearup-windows-set-path)
+    ;; allow magit to do https authentication by GUI
+    (setenv "GIT_ASKPASS" "git-gui--askpass")))
 
 (setq gearup-windows-msys2-default-directories '("C:\\msys64\\usr\\bin" "C:\\msys64\\mingw64\\bin"))
 

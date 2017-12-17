@@ -62,9 +62,6 @@
 (set-face-attribute 'hl-tags-face nil :background "turquoise")
 (require 'gearup-org-attach-screenshot)
 
-;; magit
-(setenv "GIT_ASKPASS" "git-gui--askpass")
-
 ;; ediff configuration
 (setq ediff-split-window-function 'split-window-horizontally)
 (setq ediff-merge-split-window-function 'split-window-horizontally)
