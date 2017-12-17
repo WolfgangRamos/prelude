@@ -3,6 +3,10 @@
 
 ;;(dir-locals-set-directory-class "z:/entities/" 'fls-entity-description)
 
+;; add git svn fucntionality to magit
+(add-hook 'magit-mode-hook 'magit-svn-mode)
+
+;; functions to jump to xml tags
 (defun gearup-get-xml-node-position (tag &optional attributes start)
   "Find xml node by TAG name and ATTRIBUTES.
 TAG is the name of the xml tag, ATTRIBUTES is an alist of
@@ -152,11 +156,11 @@ Signal an error if point is not inside a form tag."
 User is queried for an entity name. The name is searched case-insensitive."
   (interactive "p")
   (gearup-query-find-xml-node "Entity" (list (list "Name" (read-string "Entity-name: "))) (> prefix 0))))
-  
+
 (defun gearup-generic-find-xml-node (tag attributes  &optional forward)
   "Jump to TAG with ATTRIBUTES.
 If FORWARD is ntn-nil start search from current point position. If CASE is not-nil match attribute values case-sensitive."
-  (interactive 
+  (interactive
    (let ((start (if (> current-prefix-arg 0)
                     (point)
                   (point-min)))
