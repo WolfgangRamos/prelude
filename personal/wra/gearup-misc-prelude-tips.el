@@ -50,7 +50,7 @@
 
 ;; frames
 (push "Hit <C-x 5 0> to delete current frame." prelude-tips)
-(push "Hit <C-x 5 2> to spawn new frame." prelude-tips)n
+(push "Hit <C-x 5 2> to spawn new frame." prelude-tips)
 
 ;; calc
 (push "Hit <C-x *> to run calc dispatch. Then hit <C> or <*> to run calc." prelude-tips)
