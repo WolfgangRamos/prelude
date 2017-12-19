@@ -22,6 +22,7 @@
 
 ;; helm-find-file
 (push "In helm-find-file hit <C-c o> to open file in other window." prelude-tips)
+(push "In helm-find-file hit <C-c C-o> to open file in other frame." prelude-tips)
 (push "In helm-find-file hit <C-c r> to open file as root" prelude-tips)
 (push "In helm-find-file hit <M-R> to rename/move file(s)." prelude-tips)
 (push "In helm-find-file hit <M-C> to copy file(s)." prelude-tips)

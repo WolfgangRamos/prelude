@@ -55,6 +55,7 @@
 ;; general
 (push "Hit <C-x z> to repeat last command." prelude-tips)
 (push "Hit <M-z> to zap to char." prelude-tips)
+(push "Hit <C-x 8> to compose unicode chars." prelude-tips)
 
 ;; frames
 (push "Hit <C-x 5 0> to delete current frame." prelude-tips)
