@@ -47,19 +47,27 @@
 (require 'wra-sunrise-commander)
 (require 'wra-savehist)
 (require 'wra-isearch)
-(require 'gearup-web-mode)
-;;(require 'gearup-nxml-mode)
+;;(require 'gearup-web-mode)
+(require 'gearup-nxml-mode)
 (require 'gearup-lisp)
 (require 'gearup-prelude)
 (require 'gearup-rebox2)
 (require 'gearup-smart-mode-line)
 (require 'hl-tags-mode)
-(require 'gearup-host-config)
 (require 'gearup-misc-prelude-tips)
 (require 'gearup-undo-tree)
+(require 'gearup-projectile)
+(require 'gearup-host-config)
 
 (set-face-attribute 'hl-tags-face nil :background "turquoise")
 (require 'gearup-org-attach-screenshot)
+
+;; open comment AND code blocks on searching
+(setq hs-isearch-open t)
+
+;; ediff configuration
+(setq ediff-split-window-function 'split-window-horizontally)
+(setq ediff-merge-split-window-function 'split-window-horizontally)
 
 ;; set UTF-8 as default encoding system for opening and saving
 (set-language-environment "UTF-8")
@@ -88,12 +96,6 @@
 ;;   '(add-to-list 'company-backends 'company-omnisharp))
 
 ;; (call-process "convert" nil t nil "screenshot:" "c://Users//wra//foo77.png")
-
-(defun w32-maximize-frame ()
-  "Maximize the current frame (windows only)"
-  (interactive)
-  (w32-send-sys-command 61488))
-
 
 ;; smartparens-mode freezes emacs when enabled in large files
 (add-hook 'change-major-mode-after-body-hook

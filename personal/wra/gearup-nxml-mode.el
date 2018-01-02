@@ -4,17 +4,22 @@
 
 ;;; Code:
 (require 'nxml-mode)
+(require 'hideshow)
+(require 'sgml-mode)
+
+(add-to-list 'hs-special-modes-alist
+             '(nxml-mode
+               "<!--\\|<[^/>]*[^/]>"
+               "-->\\|</[^/>]*[^/]>"
+
+               "<!--"
+               sgml-skip-tag-forward
+               nil))
+
+(add-hook 'nxml-mode-hook 'hs-minor-mode)
 
 ;; set indetation to 2 spaces
 (setq nxml-child-indent 2)
-;; pom files should be treated as xml files
-;;(add-to-list 'auto-mode-alist '("\\.pom$" . nxml-mode))
-
-(setq nxml-attribute-indent 4)
-(setq nxml-auto-insert-xml-declaration-flag nil)
-(setq nxml-bind-meta-tab-to-complete-flag t)
-(setq nxml-slash-auto-complete-flag t)
-
 
 (setq rng-nxml-auto-validate-flag nil)
 (setq rng-complete-end-tags-after-< nil)
@@ -53,4 +58,3 @@ path. from http://www.emacswiki.org/emacs/NxmlMode"
 
 (provide 'gearup-nxml-mode)
 ;;; gearup-nxml-mode.el ends here
-

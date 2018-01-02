@@ -3,7 +3,11 @@
 
 ;;(dir-locals-set-directory-class "z:/entities/" 'fls-entity-description)
 
-(defun gearup-find-xml-node (tag &optional attributes start)
+;; add git svn fucntionality to magit
+(add-hook 'magit-mode-hook 'magit-svn-mode)
+
+;; functions to jump to xml tags
+(defun gearup-get-xml-node-position (tag &optional attributes start)
   "Find xml node by TAG name and ATTRIBUTES.
 TAG is the name of the xml tag, ATTRIBUTES is an alist of
 attribute names and values. E.g \"((\"name\" \"a-name\"))\"."
@@ -147,7 +151,26 @@ Signal an error if point is not inside a form tag."
 ;;   (let ((start )))
 ;;   (gearup-find-xml-node ))
 
-(defun fls-goto-entity-node (prefix))
+(defun fls-goto-entity-node (prefix)
+  "Jump to entity node.
+User is queried for an entity name. The name is searched case-insensitive."
+  (interactive "p")
+  (gearup-query-find-xml-node "Entity" (list (list "Name" (read-string "Entity-name: "))) (> prefix 0))))
+
+(defun gearup-generic-find-xml-node (tag attributes  &optional forward)
+  "Jump to TAG with ATTRIBUTES.
+If FORWARD is ntn-nil start search from current point position. If CASE is not-nil match attribute values case-sensitive."
+  (interactive
+   (let ((start (if (> current-prefix-arg 0)
+                    (point)
+                  (point-min)))
+         (tag (read-string "Tag name: "))
+         attributes current-attr current-value)
+     (while (> (length (setq current-attr (read-string "Attribute name: "))) 0)
+       (setq current-value (read-string "Attribute value: "))
+       (push (list current-attr current-name) attributes))
+     (list tag attributes forward)))
+  (gearup-get-xml-node-position tag attributes start))
 
 (defun fls-client-xml-layout-path (&optional usenames)
   "Return plist of xml nodes enclosing point.

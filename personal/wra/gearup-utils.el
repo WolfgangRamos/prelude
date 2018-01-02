@@ -3,6 +3,7 @@
 ;;; Commentary:
 
 ;;; Code:
+(prelude-require-package 'hydra)
 
 ;; copy buffer file name (full path) to kill ring and clipboard
 (defun gearup-file-name-to-clipboard ()
@@ -14,6 +15,38 @@ If called from dired copy path of marked files to kill ring and clipboard."
     (dired-copy-filename-as-kill 0))
    (t
     (kill-new (buffer-file-name)))))
+
+;; gearup sizing menu
+(global-set-key (kbd "C-c s")
+                (defhydra hydra-sizing (:foreign-keys warn)
+                  "
+^Font size^    ^Vertical window size^   ^Horizontal window size
+^----------^   ^--------------------^   ^----------------------
+_j_ increase   _k_ enlage               _l_ enlage
+_f_ decrease   _d_ shrink               _s_ shrink
+"
+                  ("j" text-scale-increase nil)
+                  ("f" text-scale-decrease nil)
+                  ("k" enlarge-window nil)
+                  ("d" shrink-window nil)
+                  ("l" enlarge-window-horizontally nil)
+                  ("s" shrink-window-horizontally nil)
+                  ("q" nil "quit")))
+
+(push "Hit <C-c s> to open gearup sizing menu." prelude-tips)
+
+;; reverse kill sexp
+(defun gearup-reverse-kill-sexp (&optional arg)
+  "Kill sexp before point.
+With ARG kill that many sexp before point."
+  (interactive "p")
+  (kill-sexp (if (> arg 1)
+                 (- arg)
+               -1)))
+
+(global-set-key (kbd "<C-M-backspace>") 'gearup-reverse-kill-sexp)
+(push "Hit <C-M-backs to backward kill sexp" prelude-tips)
+
 
 ;; Whitespace mode configuration
 (setq whitespace-display-mappings ;; all numbers are unicode codepoint in decimal. e.g. (insert-char 182 1)

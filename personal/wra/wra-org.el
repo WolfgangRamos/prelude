@@ -270,5 +270,9 @@
 
         ))
 
+;; tips
+(push "Hit <M-S-left> to kill the current column." prelude-tips)
+(push "Hit <M-S-right> to insert a new column left of the cursor." prelude-tips)
+
 (provide 'wra-org)
 ;;; wra-org.el ends here

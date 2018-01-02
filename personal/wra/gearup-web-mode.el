@@ -2,6 +2,9 @@
 
 ;;; Commentary:
 ;; use web-mode to edit xml files; it provides superior folding
+;;
+;; 2017/12/17: dropped web mode because search could not find strings
+;; in folded code.
 
 ;;; Code:
 (prelude-require-package 'web-mode)
@@ -28,8 +31,6 @@
 (push "Hit <C-c C-e d> to go to child element." prelude-tips)
 (push "Hit <C-c C-e m> to remove blank lines between child elements." prelude-tips)
 (push "Hit <C-c C-e t> to transpose elements." prelude-tips)
-
-;; FIXME search in web mode can fail because of folding
 
 (provide 'gearup-web-mode)
 ;;; gearup-web-mode.el ends here
