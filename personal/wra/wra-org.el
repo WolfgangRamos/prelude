@@ -150,6 +150,7 @@
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((emacs-lisp . t)
+   (sql . t)
    (sh . t)))
 
 ;; latex math fragments preview
