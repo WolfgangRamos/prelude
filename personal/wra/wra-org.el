@@ -9,6 +9,9 @@
 (require 'cdlatex)
 (require 'org-wc) ;; provides function 'org-word-count
 (prelude-require-package 'org-ref)
+(prelude-require-package 'ob-restclient)
+(require 'ob-restclient)
+(require 'ob-sql)
 
 
 (setq org-image-actual-width nil)
@@ -151,6 +154,7 @@
  'org-babel-load-languages
  '((emacs-lisp . t)
    (sql . t)
+   (restclient . t)
    (sh . t)))
 
 ;; latex math fragments preview
