@@ -18,7 +18,7 @@ If called from dired copy path of marked files to kill ring and clipboard."
 
 ;; gearup sizing menu
 (global-set-key (kbd "C-c s")
-                (defhydra hydra-sizing (:foreign-keys warn)
+                (defhydra hydra-sizing (:foreign-keys nil)
                   "
 ^Font size^    ^Vertical window size^   ^Horizontal window size
 ^----------^   ^--------------------^   ^----------------------
