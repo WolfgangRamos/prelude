@@ -1,5 +1,6 @@
 !savefile/
 savefile/abbrev_defs
+savefile/.mc-lists.el
 
 # emacs server socket file directory
 server/

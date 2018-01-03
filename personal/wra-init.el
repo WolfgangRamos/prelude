@@ -41,9 +41,9 @@
 (require 'wra-company)
 (require 'x-dict)
 (require 'restclient)
-;;(require 'wra-restclient)
+;; (require 'wra-restclient)
 (require 'gearup-ms-windows)
-(require 'wra-nameses)
+;; (require 'wra-nameses)
 (require 'wra-sunrise-commander)
 (require 'wra-savehist)
 (require 'wra-isearch)
@@ -57,10 +57,13 @@
 (require 'gearup-misc-prelude-tips)
 (require 'gearup-undo-tree)
 (require 'gearup-projectile)
+(require 'gearup-multiple-cursors)
 (require 'gearup-host-config)
 
 (set-face-attribute 'hl-tags-face nil :background "turquoise")
 (require 'gearup-org-attach-screenshot)
+
+(push "Hit <C-x SPC> to select a rectangular region." prelude-tips)
 
 ;; open comment AND code blocks on searching
 (setq hs-isearch-open t)
@@ -191,6 +194,7 @@
 ;; (global-set-key (kbd "M-S") 'avy-goto-char-timer)
 ;; (global-set-key (kbd "M-l") 'avy-goto-line)
 (global-set-key (kbd "M-=") 'er/expand-region)
+(push "Hit <M-=> to expand region to word, symbol, sexp, ..." prelude-tips)
 
 ;; DocView Mode (pdf viewer)
 ;; (put 'set-goal-column 'disabled nil) ;; enable continuous scrolling
