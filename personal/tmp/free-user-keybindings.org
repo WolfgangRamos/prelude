@@ -26,3 +26,4 @@
 - x :: sunrise commander
 - y :: yasnippet
 - z ::
+- SPC :: set-rectangular-region-anchor from multiple-cursors

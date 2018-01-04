@@ -47,7 +47,11 @@ With ARG kill that many sexp before point."
 (global-set-key (kbd "<C-M-backspace>") 'gearup-reverse-kill-sexp)
 (push "Hit <C-M-backs to backward kill sexp" prelude-tips)
 
+(global-set-key (kbd "C-c O") 'just-one-space)
+(push "Hit <C-s O> to remove additional spaces." prelude-tips)
 
+(global-set-key (kbd "C-x r I") 'string-insert-rectangle)
+(push "Hit <C-x r I> to insert string rectangle." prelude-tips)
 ;; Whitespace mode configuration
 (setq whitespace-display-mappings ;; all numbers are unicode codepoint in decimal. e.g. (insert-char 182 1)
       '((space-mark 32 [183] [46])
