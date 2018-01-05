@@ -145,9 +145,12 @@
 ;; enable yasnippet
 (add-hook 'org-mode-hook #'yas-minor-mode)
 
-;; map org-time-stamp to
-(add-hook 'org-mode-hook (lambda ()
-                           (define-key org-mode-map (kbd "C-c .") nil)))
+(defun gearup-org-mode-free-user-keybindings ()
+  "Adjust org-mode keybindings"
+  (define-key org-mode-map (kbd "C-c SPC") nil)
+  (define-key org-mode-map (kbd "C-c .") nil))
+
+(add-hook 'org-mode-hook 'gearup-org-mode-free-user-keybindings)
 
 ;; enable evaluation of code blocks for specific languages
 (org-babel-do-load-languages
@@ -156,6 +159,8 @@
    (sql . t)
    (restclient . t)
    (sh . t)))
+
+
 
 ;; latex math fragments preview
 ;;(setq org-latex-create-formula-image-program 'dvipng)
