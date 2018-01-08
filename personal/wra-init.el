@@ -60,6 +60,8 @@
 (require 'gearup-multiple-cursors)
 (require 'gearup-host-config)
 
+(prelude-require-package 'bookmark+)
+
 (set-face-attribute 'hl-tags-face nil :background "turquoise")
 (require 'gearup-org-attach-screenshot)
 
