@@ -6,6 +6,19 @@
 
 ;; dired
 (require 'dired)
+
+(defun gearup--allow-edit-file-permissions ()
+  "Make file permisions editable in wdired mode."
+  (setq wdired-allow-to-change-permissions t))
+
+(defun gearup--use-system-trash ()
+  "Make deletiin in dired move files to system trash."
+  (setq delete-by-moving-to-trash t))
+  
+(with-eval-after-load 'wdired 
+  (gearup--allow-edit-file-permissions)
+  (gearup--use-system-trash))
+  
 (prelude-require-package 'ace-window)
 
 ;; configure default shell commands for (a)synchronous shell commands with ! or &

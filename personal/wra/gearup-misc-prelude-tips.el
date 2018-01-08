@@ -38,7 +38,9 @@
 ;;(push "Hit <C-x #> to close an emacs client frame." prelude-tips);; FIXME verify this
 
 ;; dired
-(push "Hit <C-q> in dired to make the buffer writable; Hit <C-x C-s> to save." prelude-tips)
+(push "Hit <C-x C-q> in dired to make the buffer writable; Hit <C-c C-c> to save." prelude-tips)
+(push "Hit <q> in dired to close dired buffer." prelude-tips)
+(push "Hit <o> in dired to open file at point in another window." prelude-tips)
 
 ;; sexp
 (push "Hit <C-M-k> to forward kill sexp" prelude-tips)
