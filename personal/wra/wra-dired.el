@@ -12,12 +12,17 @@
   (setq wdired-allow-to-change-permissions t))
 
 (defun gearup--use-system-trash ()
-  "Make deletiin in dired move files to system trash."
+  "Make deletion in dired move files to system trash."
   (setq delete-by-moving-to-trash t))
+  
+(defun gearup--use-other-dired-buffer-as-default-target-directory ()
+  "Make copy, move commands use other dired buffer as target (if there is one)."
+  (setq dired-dwim-target t))
   
 (with-eval-after-load 'wdired 
   (gearup--allow-edit-file-permissions)
-  (gearup--use-system-trash))
+  (gearup--use-system-trash)
+  (gearup--use-other-dired-buffer-as-default-target-directory))
   
 (prelude-require-package 'ace-window)
 
