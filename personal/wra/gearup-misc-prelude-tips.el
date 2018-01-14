@@ -17,6 +17,7 @@
 ;; emacs help
 (push "Hit <C-h r> to show emacs manual." prelude-tips)
 (push "Hit <C-h r> to show emacs info page." prelude-tips)
+(push "Hit <C-h l> to show the last 300 key and mouse events and functions they called." prelude-tips)
 
 ;; ediff
 (push "Hit <n> in ediff to goto next difference." prelude-tips)
