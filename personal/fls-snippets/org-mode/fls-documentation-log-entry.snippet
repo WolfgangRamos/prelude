@@ -6,12 +6,30 @@
 # type: snippet
 # --
 #+STARTUP: showall
+#+PROPERTY: header-args:restclient :var vtserver="http://localhost:89" :var content_type_text="text/xml; charset=utf-8" :var basic_authentification_credentials=(base64-encode-string "FLS:1147")
+#+PROPERTY: header-args:sql :engine mssql :dbhost MSSQL2014 :dbuser vttest :dbport :dbpassword vttest :database DEV_CLIENT_WR
 
 - Auftragsnummer: $1
 - [X] Standard
 - [ ] Kundenanpassung
 - Kunde: $2
 - (Sub-)Projektnummern: $3
+
+* DB Queries
+
+#+BEGIN_SRC sql
+Select * from vtsorderreport;
+#+END_SRC
+
+* Web Requests
+
+#+BEGIN_SRC restclient
+  POST :vtserver/VTS/WS/GetNextActivity
+  Content-Type: :content_type_text
+  Authorization: Basic :basic_authentification_credentials
+
+  <GetNextActivity><User>1</User><ActivityNr>0</ActivityNr><ProcessInstance></ProcessInstance><ShowNextProcess>true</ShowNextProcess></GetNextActivity>
+#+END_SRC
 
 * Dokumentation
 
