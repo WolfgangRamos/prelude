@@ -58,7 +58,9 @@
 (require 'gearup-undo-tree)
 (require 'gearup-projectile)
 (require 'gearup-multiple-cursors)
-(require 'gearup-host-config)
+(require 'gearup-psvn)
+(require 'gearup-host-config) ;; load this last
+
 
 (prelude-require-package 'bookmark+)
 
