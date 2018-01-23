@@ -15,8 +15,11 @@
 (push "In vc-mode-line '!' is shown when a file contains conflicts." prelude-tips)
 
 ;; emacs help
-(push "Hit <C-h r> to show emacs maual." prelude-tips)
+(push "Hit <C-h r> to show emacs manual." prelude-tips)
 (push "Hit <C-h r> to show emacs info page." prelude-tips)
+(push "Hit <C-h l> to show the last 300 key and mouse events and functions they called." prelude-tips)
+(push "Hit <C-h s> to show the current syntax table." prelude-tips)
+(push "Hit <C-h b> to show the current key bindings." prelude-tips)
 
 ;; ediff
 (push "Hit <n> in ediff to goto next difference." prelude-tips)
