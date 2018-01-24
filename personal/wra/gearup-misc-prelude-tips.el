@@ -13,6 +13,26 @@
 (push "In vc-mode-line '-' is shown when a file is unmodified." prelude-tips)
 (push "In vc-mode-line ':' is shown when a file has been modified." prelude-tips)
 (push "In vc-mode-line '!' is shown when a file contains conflicts." prelude-tips)
+(push "Hit <C-x v g> to annotate a file under version control." prelude-tips)
+(push "Hit <C-x v i> to mark current file for commit (svn add)." prelude-tips)
+(push "Hit <C-x v u> to revert local changes to current file." prelude-tips)
+
+;; magit
+(push "Hit <TAB> in magit status buffer to hide/show sections." prelude-tips)
+(push "Hit <RET> in magit status buffer to show details of thing at point." prelude-tips)
+(push "Hit <C-n> in magit status buffer to move to next section." prelude-tips)
+(push "Hit <M-n> in magit status buffer to move to next section at same level." prelude-tips)
+(push "Hit <C-p> in magit status buffer to move to previous section." prelude-tips)
+(push "Hit <M-p> in magit status buffer to move to previous section at same level." prelude-tips)
+(push "Hit <q> to close any magit window." prelude-tips)
+(push "Hit <?> in magit status window to list available commands." prelude-tips)
+(push "Hit <C-c C-c> in magit popups to persist current option configuration." prelude-tips)
+(push "Hit <+>/<-> in magit to make diff hunks larger/smaller." prelude-tips)
+(push "Hit <D> in magit to change arguments used for current diff display." prelude-tips)
+(push "Hit <L> in magit to change arguments used for current log display." prelude-tips)
+(push "Hit <SPC> on commit in magit log buffer to open a details buffer following the commit selection." prelude-tips)
+(push "Hit <RET> in commit buffer spawned from log buffer to display the file following commit selection." prelude-tips)
+(push "Hit <?> followed by action or argument char in magit popups to open help buffer." prelude-tips)
 
 ;; emacs help
 (push "Hit <C-h r> to show emacs manual." prelude-tips)
