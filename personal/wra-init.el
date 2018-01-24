@@ -61,6 +61,7 @@
 (require 'gearup-psvn)
 (require 'gearup-host-config) ;; load this last
 
+(set-face-attribute 'default nil :height 120)
 
 (prelude-require-package 'bookmark+)
 
