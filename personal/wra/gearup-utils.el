@@ -16,6 +16,10 @@ If called from dired copy path of marked files to kill ring and clipboard."
    (t
     (kill-new (buffer-file-name)))))
 
+(defun gearup-disable-whitespace-mode ()
+  "Disable whitespace-mode."
+  (whitespace-mode -1))
+
 ;; gearup sizing menu
 (global-set-key (kbd "C-c s")
                 (defhydra hydra-sizing (:foreign-keys nil)
