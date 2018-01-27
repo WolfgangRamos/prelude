@@ -55,6 +55,7 @@
 (require 'gearup-smart-mode-line)
 (require 'hl-tags-mode)
 (require 'gearup-misc-prelude-tips)
+(require 'gearup-omnisharp)
 (require 'gearup-undo-tree)
 (require 'gearup-projectile)
 (require 'gearup-multiple-cursors)
@@ -65,7 +66,8 @@
 (set-face-attribute 'hl-tags-face nil :background "turquoise")
 (require 'gearup-org-attach-screenshot)
 
-(push "Hit <C-x SPC> to select a rectangular region." prelude-tips)
+;; this command (pop-global-mark) is to close to "C-x SPC"
+(global-set-key (kbd "C-x C-SPC") nil)
 
 ;; open comment AND code blocks on searching
 (setq hs-isearch-open t)
@@ -197,6 +199,7 @@
 ;; (global-set-key (kbd "M-l") 'avy-goto-line)
 (global-set-key (kbd "M-=") 'er/expand-region)
 (push "Hit <M-=> to expand region to word, symbol, sexp, ..." prelude-tips)
+(push "Hit <C-M-SPC> to run easy-mark." prelude-tips)
 
 ;; DocView Mode (pdf viewer)
 ;; (put 'set-goal-column 'disabled nil) ;; enable continuous scrolling

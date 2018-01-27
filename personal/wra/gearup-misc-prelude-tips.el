@@ -93,6 +93,8 @@
 (push "Hit <C-x z> to repeat last command." prelude-tips)
 (push "Hit <M-z> to zap to char." prelude-tips)
 (push "Hit <C-x 8> to compose unicode chars." prelude-tips)
+(push "Hit <C-o> to insert a new line below without moving point." prelude-tips)
+(push "Hit <C-j> to insert a new line, move point forward and indent." prelude-tips)
 
 ;; frames
 (push "Hit <C-x 5 0> to delete current frame." prelude-tips)
@@ -107,6 +109,7 @@
 (push "Hit <C-x r c> to clear rectangle." prelude-tips)
 (push "Hit <C-x r y> to yank rectangle." prelude-tips)
 (push "Hit <C-x r t> to directly type text to rectangle." prelude-tips)
+(push "Hit <C-x SPC> to select a rectangular region." prelude-tips)
 
 ;; prefix args
 (push "Hit <M--> or <C-u -> to enter negative prefix arg." prelude-tips)

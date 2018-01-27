@@ -13,6 +13,8 @@
 (require 'ob-restclient)
 (require 'ob-sql)
 
+(define-key org-mode-map (kbd "C-,") nil)
+
 
 (setq org-image-actual-width nil)
 

@@ -6,6 +6,9 @@
 ;; set auth directory for emacs daemon
 (setq server-auth-dir (expand-file-name "server/" prelude-personal-dir))
 
+(require 'vimgolf)
+(require 'gearup-omnisharp)
+
 (message "Loaded host config for lambda.")
 
 (provide 'lambda)
