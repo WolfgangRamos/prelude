@@ -58,8 +58,12 @@
 (require 'gearup-omnisharp)
 (require 'gearup-undo-tree)
 (require 'gearup-projectile)
+(require 'gearup-csharp-mode)
 (require 'gearup-multiple-cursors)
-(require 'gearup-host-config)
+;;(require 'gearup-psvn) ;; switched to git svn via magit
+(require 'gearup-host-config) ;; load this last
+
+(set-face-attribute 'default nil :height 120)
 
 (prelude-require-package 'bookmark+)
 
