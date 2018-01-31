@@ -61,11 +61,13 @@
 (require 'gearup-csharp-mode)
 (require 'gearup-multiple-cursors)
 ;;(require 'gearup-psvn) ;; switched to git svn via magit
+(require 'gearup-iedit)
 (require 'gearup-host-config) ;; load this last
 
 (set-face-attribute 'default nil :height 120)
 
 (prelude-require-package 'bookmark+)
+
 
 (set-face-attribute 'hl-tags-face nil :background "turquoise")
 (require 'gearup-org-attach-screenshot)
@@ -233,8 +235,8 @@
 ;;  '(haskell-process-log t)
 ;;  '(haskell-process-suggest-remove-import-lines t))
 ;; (add-hook 'haskell-mode-hook
-;; 	  (lambda ()
-;; 	    column-number-mode 1))
+;;    (lambda ()
+;;      column-number-mode 1))
 
 ;; Prolog (from: https://bruda.ca/emacs/prolog_mode_for_emacs)
 ;; (autoload 'run-prolog "prolog" "Start a Prolog sub-process." t)
@@ -261,10 +263,10 @@
 ;; (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 ;; (setq markdown-enable-math t) ;; enable math highlighting
 ;; (add-hook 'markdown-mode-hook
-;; 	  (lambda ()
-;; 	    (flyspell-mode-off)
-;; 	    (electric-indent-mode nil)
-;; 	    (setq indent-tabs-mode nil)))
+;;    (lambda ()
+;;      (flyspell-mode-off)
+;;      (electric-indent-mode nil)
+;;      (setq indent-tabs-mode nil)))
 
 ;; (add-hook 'markdown-mode-hook #'yas-minor-mode)
 
