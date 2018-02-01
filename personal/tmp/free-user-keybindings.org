@@ -1,3 +1,60 @@
+* M-[single char]
+
+- M-SPC :: hippie expand
+- M-! :: shell-command
+- M-$ :: ispell-word
+- M-% :: query-replace
+- M-& :: async-shell-command
+- M-' :: abbrev-prefix-mark
+- M-( :: insert-parentheses
+- M-) :: move-past-close-and-reindent
+- M-, :: xref-pop-marker-stack
+- M-- :: negative-argument
+- M-. :: xref-find-definitions
+- M-/ :: dabbrev-expand
+- M-: :: eval-expression
+- M-; :: comment-dwim
+- M-< :: beginning-of-buffer
+- M-= :: count-words-region
+- M-> :: end-of-buffer
+- M-? :: xref-find-references
+- M-@ :: mark-word
+- M-\ :: delete-horizontal-space
+- M-^ :: delete-indentation
+- M-` :: tmm-menubar
+- M-a :: backward-sentence
+- M-b :: backward-word
+- M-c :: capitalize-word
+- M-d :: kill-word
+- M-e :: forward-sentence
+- M-f :: forward-word
+- M-g :: Prefix Command
+- M-h :: mark-paragraph
+- M-i :: tab-to-tab-stop
+- M-j :: indent-new-comment-line
+- M-k :: kill-sentence
+- M-l :: downcase-word
+- M-m :: back-to-indentation
+- M-n :: *[unbound]*
+- M-o :: facemenu-keymap
+- M-p :: *[unbound]*
+- M-q :: fill-paragraph
+- M-r :: move-to-window-line-top-bottom
+- M-s :: Prefix Command
+- M-t :: transpose-words
+- M-u :: upcase-word
+- M-v :: scroll-down-command
+- M-w :: kill-ring-save
+- M-x :: execute-extended-command
+- M-y :: yank-pop
+- M-z :: zap-to-char
+- M-{ :: backward-paragraph
+- M-| :: shell-command-on-region
+- M-} :: forward-paragraph
+- M-~ :: not-modified
+- M-DEL :: backward-kill-word
+
+
 * C-[single char]
 
 - a :: move-beginning-of-line

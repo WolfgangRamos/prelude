@@ -97,17 +97,6 @@
                   (message "Prelude-auto-save enabled")
                   t))))
 
-(prelude-require-package 'iedit)
-
-(prelude-require-package 'omnisharp)
-
-(setq omnisharp-server-executable-path "c:/Program Files/Omnisharp/omnisharp-win-x64/OmniSharp.exe")
-
-;;(add-hook 'csharp-mode-hook 'omnisharp-mode)
-;; (eval-after-load
-;;     'company
-;;   '(add-to-list 'company-backends 'company-omnisharp))
-
 ;; (call-process "convert" nil t nil "screenshot:" "c://Users//wra//foo77.png")
 
 ;; smartparens-mode freezes emacs when enabled in large files
@@ -317,11 +306,8 @@
 ;;   (deactivate-mark nil))
 ;; (define-key global-map [remap exchange-point-and-mark] 'exchange-point-and-mark-no-activate)
 
-
-;; toggle the case of a word with M-ö
-;; -> taken from: http://ergoemacs.org/emacs/modernization_upcase-word.html
 (defun wra-toggle-case ()
-  "Toggle the letter case of current word or text selection.
+  "Toggle case of current word or text in region and move over it.
 Toggles between: “all lower”, “Init Caps”, “ALL CAPS”."
   (interactive)
 
