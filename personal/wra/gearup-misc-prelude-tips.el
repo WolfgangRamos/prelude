@@ -98,16 +98,17 @@
 (push "Hit <C-u k> in dired on subdirectory listing header to remove it." prelude-tips)
 
 ;; sexp
-(push "Hit <C-M-k> to forward kill sexp" prelude-tips)
-(push "Hit <C-M-- k> to backward kill sexp." prelude-tips)
-(push "Hit <C-M-b> to move backward over sexp." prelude-tips)
-(push "Hit <C-M-f> to move forward over sexp." prelude-tips)
-(push "Hit <C-M-t> to transpose sexp." prelude-tips)
-(push "Hit <C-M-SPC> to forward mark sexp." prelude-tips)
-(push "Hit <C-M-n> to move forward over sexp staying at same level in sexp structure." prelude-tips)
-(push "Hit <C-M-p> to move backward over sexp staying at the same level in sexp structure." prelude-tips)
-(push "Hit <C-M-u> to move upward in sexp structure." prelude-tips)
-(push "Hit <C-M-d> to move downward in sexp structure." prelude-tips)
+(setq prelude-tips
+      (append prelude-tips
+              '("Hit <C-M-k> to forward kill sexp"
+                "Hit <C-M-- k> to backward kill sexp."
+                "Hit <C-M-b> to move backward over sexp."
+                "Hit <C-M-f> to move forward over sexp."
+                "Hit <C-M-t> to transpose sexp."
+                "Hit <C-M-n> to move forward over sexp staying at same level in sexp structure."
+                "Hit <C-M-p> to move backward over sexp staying at the same level in sexp structure."
+                "Hit <C-M-u> to move upward in sexp structure."
+                "Hit <C-M-d> to move downward in sexp structure.")))
 
 ;; general
 (push "Hit <C-x z> to repeat last command." prelude-tips)
