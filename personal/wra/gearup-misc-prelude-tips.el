@@ -115,6 +115,7 @@
 (push "Hit <C-x 8> to compose unicode chars." prelude-tips)
 (push "Hit <C-o> to insert a new line below without moving point." prelude-tips)
 (push "Hit <C-j> to insert a new line, move point forward and indent." prelude-tips)
+(push "Hit <C-c n> to cleanup (fix indentation, strip whitespace, etc) buffer or reagion." prelude-tips)
 
 ;; frames
 (push "Hit <C-x 5 0> to delete current frame." prelude-tips)
