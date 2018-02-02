@@ -142,7 +142,7 @@
         ))
 
 ;; turn on cdlatex in org mode
-(add-hook 'org-mode-hook 'turn-on-org-cdlatex)
+;;(add-hook 'org-mode-hook 'turn-on-org-cdlatex)
 
 ;; enable yasnippet
 (add-hook 'org-mode-hook #'yas-minor-mode)

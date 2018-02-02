@@ -3,11 +3,12 @@
 # key: entry
 # group: fls
 # condition: t
+# expand-env: ((yas-indent-line 'fixed))
 # type: snippet
 # --
 #+STARTUP: showall
 #+PROPERTY: header-args:restclient :var vtserver="http://localhost:89" :var content_type_text="text/xml; charset=utf-8" :var basic_authentification_credentials=(base64-encode-string "FLS:1147")
-#+PROPERTY: header-args:sql :engine mssql :dbhost MSSQL2014 :dbuser vttest :dbport :dbpassword vttest :database DEV_CLIENT_WR
+#+PROPERTY: header-args:sql :engine mssql :dbhost MSSQL2014 :dbuser $4 :dbport :dbpassword $5 :database DEV_CLIENT_WR
 
 - Auftragsnummer: $1
 - [X] Standard
@@ -31,27 +32,26 @@ Select * from vtsorderreport;
   <GetNextActivity><User>1</User><ActivityNr>0</ActivityNr><ProcessInstance></ProcessInstance><ShowNextProcess>true</ShowNextProcess></GetNextActivity>
 #+END_SRC
 
-* Dokumentation
+* Technische Dokumentation
 
 - $0
 
-* Implementierungsdetails
+** Übersicht über Localization IDs
 
-#+NAME: Allgemeine Informationen
-| Name DE                                 |                        |
-| Name EN                                 |                        |
-| Name TECH                               |                        |
-|-----------------------------------------+------------------------|
-| QS erwünscht                            | ja                     |
-| Einzelner Parameter oder Funktionspaket |                        |
-| Wo?                                     | Client 3.0             |
-| Andere Quelle                           | s.o.                   |
-|-----------------------------------------+------------------------|
-| Weshalb (Benefit)                       |                        |
-| Weshelb (technisch)                     |                        |
-|-----------------------------------------+------------------------|
-| Systemanforderungen                     |                        |
-| Erforderliche Module                    |                        |
-| Erforderliche Konfiguration             |                        |
+Neue oder veränderte Localization IDs:
+
+#+BEGIN_SRC sql :engine oracle :dbhost vm-oracle-utf :dbuser $6 :dbport 1521 :dbpassword $4 :database orcl.serverfls.com
+  select k.sectionkey as id, l.language as sprache, t.text
+  from keys k
+  inner join texte t
+  on k.logicalkey = t.logicalkey
+  inner join LANGUAGES l
+  on t.lang_nr = l.nr
+  where Regexp_like (l.language, '^(German|English)$') and
+  Regexp_like (k.sectionkey, '^(abidances_id|error_id)$')
+  Order by id, sprache;
+#+END_SRC
+
+* Implementierungsdetails
 
 * Entwicklertests
