@@ -55,21 +55,25 @@
 (require 'gearup-smart-mode-line)
 (require 'hl-tags-mode)
 (require 'gearup-misc-prelude-tips)
+(require 'gearup-omnisharp)
 (require 'gearup-undo-tree)
 (require 'gearup-projectile)
 (require 'gearup-csharp-mode)
 (require 'gearup-multiple-cursors)
 ;;(require 'gearup-psvn) ;; switched to git svn via magit
+(require 'gearup-iedit)
 (require 'gearup-host-config) ;; load this last
 
 (set-face-attribute 'default nil :height 120)
 
 (prelude-require-package 'bookmark+)
 
+
 (set-face-attribute 'hl-tags-face nil :background "turquoise")
 (require 'gearup-org-attach-screenshot)
 
-(push "Hit <C-x SPC> to select a rectangular region." prelude-tips)
+;; this command (pop-global-mark) is to close to "C-x SPC"
+(global-set-key (kbd "C-x C-SPC") nil)
 
 ;; open comment AND code blocks on searching
 (setq hs-isearch-open t)
@@ -92,17 +96,6 @@
                 (progn
                   (message "Prelude-auto-save enabled")
                   t))))
-
-(prelude-require-package 'iedit)
-
-(prelude-require-package 'omnisharp)
-
-(setq omnisharp-server-executable-path "c:/Program Files/Omnisharp/omnisharp-win-x64/OmniSharp.exe")
-
-;;(add-hook 'csharp-mode-hook 'omnisharp-mode)
-;; (eval-after-load
-;;     'company
-;;   '(add-to-list 'company-backends 'company-omnisharp))
 
 ;; (call-process "convert" nil t nil "screenshot:" "c://Users//wra//foo77.png")
 
@@ -201,6 +194,7 @@
 ;; (global-set-key (kbd "M-l") 'avy-goto-line)
 (global-set-key (kbd "M-=") 'er/expand-region)
 (push "Hit <M-=> to expand region to word, symbol, sexp, ..." prelude-tips)
+(push "Hit <C-M-SPC> to run easy-mark." prelude-tips)
 
 ;; DocView Mode (pdf viewer)
 ;; (put 'set-goal-column 'disabled nil) ;; enable continuous scrolling
@@ -230,8 +224,8 @@
 ;;  '(haskell-process-log t)
 ;;  '(haskell-process-suggest-remove-import-lines t))
 ;; (add-hook 'haskell-mode-hook
-;; 	  (lambda ()
-;; 	    column-number-mode 1))
+;;    (lambda ()
+;;      column-number-mode 1))
 
 ;; Prolog (from: https://bruda.ca/emacs/prolog_mode_for_emacs)
 ;; (autoload 'run-prolog "prolog" "Start a Prolog sub-process." t)
@@ -258,10 +252,10 @@
 ;; (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 ;; (setq markdown-enable-math t) ;; enable math highlighting
 ;; (add-hook 'markdown-mode-hook
-;; 	  (lambda ()
-;; 	    (flyspell-mode-off)
-;; 	    (electric-indent-mode nil)
-;; 	    (setq indent-tabs-mode nil)))
+;;    (lambda ()
+;;      (flyspell-mode-off)
+;;      (electric-indent-mode nil)
+;;      (setq indent-tabs-mode nil)))
 
 ;; (add-hook 'markdown-mode-hook #'yas-minor-mode)
 
@@ -312,11 +306,8 @@
 ;;   (deactivate-mark nil))
 ;; (define-key global-map [remap exchange-point-and-mark] 'exchange-point-and-mark-no-activate)
 
-
-;; toggle the case of a word with M-ö
-;; -> taken from: http://ergoemacs.org/emacs/modernization_upcase-word.html
 (defun wra-toggle-case ()
-  "Toggle the letter case of current word or text selection.
+  "Toggle case of current word or text in region and move over it.
 Toggles between: “all lower”, “Init Caps”, “ALL CAPS”."
   (interactive)
 

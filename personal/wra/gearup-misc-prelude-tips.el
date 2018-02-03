@@ -107,21 +107,25 @@
 (push "Hit <C-u k> in dired on subdirectory listing header to remove it." prelude-tips)
 
 ;; sexp
-(push "Hit <C-M-k> to forward kill sexp" prelude-tips)
-(push "Hit <C-M-- k> to backward kill sexp." prelude-tips)
-(push "Hit <C-M-b> to move backward over sexp." prelude-tips)
-(push "Hit <C-M-f> to move forward over sexp." prelude-tips)
-(push "Hit <C-M-t> to transpose sexp." prelude-tips)
-(push "Hit <C-M-SPC> to forward mark sexp." prelude-tips)
-(push "Hit <C-M-n> to move forward over sexp staying at same level in sexp structure." prelude-tips)
-(push "Hit <C-M-p> to move backward over sexp staying at the same level in sexp structure." prelude-tips)
-(push "Hit <C-M-u> to move upward in sexp structure." prelude-tips)
-(push "Hit <C-M-d> to move downward in sexp structure." prelude-tips)
+(setq prelude-tips
+      (append prelude-tips
+              '("Hit <C-M-k> to forward kill sexp"
+                "Hit <C-M-- k> to backward kill sexp."
+                "Hit <C-M-b> to move backward over sexp."
+                "Hit <C-M-f> to move forward over sexp."
+                "Hit <C-M-t> to transpose sexp."
+                "Hit <C-M-n> to move forward over sexp staying at same level in sexp structure."
+                "Hit <C-M-p> to move backward over sexp staying at the same level in sexp structure."
+                "Hit <C-M-u> to move upward in sexp structure."
+                "Hit <C-M-d> to move downward in sexp structure.")))
 
 ;; general
 (push "Hit <C-x z> to repeat last command." prelude-tips)
 (push "Hit <M-z> to zap to char." prelude-tips)
 (push "Hit <C-x 8> to compose unicode chars." prelude-tips)
+(push "Hit <C-o> to insert a new line below without moving point." prelude-tips)
+(push "Hit <C-j> to insert a new line, move point forward and indent." prelude-tips)
+(push "Hit <C-c n> to cleanup (fix indentation, strip whitespace, etc) buffer or reagion." prelude-tips)
 
 ;; frames
 (push "Hit <C-x 5 0> to delete current frame." prelude-tips)
@@ -136,6 +140,7 @@
 (push "Hit <C-x r c> to clear rectangle." prelude-tips)
 (push "Hit <C-x r y> to yank rectangle." prelude-tips)
 (push "Hit <C-x r t> to directly type text to rectangle." prelude-tips)
+(push "Hit <C-x SPC> to select a rectangular region." prelude-tips)
 
 ;; prefix args
 (push "Hit <M--> or <C-u -> to enter negative prefix arg." prelude-tips)

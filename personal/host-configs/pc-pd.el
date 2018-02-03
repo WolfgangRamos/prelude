@@ -177,3 +177,6 @@ If FORWARD is ntn-nil start search from current point position. If CASE is not-n
   If usenames is not nil use names extracted from name attributes instead of tag names (where possible)."
   (interactive)
   nil)
+
+;; TODO give correct path
+;;(gearup-omnisharp--setup-omnisharp-completion "C:\\Users\\wra\\Downloads\\omnisharp-win-x86\\OmniSharp.exe")

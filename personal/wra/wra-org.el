@@ -13,6 +13,8 @@
 (require 'ob-restclient)
 (require 'ob-sql)
 
+(define-key org-mode-map (kbd "C-,") nil)
+
 
 (setq org-image-actual-width nil)
 
@@ -140,7 +142,7 @@
         ))
 
 ;; turn on cdlatex in org mode
-(add-hook 'org-mode-hook 'turn-on-org-cdlatex)
+;;(add-hook 'org-mode-hook 'turn-on-org-cdlatex)
 
 ;; enable yasnippet
 (add-hook 'org-mode-hook #'yas-minor-mode)

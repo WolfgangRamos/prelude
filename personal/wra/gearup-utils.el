@@ -16,6 +16,23 @@ If called from dired copy path of marked files to kill ring and clipboard."
    (t
     (kill-new (buffer-file-name)))))
 
+(defun gearup-recenter-top-bottom (&optional arg)
+       "Cycle scroll position: center -> top -> bottom.
+
+With single prefix `C-u', scroll window to make line top of
+window. With double prefix `C-u C-u', scroll window to make line
+bottom of window."
+(interactive "p")
+(cond
+ ((= arg 1) (recenter-top-bottom))
+ ((= arg 4) (recenter-top-bottom 0))
+ ((= arg 16) (recenter-top-bottom (window-height)))))
+
+(global-set-key (kbd "C-l") 'gearup-recenter-top-bottom)
+(push "Hit <C-l> to cycle scroll positions: center -> top -> bottom." prelude-tips)
+(push "Hit <C-u C-l> to scroll line to top." prelude-tips)
+(push "Hit <C-u C-u C-l> to scroll line to bottom.." prelude-tips)
+
 (defun gearup-disable-whitespace-mode ()
   "Disable whitespace-mode."
   (whitespace-mode -1))
@@ -51,11 +68,9 @@ With ARG kill that many sexp before point."
 (global-set-key (kbd "<C-M-backspace>") 'gearup-reverse-kill-sexp)
 (push "Hit <C-M-backs to backward kill sexp" prelude-tips)
 
-(global-set-key (kbd "C-c O") 'just-one-space)
-(push "Hit <C-s O> to remove additional spaces." prelude-tips)
-
 (global-set-key (kbd "C-x r I") 'string-insert-rectangle)
 (push "Hit <C-x r I> to insert string rectangle." prelude-tips)
+
 ;; Whitespace mode configuration
 (setq whitespace-display-mappings ;; all numbers are unicode codepoint in decimal. e.g. (insert-char 182 1)
       '((space-mark 32 [183] [46])
@@ -80,4 +95,4 @@ With ARG kill that many sexp before point."
               (flycheck-mode -1))))
 
 (provide 'gearup-utils)
-;;; wra-yasnippet.el ends here
+;;; gearup-utils.el ends here
