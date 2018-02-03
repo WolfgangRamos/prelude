@@ -9,6 +9,15 @@
 ;; undo-tree
 (push "Press <d> in undo-tree to toggle diff buffer (requires diff system command)" prelude-tips)
 
+;; xref
+(setq prelude-tips 
+  (append prelude-tips
+    '("Hit <M-.> to xref-find-definition of thing at point; hit <M-,> to go back."
+      "Hit <n>/<p> in *xref* buffer to show next/previous ref in other window."
+      "Hit <r> in *xref* buffer to query-replace in current references."
+      "Hit <q> in *xref* buffer to close buffer."
+      "Hit <M-?> to find references of thing at point."))
+
 ;; vc-mode
 (push "In vc-mode-line '-' is shown when a file is unmodified." prelude-tips)
 (push "In vc-mode-line ':' is shown when a file has been modified." prelude-tips)
