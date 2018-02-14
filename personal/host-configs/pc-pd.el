@@ -178,5 +178,7 @@ If FORWARD is ntn-nil start search from current point position. If CASE is not-n
   (interactive)
   nil)
 
+
+
 ;; TODO give correct path
 ;;(gearup-omnisharp--setup-omnisharp-completion "C:\\Users\\wra\\Downloads\\omnisharp-win-x86\\OmniSharp.exe")
