@@ -1,4 +1,4 @@
-;;; wra-init.el --- My Prelude User Init File
+﻿;;; wra-init.el --- My Prelude User Init File
 
 ;;; Commentary:
 
@@ -83,7 +83,10 @@
 (setq ediff-merge-split-window-function 'split-window-horizontally)
 
 ;; set UTF-8 as default encoding system for opening and saving
-(set-language-environment "UTF-8")
+;;(set-language-environment "UTF-8")
+;;(prefer-coding-system 'utf-8)
+;;(setq coding-system-for-read 'utf-8)
+;;(setq coding-system-for-write 'utf-8)
 
 (defun gearup-toggle-prelude-auto-save-command ()
   "Toggle `prelude-auto-save' to disable `prelude-auto-save-command'."
