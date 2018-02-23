@@ -5,9 +5,16 @@
 ;;; Code:
 
 
-;; remoce bindings
+;; remove bindings
 (define-key prelude-mode-map (kbd "C-c y") nil)
 (define-key prelude-mode-map (kbd "C-c s") nil)
+
+(defun gearup-prelude--disable-whitespace-cleanup-on-save ()
+  "Disable prelude's auto whitespace cleanup on save feature."
+  (remove-hook 'before-save-hook 'prelude-cleanup-maybe)
+  (setq prelude-clean-whitespace-on-save nil))
+
+(gearup-prelude--disable-whitespace-cleanup-on-save)
 
 ;; tips
 (push "Hit <C-Backsp> to backward kill line." prelude-tips)
