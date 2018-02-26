@@ -27,10 +27,14 @@
                'magit-log-maybe-update-revision-buffer)
   "Revision buffer follow log %s.")
 
-(defun gearup-magit--log-enable-blob-buffee-follow ()
+(define-togglefun gearup-magit--toggle-blob-buffer-follow-log
   "Let blob buffers follow point in log buffer."
+  (member 'magit-log-maybe-update-blob-buffer magit-section-movement-hook)
   (add-hook 'magit-section-movement-hook
-            'magit-log-maybe-update-blob-buffer))
+            'magit-log-maybe-update-blob-buffer)
+  (remove-hook 'magit-section-movement-hook
+               'magit-log-maybe-update-blob-buffer)
+  "Blob buffer follow log %s.")
 
 (gearup-magit--commit-disable-automatic-diff)
 (gearup-magit--disable-vc-for-git-repos)
