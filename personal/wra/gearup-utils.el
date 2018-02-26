@@ -71,6 +71,24 @@ With ARG kill that many sexp before point."
 (global-set-key (kbd "C-x r I") 'string-insert-rectangle)
 (push "Hit <C-x r I> to insert string rectangle." prelude-tips)
 
+(defmacro define-togglefun (function-name doc-string test on-action off-action msg-format-string)
+  "Define interactive function to perform a toggle operation based on TEST.
+
+TEST must be an (unquoted) expression. If TEST evaluates to non-nil OFF-ACTION is evaluated. Otherwise ON-ACTION. DOC-STRING is the doc-string of the generated function. MSG-FORMAT-STRING is a format string used to generate a message in the minibuffer. MSG-FORMAT-STRING can contain one %s placeholder. This placeholder will be filled with the string 'enabled' or 'disabled'.
+
+If the generated function is called with one prefix arg (ie. C-u), ON-ACTION is evaluated no matter what TEST returns"
+  (list 'defun function-name (list 'arg)
+        doc-string
+        (list 'interactive "p")
+        (list 'if (list 'or (list '= 'arg 4) (list 'not test))
+              (list 'progn
+                    on-action
+                    (list 'message msg-format-string "enabled"))
+              (list 'progn
+                    off-action
+                    (list 'message msg-format-string "disabled")))))
+
+
 (defun gearup-buffer-file-has-bom ()
   "Detect if current buffers file has a BOM"
   (interactive)
