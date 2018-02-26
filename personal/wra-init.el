@@ -1,4 +1,4 @@
-﻿;;; wra-init.el --- My Prelude User Init File
+;;; wra-init.el --- My Prelude User Init File
 
 ;;; Commentary:
 
@@ -84,7 +84,13 @@
 
 ;; set UTF-8 as default encoding system for opening and saving
 ;;(set-language-environment "UTF-8")
-;;(prefer-coding-system 'utf-8)
+(prefer-coding-system 'utf-8)
+(defun gearup--set-utf-8with-signature-coding-system-mode-line-mnemonic-to-B ()
+  "Set the mode line indicator mnemonic for utf-8-with-signature to \"B\"."
+  (coding-system-put 'utf-8-with-signature :mnemonic 66))
+
+(gearup--set-utf-8with-signature-coding-system-mode-line-mnemonic-to-B)
+
 ;;(setq coding-system-for-read 'utf-8)
 ;;(setq coding-system-for-write 'utf-8)
 

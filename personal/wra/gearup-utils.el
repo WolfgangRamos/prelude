@@ -17,16 +17,16 @@ If called from dired copy path of marked files to kill ring and clipboard."
     (kill-new (buffer-file-name)))))
 
 (defun gearup-recenter-top-bottom (&optional arg)
-       "Cycle scroll position: center -> top -> bottom.
+  "Cycle scroll position: center -> top -> bottom.
 
 With single prefix `C-u', scroll window to make line top of
 window. With double prefix `C-u C-u', scroll window to make line
 bottom of window."
-(interactive "p")
-(cond
- ((= arg 1) (recenter-top-bottom))
- ((= arg 4) (recenter-top-bottom 0))
- ((= arg 16) (recenter-top-bottom (window-height)))))
+  (interactive "p")
+  (cond
+   ((= arg 1) (recenter-top-bottom))
+   ((= arg 4) (recenter-top-bottom 0))
+   ((= arg 16) (recenter-top-bottom (window-height)))))
 
 (global-set-key (kbd "C-l") 'gearup-recenter-top-bottom)
 (push "Hit <C-l> to cycle scroll positions: center -> top -> bottom." prelude-tips)
@@ -70,6 +70,27 @@ With ARG kill that many sexp before point."
 
 (global-set-key (kbd "C-x r I") 'string-insert-rectangle)
 (push "Hit <C-x r I> to insert string rectangle." prelude-tips)
+
+(defun gearup-buffer-file-has-bom ()
+  "Detect if current buffers file has a BOM"
+  (interactive)
+  (if (not buffer-file-name)
+      (message "Buffer is not visiting a file.")
+    (if (gearup--file-has-bom buffer-file-name)
+        (message "File has a BOM.")
+      (message "File has no BOM."))))
+
+(defun gearup--file-has-bom (filepath)
+  "Return t if FILE has utf-8 encoding with BOM.
+
+If the utf-8 char U+FEFF appears as first char of a file the file
+has BOM. This char corresponds to the bit sequence 0xEF 0xBB
+0xBF."
+  (with-temp-buffer
+    (insert-file-contents-literally filepath nil 0 3)
+    (let ((bom (decode-coding-string (buffer-substring-no-properties 1 4) 'utf-8)))
+      (when (string= bom (string ?\uFEFF))
+        t))))
 
 ;; Whitespace mode configuration
 (setq whitespace-display-mappings ;; all numbers are unicode codepoint in decimal. e.g. (insert-char 182 1)
