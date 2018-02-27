@@ -4,8 +4,13 @@
 
 ;;; Code:
 
+(defun gearup-prelude--disable-global-diff-hl-mode ()
+  "Disable global-diff-hl-mode loaded by prelude."
+  (global-diff-hl-mode 0))
 
-;; remoce bindings
+(gearup-prelude--disable-global-diff-hl-mode)
+
+;; remove bindings
 (define-key prelude-mode-map (kbd "C-c y") nil)
 (define-key prelude-mode-map (kbd "C-c s") nil)
 
