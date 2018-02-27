@@ -10,4 +10,5 @@
 ;; refactoring
 (setq gearup-programming-tips 
   (append gearup-programming-tips
-    '("Break dependencies for testing by faking collaborator objects, eg by <Extract Interface>.")))
+    '("Break dependencies for testing by faking collaborator objects, eg by EXTRACT INTERFACE or EXTRACT IMPLEMENTER."
+      "NULL OBJECT PATTERN can replace frequent null checks and exception handling.")))
