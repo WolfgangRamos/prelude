@@ -17,16 +17,16 @@ If called from dired copy path of marked files to kill ring and clipboard."
     (kill-new (buffer-file-name)))))
 
 (defun gearup-recenter-top-bottom (&optional arg)
-       "Cycle scroll position: center -> top -> bottom.
+  "Cycle scroll position: center -> top -> bottom.
 
 With single prefix `C-u', scroll window to make line top of
 window. With double prefix `C-u C-u', scroll window to make line
 bottom of window."
-(interactive "p")
-(cond
- ((= arg 1) (recenter-top-bottom))
- ((= arg 4) (recenter-top-bottom 0))
- ((= arg 16) (recenter-top-bottom (window-height)))))
+  (interactive "p")
+  (cond
+   ((= arg 1) (recenter-top-bottom))
+   ((= arg 4) (recenter-top-bottom 0))
+   ((= arg 16) (recenter-top-bottom (window-height)))))
 
 (global-set-key (kbd "C-l") 'gearup-recenter-top-bottom)
 (push "Hit <C-l> to cycle scroll positions: center -> top -> bottom." prelude-tips)
@@ -70,6 +70,45 @@ With ARG kill that many sexp before point."
 
 (global-set-key (kbd "C-x r I") 'string-insert-rectangle)
 (push "Hit <C-x r I> to insert string rectangle." prelude-tips)
+
+(defmacro define-togglefun (function-name doc-string test on-action off-action msg-format-string)
+  "Define interactive function to perform a toggle operation based on TEST.
+
+TEST must be an (unquoted) expression. If TEST evaluates to non-nil OFF-ACTION is evaluated. Otherwise ON-ACTION. DOC-STRING is the doc-string of the generated function. MSG-FORMAT-STRING is a format string used to generate a message in the minibuffer. MSG-FORMAT-STRING can contain one %s placeholder. This placeholder will be filled with the string 'enabled' or 'disabled'.
+
+If the generated function is called with one prefix arg (ie. C-u), ON-ACTION is evaluated no matter what TEST returns"
+  (list 'defun function-name (list 'arg)
+        doc-string
+        (list 'interactive "p")
+        (list 'if (list 'or (list '= 'arg 4) (list 'not test))
+              (list 'progn
+                    on-action
+                    (list 'message msg-format-string "enabled"))
+              (list 'progn
+                    off-action
+                    (list 'message msg-format-string "disabled")))))
+
+
+(defun gearup-buffer-file-has-bom ()
+  "Detect if current buffers file has a BOM"
+  (interactive)
+  (if (not buffer-file-name)
+      (message "Buffer is not visiting a file.")
+    (if (gearup--file-has-bom buffer-file-name)
+        (message "File has a BOM.")
+      (message "File has no BOM."))))
+
+(defun gearup--file-has-bom (filepath)
+  "Return t if FILE has utf-8 encoding with BOM.
+
+If the utf-8 char U+FEFF appears as first char of a file the file
+has BOM. This char corresponds to the bit sequence 0xEF 0xBB
+0xBF."
+  (with-temp-buffer
+    (insert-file-contents-literally filepath nil 0 3)
+    (let ((bom (decode-coding-string (buffer-substring-no-properties 1 4) 'utf-8)))
+      (when (string= bom (string ?\uFEFF))
+        t))))
 
 ;; Whitespace mode configuration
 (setq whitespace-display-mappings ;; all numbers are unicode codepoint in decimal. e.g. (insert-char 182 1)

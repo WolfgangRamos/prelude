@@ -12,6 +12,12 @@
 (setq sml/theme 'smart-mode-line-light-powerline)
 (sml/setup)
 
+(defun gearup-sml--show-eol-indicator-in-mode-line ()
+  "Show end of line indicator in mode line."
+  (setq sml/show-eol t))
+
+(gearup-sml--show-eol-indicator-in-mode-line)
+
 ;; hide modes form mode line
 (diminish 'guru-mode)
 (diminish 'whitespace-mode)

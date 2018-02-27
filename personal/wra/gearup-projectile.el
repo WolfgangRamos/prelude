@@ -3,7 +3,7 @@
 ;;; Commentary:
 
 ;;; Code:
-
+(prelude-require-package 'projectile)
 
 (setq projectile-indexing-method 'alien)
 

@@ -4,6 +4,11 @@
 
 ;;; Code:
 
+(defun gearup-prelude--disable-global-diff-hl-mode ()
+  "Disable global-diff-hl-mode loaded by prelude."
+  (global-diff-hl-mode 0))
+
+(gearup-prelude--disable-global-diff-hl-mode)
 
 ;; remove bindings
 (define-key prelude-mode-map (kbd "C-c y") nil)
@@ -11,7 +16,6 @@
 
 (defun gearup-prelude--disable-whitespace-cleanup-on-save ()
   "Disable prelude's auto whitespace cleanup on save feature."
-  (remove-hook 'before-save-hook 'prelude-cleanup-maybe)
   (setq prelude-clean-whitespace-on-save nil))
 
 (gearup-prelude--disable-whitespace-cleanup-on-save)
