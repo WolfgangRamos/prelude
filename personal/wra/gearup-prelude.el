@@ -8,17 +8,24 @@
   "Disable global-diff-hl-mode loaded by prelude."
   (global-diff-hl-mode 0))
 
-(gearup-prelude--disable-global-diff-hl-mode)
-
-;; remove bindings
-(define-key prelude-mode-map (kbd "C-c y") nil)
-(define-key prelude-mode-map (kbd "C-c s") nil)
+(defun gearup-prelude--set-eshell-as-default-shell ()
+  "Set eshell as default shell in prelude's keymap."
+  (define-key prelude-mode-map (kbd "C-c t") 'eshell))
 
 (defun gearup-prelude--disable-whitespace-cleanup-on-save ()
   "Disable prelude's auto whitespace cleanup on save feature."
   (setq prelude-clean-whitespace-on-save nil))
 
+(gearup-prelude--disable-global-diff-hl-mode)
+(gearup-prelude--set-eshell-as-default-shell)
 (gearup-prelude--disable-whitespace-cleanup-on-save)
+
+;; remove bindings
+(define-key prelude-mode-map (kbd "C-c y") nil) ;; my expand-yasnippet command
+(define-key prelude-mode-map (kbd "C-c s") nil)
+(define-key prelude-mode-map [(shift return)] nil) ;; masks org-table-copy-down
+(define-key prelude-mode-map [(meta shift up)] nil)
+(define-key prelude-mode-map [(meta shift down)] nil)
 
 ;; tips
 (push "Hit <C-Backsp> to backward kill line." prelude-tips)

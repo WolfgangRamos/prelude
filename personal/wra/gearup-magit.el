@@ -4,6 +4,7 @@
 
 ;;; Code:
 (require 'gearup-utils)
+(require 'magit)
 
 (defun gearup-magit--commit-disable-automatic-diff ()
   "Do not show diffs in commit view."

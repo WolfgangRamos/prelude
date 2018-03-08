@@ -26,6 +26,8 @@
 
 ;; require personalizations in 'wra' subdir
 (require 'gearup-utils) ;; load this first
+(require 'gearup-base)
+(require 'gearup-prelude)
 (require 'gearup-ace-window)
 (require 'wra-helm)
 (require 'wra-image)
@@ -44,16 +46,14 @@
 ;; (require 'wra-restclient)
 (require 'gearup-ms-windows)
 ;; (require 'wra-nameses)
-(require 'wra-sunrise-commander)
+;;(require 'wra-sunrise-commander)
 (require 'wra-savehist)
 (require 'wra-isearch)
 ;;(require 'gearup-web-mode)
 (require 'gearup-nxml-mode)
 (require 'gearup-lisp)
-(require 'gearup-prelude)
-(require 'gearup-rebox2)
+;;(require 'gearup-rebox2)
 (require 'gearup-smart-mode-line)
-(require 'hl-tags-mode)
 (require 'gearup-misc-prelude-tips)
 (require 'gearup-omnisharp)
 (require 'gearup-undo-tree)
@@ -62,21 +62,15 @@
 (require 'gearup-multiple-cursors)
 ;;(require 'gearup-psvn) ;; switched to git svn via magit
 (require 'gearup-iedit)
+(require 'gearup-magit)
 (require 'gearup-host-config) ;; load this last
-
-(set-face-attribute 'default nil :height 120)
 
 (prelude-require-package 'bookmark+)
 
-
-(set-face-attribute 'hl-tags-face nil :background "turquoise")
 (require 'gearup-org-attach-screenshot)
 
 ;; this command (pop-global-mark) is to close to "C-x SPC"
 (global-set-key (kbd "C-x C-SPC") nil)
-
-;; open comment AND code blocks on searching
-(setq hs-isearch-open t)
 
 ;; ediff configuration
 (setq ediff-split-window-function 'split-window-horizontally)
@@ -176,12 +170,6 @@
 ;; keybindings for movement by paragraph
 (global-set-key (kbd "M-n") 'forward-paragraph)
 (global-set-key (kbd "M-p") 'backward-paragraph)
-
-;; delete bindings from prelude-mode-map
-(define-key prelude-mode-map [(shift return)] nil) ;; masks org-table-copy-down
-(define-key prelude-mode-map [(meta shift up)] nil)
-(define-key prelude-mode-map [(meta shift down)] nil)
-(define-key prelude-mode-map (kbd "C-c t") 'eshell) ;; replaced default ansi-term with eshell :)
 
 (setq register-preview-delay 0)
 
