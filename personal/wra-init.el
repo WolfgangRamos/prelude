@@ -26,6 +26,8 @@
 
 ;; require personalizations in 'wra' subdir
 (require 'gearup-utils) ;; load this first
+(require 'gearup-base)
+(require 'gearup-prelude)
 (require 'gearup-ace-window)
 (require 'wra-helm)
 (require 'wra-image)
@@ -44,16 +46,15 @@
 ;; (require 'wra-restclient)
 (require 'gearup-ms-windows)
 ;; (require 'wra-nameses)
-(require 'wra-sunrise-commander)
+;;(require 'wra-sunrise-commander)
 (require 'wra-savehist)
 (require 'wra-isearch)
 ;;(require 'gearup-web-mode)
 (require 'gearup-nxml-mode)
 (require 'gearup-lisp)
-(require 'gearup-prelude)
-(require 'gearup-rebox2)
+;;(require 'gearup-rebox2)
+;;(require 'gearup-hl-tags-mode)
 (require 'gearup-smart-mode-line)
-(require 'hl-tags-mode)
 (require 'gearup-misc-prelude-tips)
 (require 'gearup-omnisharp)
 (require 'gearup-undo-tree)
@@ -63,50 +64,12 @@
 ;;(require 'gearup-psvn) ;; switched to git svn via magit
 (require 'gearup-magit)
 (require 'gearup-iedit)
+(require 'gearup-magit)
 (require 'gearup-host-config) ;; load this last
-
-(set-face-attribute 'default nil :height 120)
 
 (prelude-require-package 'bookmark+)
 
-
-(set-face-attribute 'hl-tags-face nil :background "turquoise")
 (require 'gearup-org-attach-screenshot)
-
-;; this command (pop-global-mark) is to close to "C-x SPC"
-(global-set-key (kbd "C-x C-SPC") nil)
-
-;; open comment AND code blocks on searching
-(setq hs-isearch-open t)
-
-;; ediff configuration
-(setq ediff-split-window-function 'split-window-horizontally)
-(setq ediff-merge-split-window-function 'split-window-horizontally)
-
-(set-language-environment "English")
-
-;; set UTF-8 as default encoding system for opening and saving
-(prefer-coding-system 'utf-8)
-(defun gearup--set-utf-8-with-signature-coding-system-mode-line-mnemonic-to-B ()
-  "Set the mode line indicator mnemonic for utf-8-with-signature to \"B\"."
-  (coding-system-put 'utf-8-with-signature :mnemonic 66))
-
-(gearup--set-utf-8-with-signature-coding-system-mode-line-mnemonic-to-B)
-
-;;(setq coding-system-for-read 'utf-8)
-;;(setq coding-system-for-write 'utf-8)
-
-(defun gearup-toggle-prelude-auto-save-command ()
-  "Toggle `prelude-auto-save' to disable `prelude-auto-save-command'."
-  (interactive)
-  (setq-local prelude-auto-save
-              (if prelude-auto-save
-                  (progn
-                    (message "Prelude-auto-save disabled")
-                    nil)
-                (progn
-                  (message "Prelude-auto-save enabled")
-                  t))))
 
 ;; (call-process "convert" nil t nil "screenshot:" "c://Users//wra//foo77.png")
 
@@ -178,12 +141,6 @@
 ;; keybindings for movement by paragraph
 (global-set-key (kbd "M-n") 'forward-paragraph)
 (global-set-key (kbd "M-p") 'backward-paragraph)
-
-;; delete bindings from prelude-mode-map
-(define-key prelude-mode-map [(shift return)] nil) ;; masks org-table-copy-down
-(define-key prelude-mode-map [(meta shift up)] nil)
-(define-key prelude-mode-map [(meta shift down)] nil)
-(define-key prelude-mode-map (kbd "C-c t") 'eshell) ;; replaced default ansi-term with eshell :)
 
 (setq register-preview-delay 0)
 
@@ -270,7 +227,7 @@
 
 ;; (add-hook 'markdown-mode-hook #'yas-minor-mode)
 
-;; ;; unbind ⟨M-<UP>⟩ and ⟨M-<DOWN>⟩
+;; ;; unbind M-<UP> and M-<DOWN>
 ;; (eval-after-load "markdown-mode"
 ;;   '(define-key markdown-mode-map (kbd "<M-down>") nil))
 ;; ;;'(local-unset-key (kbd "<M-down>")))
@@ -362,21 +319,6 @@ Toggles between: “all lower”, “Init Caps”, “ALL CAPS”."
       (message "Current buffer does not have an associated file."))))
 
 
-;; insert math right or left angle bracket
-(defun wra-insert-char-left-chevron ()
-  "Insert left mathematical angle bracket"
-  (interactive)
-  (insert-char 10216))
-
-(defun wra-insert-char-right-chevron ()
-  "Insert rigth mathematical angle bracket"
-  (interactive)
-  (insert-char 10217))
-
-(global-set-key (kbd "C-(") 'wra-insert-char-left-chevron)
-(global-set-key (kbd "C-)") 'wra-insert-char-right-chevron)
-
-
 ;; display ascii table in a buffer
 (defun wra-display-ascii-table ()
   "Display basic ASCII table (0 thru 128)."
@@ -396,4 +338,4 @@ Toggles between: “all lower”, “Init Caps”, “ALL CAPS”."
                                       (setq i (+ 32 i)) i (single-key-description i)))
                       (setq i (- i 96))))))
 
-;;; init.el ends here
+;;; wra-init.el ends here
