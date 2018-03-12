@@ -61,6 +61,7 @@
 (require 'gearup-csharp-mode)
 (require 'gearup-multiple-cursors)
 ;;(require 'gearup-psvn) ;; switched to git svn via magit
+(require 'gearup-magit)
 (require 'gearup-iedit)
 (require 'gearup-host-config) ;; load this last
 
@@ -82,8 +83,9 @@
 (setq ediff-split-window-function 'split-window-horizontally)
 (setq ediff-merge-split-window-function 'split-window-horizontally)
 
+(set-language-environment "English")
+
 ;; set UTF-8 as default encoding system for opening and saving
-;;(set-language-environment "UTF-8")
 (prefer-coding-system 'utf-8)
 (defun gearup--set-utf-8-with-signature-coding-system-mode-line-mnemonic-to-B ()
   "Set the mode line indicator mnemonic for utf-8-with-signature to \"B\"."
