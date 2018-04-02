@@ -4,6 +4,8 @@
 ;;; Anything not directly related to a significant emacs package.
 
 ;;; Code:
+(set-language-environment "English")
+
 (defun gearup--set-font-size-12 ()
   (set-face-attribute 'default nil :height 120))
 

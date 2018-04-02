@@ -62,6 +62,7 @@
 (require 'gearup-csharp-mode)
 (require 'gearup-multiple-cursors)
 ;;(require 'gearup-psvn) ;; switched to git svn via magit
+(require 'gearup-magit)
 (require 'gearup-iedit)
 (require 'gearup-magit)
 (require 'gearup-gnus)
@@ -70,7 +71,6 @@
 (prelude-require-package 'bookmark+)
 
 (require 'gearup-org-attach-screenshot)
-
 
 ;; (call-process "convert" nil t nil "screenshot:" "c://Users//wra//foo77.png")
 
