@@ -64,6 +64,7 @@
 ;;(require 'gearup-psvn) ;; switched to git svn via magit
 (require 'gearup-iedit)
 (require 'gearup-magit)
+(require 'gearup-gnus)
 (require 'gearup-host-config) ;; load this last
 
 (prelude-require-package 'bookmark+)
