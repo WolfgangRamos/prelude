@@ -16,6 +16,13 @@
   "Disable prelude's auto whitespace cleanup on save feature."
   (setq prelude-clean-whitespace-on-save nil))
 
+(define-togglefun gearup-toggle-prelude-auto-save-command
+  "Toggle `prelude-auto-save' to disable `prelude-auto-save-command'."
+  (and (local-variable-p 'prelude-auto-save) prelude-auto-save)
+  (setq-local prelude-auto-save t)
+  (setq-local prelude-auto-save nil)
+  "Prelude auto save %s")
+
 (gearup-prelude--disable-global-diff-hl-mode)
 (gearup-prelude--set-eshell-as-default-shell)
 (gearup-prelude--disable-whitespace-cleanup-on-save)
