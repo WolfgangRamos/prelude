@@ -6,6 +6,7 @@
 (require 'nxml-mode)
 (require 'hideshow)
 (require 'sgml-mode)
+(require 'gearup-hl-tags-mode)
 
 (add-to-list 'hs-special-modes-alist
              '(nxml-mode
@@ -25,7 +26,6 @@
 (setq rng-complete-end-tags-after-< nil)
 (add-hook 'nxml-mode-hook
           (lambda ()
-            ;;(hs-minor-mode 1) ;; enable hide-show
             (whitespace-mode -1)
             (rng-validate-mode 0) ;; disable validation
             (yas-minor-mode-on)
