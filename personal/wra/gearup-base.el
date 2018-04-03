@@ -24,7 +24,16 @@
   (setq-local coding-system-for-read 'utf-8))
 
 (defun gearup-force-utf-8-for-write ()
-  (setq coding-system-for-write 'utf-8))
+  (interactive)
+  (setq-local coding-system-for-write 'utf-8))
+
+(defun gearup-force-utf-8-with-signature-for-write ()
+  (interactive)
+  (setq-local coding-system-for-write 'utf-8-with-signature))
+
+(defun gearup-force-utf-8-with-signature-for-read ()
+  (interactive)
+  (setq-local coding-system-for-read 'utf-8-with-signature))
 
 (gearup--set-font-size-12)
 (gearup-ediff---make-split-window-horizontally)

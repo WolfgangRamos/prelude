@@ -45,7 +45,7 @@ Select * from vtsorderreport;
 
 Neue oder veränderte Localization IDs:
 
-#+BEGIN_SRC sql :engine oracle :dbhost vm-oracle-utf :dbuser $6 :dbport 1521 :dbpassword $4 :database orcl.serverfls.com
+#+BEGIN_SRC sql :exports results :engine oracle :dbhost vm-oracle-utf :dbuser $6 :dbport 1521 :dbpassword $4 :database orcl.serverfls.com
   select k.sectionkey as id, l.language as sprache, t.text
   from keys k
   inner join texte t
