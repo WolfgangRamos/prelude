@@ -3,7 +3,7 @@
 ;;; Commentary:
 
 ;;; Code:
-(require 'gnus)
+;;(require 'gnus)
 
 (defun gearup-gnus--set-gnus-init-file (file-name &optional base-dir)
   "Set gnus init file to FILE-NAME.
@@ -14,17 +14,25 @@ BASE-DIR defaults to ~/.emacs.d/personal/gnus/"
                           (expand-file-name "gnus"
                                             prelude-personal-dir))))
 
+(defun gearup-gnus--disable-forward-point-on-summary-exit ()
+  "Disable forwarding point to next group when a summary buffer is closed."
+  (setq gnus-summary-next-group-on-exit nil))
+
 (defun gearup-gnus-show-all-subscribed-groups ()
   "List all subscribed groups with or without un-read messages"
   (interactive)
   (gnus-group-list-all-groups 5))
 
-(define-key gnus-group-mode-map
-  ;; list all the subscribed groups even they contain zero un-read messages
-  (kbd "o") 'gearup-gnus-show-all-subscribed-groups)
+(defun gearup-gnus--keybind-show-all-subscribed-groups-command ()
+  "Bind `gearup-gnus-show-all-subscribed-groups to \"o\" in `gnus-group-mode-map'."
+  (define-key gnus-group-mode-map
+  ;; list all the subscribed groups even when they contain zero un-read messages
+  (kbd "o") 'gearup-gnus-show-all-subscribed-groups))
 
-(setq gnus-thread-sort-functions
-      'gnus-thread-sort-by-most-recent-number)
+(defun gearup-gnus--sort-threads-newest-first ()
+  "Make messages sort newest first"
+  (setq gnus-thread-sort-functions
+      'gnus-thread-sort-by-most-recent-number))
 
 (defun gearup-gnus--setup-group-mode-hydra ()
   "Create hydra for gnus group mode and bind it to \"y\"."
@@ -36,7 +44,7 @@ BASE-DIR defaults to ~/.emacs.d/personal/gnus/"
     ("G" gnus-group-make-nnir-group "Search server G G")
     ("g" gnus-group-get-new-news "Refresh g")
     ("s" gnus-group-enter-server-mode "Servers")
-    ("m" gnus-group-new-mail "Compose m OR C-x m")
+    ("m" gnus-group-new-mail "C-x m")
     ("#" gnus-topic-mark-topic "mark #")
     ("q" nil "cancel"))
   ;; y is not used by default
@@ -88,7 +96,10 @@ BASE-DIR defaults to ~/.emacs.d/personal/gnus/"
   (global-set-key (kbd "C-c C-y") 'gearup-gnus--message-hydra/body))
 
 (with-eval-after-load 'gnus-group
-  (gearup-gnus--setup-group-mode-hydra))
+  (gearup-gnus--setup-group-mode-hydra)
+  (gearup-gnus--keybind-show-all-subscribed-groups-command)
+  (gearup-gnus--sort-threads-newest-first)
+  (gearup-gnus--disable-forward-point-on-summary-exit))
 
 (with-eval-after-load 'gnus-sum
   (gearup-gnus--setup-summary-mode-hydra))
@@ -99,5 +110,18 @@ BASE-DIR defaults to ~/.emacs.d/personal/gnus/"
 (with-eval-after-load 'message
   (gearup-gnus--setup-message-mode-hydra))
 
+
+
+(setq prelude-tips
+  (append prelude-tips
+    '("Hit <n>/<p> in gnus group buffer to move to next/previous group with unread messages."
+    "Hit <N>/<P> in gnus group buffer to move to next/previous group."
+    "Hit <j> in gnus group buffer to jump to a group."
+    "Hit <RET> to enter a group; with prefix <C-u> also show unread."
+    "Hit <M-g> in gnus group summary to fetch new messages; with prefix <C-u> also fetch unread."
+    "Hit <S l> in gnus group buffer to set the level of the group under point."
+    "Hit <u>/<U> in gnus group buffer to subscribe a group."
+    "Hit <C-k> in gnus group buffer to kill group under point.")))
+    
 (provide 'gearup-gnus)
 ;;; gearup-gnus.el ends here
