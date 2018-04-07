@@ -1,0 +1,15 @@
+* Markup
+
+*bold*
+
+_underlined_
+
+/italics/
+
++strikethrough+
+
+~code~
+
+Subscripts: H_{2}O
+Superscripts: H^{+}
+An entity: To \infty and beyond

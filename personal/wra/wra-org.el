@@ -282,9 +282,16 @@
 
         ))
 
-;; tips
+;;; Tips
 (push "Hit <M-S-left> to kill the current column." prelude-tips)
 (push "Hit <M-S-right> to insert a new column left of the cursor." prelude-tips)
+
+;;; Playground
+(prelude-require-package 'org-mime)
+;;(require 'org-mime)
+;;(custom-set-variables '(epg-gpg-program "c:/Program Files (x86)/GnuPG/bin/gpg.exe"))
+
+
 
 (provide 'wra-org)
 ;;; wra-org.el ends here
