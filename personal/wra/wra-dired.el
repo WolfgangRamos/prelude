@@ -5,6 +5,7 @@
 ;;; Code
 
 ;; dired
+(prelude-require-package 'dired+)
 (require 'dired)
 
 (defun gearup--allow-edit-file-permissions ()

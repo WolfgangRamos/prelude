@@ -5,6 +5,9 @@
 ;;; Code:
 
 ;; should be loaded before auto complete so that they can work together
+(prelude-require-package 'yasnippet)
+(prelude-require-package 'helm-c-yasnippet)
+
 (require 'yasnippet)
 (require 'helm-c-yasnippet) ;; use helm interface
 (setq helm-yas-space-match-any-greedy t) ;[default: nil]

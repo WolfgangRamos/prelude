@@ -14,6 +14,7 @@
 (require 'ob-sql)
 
 (define-key org-mode-map (kbd "C-,") nil)
+(global-set-key (kbd "C-c b") nil)
 
 
 (setq org-image-actual-width nil)

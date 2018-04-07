@@ -12,6 +12,10 @@
   "Set eshell as default shell in prelude's keymap."
   (define-key prelude-mode-map (kbd "C-c t") 'eshell))
 
+(defun gearup-prelude--disable-beacon-mode ()
+  "Disable beacon mode."
+  (beacon-mode -1))
+
 (defun gearup-prelude--disable-whitespace-cleanup-on-save ()
   "Disable prelude's auto whitespace cleanup on save feature."
   (setq prelude-clean-whitespace-on-save nil))
@@ -26,6 +30,7 @@
 (gearup-prelude--disable-global-diff-hl-mode)
 (gearup-prelude--set-eshell-as-default-shell)
 (gearup-prelude--disable-whitespace-cleanup-on-save)
+(gearup-prelude--disable-beacon-mode)
 
 ;; remove bindings
 (define-key prelude-mode-map (kbd "C-c y") nil) ;; my expand-yasnippet command

@@ -22,5 +22,7 @@ copy-image-from-clipboard-command can be found here URL
         (current-prefix-arg '(4)))
     (call-interactively 'org-attach-screenshot)))
 
+;; (call-process "convert" nil t nil "screenshot:" "c://Users//wra//foo77.png")
+
 (provide 'gearup-org-attach-screenshot)
 ;;; gearup-org-attach-screenshot.el ends here
