@@ -3,6 +3,7 @@
 ;;; Commentary
 
 ;;; Code
+(prelude-require-package 'auctex)
 
 ;; AucTeX
 ;;(require 'tex-site)

@@ -3,6 +3,7 @@
 ;;; Commentary
 
 ;;; Code
+(prelude-require-package 'cdlatex)
 
 ;; add environments
 (setq cdlatex-env-alist

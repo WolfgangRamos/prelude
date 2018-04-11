@@ -89,7 +89,7 @@
 * List of free C-c bindings
 
 - a :: currently bound to org-agenda
-- b :: currently bound to org-iswitchb (switch between org buffers)
+- b ::
 - c ::
 - d :: duplicate current line or region
 - e :: crux-eval-and-replace
@@ -100,7 +100,7 @@
 - j :: currently bound to avy-goto-word1 -> unbind this
 - k :: crux-kill all buffers
 - l :: org-store-link
-- m ::
+- m :: gearup-multiple-cursors
 - n :: crux-cleanup; be carefull this calls untabify
 - o :: crux-open-with (opens current file in another application)
 - p :: projectile prefix

@@ -3,8 +3,20 @@
 ;;; Commentary:
 
 ;;; Code
+(defun gearup-w32--recentf-save-wrapper (terminal)
+  "Save recentf list."
+  (recentf-save-list))
 
-;; command to maximize current frame
+(defun gearup-w32--save-recentf-on-client-exit ()
+  "Save `recentf' files when client frame is closed.
+
+Windows doesn't know how to gracefully exit emacs daemon. So we
+save recentf list not on emacs exit, but on closing last client frame."
+  (add-hook 'delete-terminal-functions 'gearup-w32--recentf-save-wrapper))
+
+(when (equal system-type 'windows-nt)
+  (gearup-w32--save-recentf-on-client-exit))
+
 (defun gearup-w32-maximize-frame ()
   "Maximize the current frame (windows only)"
   (interactive)
