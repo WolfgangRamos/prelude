@@ -238,7 +238,7 @@
     (wra-remove-labels)))
 
 (defun wra-remove-labels ()
- ;; (interactive)
+  ;; (interactive)
   (while (re-search-forward "^label:.*\\s-" nil t)
     (replace-match "")))
 ;; (add-to-list 'org-export-filter-final-output-functions 'remove-orgmode-latex-labels)
@@ -290,6 +290,32 @@
 (prelude-require-package 'org-mime)
 ;;(require 'org-mime)
 ;;(custom-set-variables '(epg-gpg-program "c:/Program Files (x86)/GnuPG/bin/gpg.exe"))
+
+
+;; reduced ascii backend
+(org-export-define-derived-backend 'ascii-reduced 'ascii
+  :translate-alist '((italic . gearup-ox--ascii-reduced-no-formatting)
+                     (bold . gearup-ox--ascii-reduced-no-formatting)
+                     (strike-through . gearup-ox--ascii-reduced-no-formatting)
+                     (verbatim . gearup-ox--ascii-reduced-no-formatting))
+  :menu-entry '(?t 1
+                   ((?R "As ASCII buffer with reduced markup" gearup-ox--export-as-ascii-reduced)
+                    (?r "As ASCII file with reduced markup" gearup-ox--export-to-ascii-reduced))))
+
+(defun gearup-ox--ascii-reduced-no-formatting (_italic contents _info)
+  "Return CONTENTS without adding formatting."
+  contents)
+
+(defun gearup-ox--export-as-ascii-reduced (&optional a s v b e)
+  "Export buffer as reduced ascii."
+  (interactive)
+  (org-export-to-buffer 'ascii-reduced "*Org ASCII Reduced Markup Export*" a s v b e (lambda () (text-mode))))
+
+(defun gearup-ox--export-to-ascii-reduced (&optional a s v b e)
+  "Export buffer to reduced ascii file."
+  (interactive)
+  (let ((file (org-export-output-file-name ".txt" subtreep)))
+    (org-export-to-file 'ascii-reduced file a s v b)))
 
 
 

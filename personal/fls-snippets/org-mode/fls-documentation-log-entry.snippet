@@ -7,10 +7,11 @@
 # type: snippet
 # --
 #+STARTUP: showall
+#+OPTIONS: toc:nil num:nil
 #+PROPERTY: header-args:restclient :var vtserver="http://localhost:89" :var content_type_text="text/xml; charset=utf-8" :var basic_authentification_credentials=(base64-encode-string "FLS:1147")
 #+PROPERTY: header-args:sql :engine mssql :dbhost MSSQL2014 :dbuser $4 :dbport :dbpassword $5 :database DEV_CLIENT_WR
 
-- Auftragsnummer: $1
+- Auftragsnummer: ${1:`(file-name-sans-extension (file-name-nondirectory (buffer-file-name)))`}
 - [X] Standard
 - [ ] Kundenanpassung
 - Kunde: $2
@@ -45,7 +46,7 @@ Select * from vtsorderreport;
 
 Neue oder veränderte Localization IDs:
 
-#+BEGIN_SRC sql :exports results :engine oracle :dbhost vm-oracle-utf :dbuser $6 :dbport 1521 :dbpassword $4 :database orcl.serverfls.com
+#+BEGIN_SRC sql :exports results :engine oracle :dbhost vm-oracle-utf :dbuser $6 :dbport 1521 :dbpassword $7 :database orcl.serverfls.com
   select k.sectionkey as id, l.language as sprache, t.text
   from keys k
   inner join texte t
