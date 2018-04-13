@@ -14,18 +14,25 @@
 - Auftragsnummer: ${1:`(file-name-sans-extension (file-name-nondirectory (buffer-file-name)))`}
 - [X] Standard
 - [ ] Kundenanpassung
+- Modul:
 - Kunde: $2
 - Fixed in Revision:
 
-* DB Queries
+* DB Queries         :no_export:
 
-#+BEGIN_SRC sql
+#+CAPTION: Query
+#+BEGIN_SRC sql :exports both :cache yes
 Select * from vtsorderreport;
 #+END_SRC
 
-* Web Requests
+#+CAPTION: Result
+#+RESULTS:
 
-#+BEGIN_SRC restclient
+
+* Web Requests :no_export:
+
+#+CAPTION: Request
+#+BEGIN_SRC restclient :exports both :cache yes
   POST :vtserver/VTS/WS/GetNextActivity
   Content-Type: :content_type_text
   Authorization: Basic :basic_authentification_credentials
@@ -33,20 +40,32 @@ Select * from vtsorderreport;
   <GetNextActivity><User>1</User><ActivityNr>0</ActivityNr><ProcessInstance></ProcessInstance><ShowNextProcess>true</ShowNextProcess></GetNextActivity>
 #+END_SRC
 
-* Technische Dokumentation
+#+CAPTION: Response
+#+RESULTS:
 
-- Neue Formulare:
-  - $0
-- Erweiterungen bestehender Formulare:
-- Rechte & Module:
-  - alle Formularerweiterungen und neuen Formulare sind nur sichtbar,
-    wenn
 
-** Übersicht über Localization IDs
+* Technical Documentation / Tested Use Cases
 
-Neue oder veränderte Localization IDs:
+#+NAME: translate
+#+BEGIN_SRC sql :exports none :var id="error_id" :var lang="English" :engine oracle :dbhost vm-oracle-utf :dbuser $6 :dbport 1521 :dbpassword $7 :database orcl.serverfls.com
+  select k.sectionkey as id, l.language as sprache, t.text
+  from keys k
+  inner join texte t
+  on k.logicalkey = t.logicalkey
+  inner join LANGUAGES l
+  on t.lang_nr = l.nr
+  where l.language = '\$lang' and
+  k.sectionkey = '\$id'
+  Order by id, sprache;
+#+END_SRC
 
-#+BEGIN_SRC sql :exports results :engine oracle :dbhost vm-oracle-utf :dbuser $6 :dbport 1521 :dbpassword $7 :database orcl.serverfls.com
+Some localzation id call_translate(n="time_zone_id") in english
+
+$0
+
+** Used Localization IDs
+
+#+BEGIN_SRC sql :exports results :cache yes :engine oracle :dbhost vm-oracle-utf :dbuser $6 :dbport 1521 :dbpassword $7 :database orcl.serverfls.com
   select k.sectionkey as id, l.language as sprache, t.text
   from keys k
   inner join texte t
@@ -58,6 +77,15 @@ Neue oder veränderte Localization IDs:
   Order by id, sprache;
 #+END_SRC
 
-* Implementierungsdetails
+#+CAPTION: List of new or modified localization IDs
+#+RESULTS:
 
-* Entwicklertests
+* Implementation Details
+
+#+BEGIN_SRC sh :exports results :cache yes
+git --no-pager log --author="Wolfgang Ramos" --grep="$1"
+#+END_SRC
+
+#+CAPTION: List of Changes
+#+RESULTS:
+
