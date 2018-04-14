@@ -28,5 +28,7 @@
 
 (define-key org-mode-map (kbd "C-c b") 'gearup-org-insert-image-from-clipboard)
 
+(push "Hit <C-c b> in org-mode to insert a screenshot from the clipboard." prelude-tips)
+
 (provide 'gearup-org-attach-screenshot)
 ;;; gearup-org-attach-screenshot.el ends here
