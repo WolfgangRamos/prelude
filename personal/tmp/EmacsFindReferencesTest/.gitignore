@@ -1,0 +1,3 @@
+/.vs
+/EmacsFindReferencesTest/obj/*
+!/EmacsFindReferencesTest/obj/.gitkeep

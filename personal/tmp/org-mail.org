@@ -13,3 +13,12 @@ _underlined_
 Subscripts: H_{2}O
 Superscripts: H^{+}
 An entity: To \infty and beyond
+
+* Images
+  :PROPERTIES:
+  :ATTACH_DIR: c:/Users/wra/.emacs.d/personal/tmp/org-mail-attachments
+  :END:
+
+foo
+[[file:org-mail-attachments/screenshot-20180415-005913.png]]
+

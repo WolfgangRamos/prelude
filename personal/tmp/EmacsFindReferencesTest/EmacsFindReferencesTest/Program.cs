@@ -14,7 +14,6 @@ namespace EmacsFindReferencesTest
         {
             ClassFolderANamespaceA a = new ClassFolderANamespaceA();
             ClassFolderANamespaceB b = new ClassFolderANamespaceB();
-
         }
     }
 }
