@@ -20,7 +20,7 @@
 
 ;; hydra menu
 (global-set-key (kbd "C-c m")
-                (defhydra hydra-multiple-cursors (:foreign-keys nil)
+                (defhydra gearup-multiple-cursors-hydra (:foreign-keys nil)
                   "
 ^Line^     ^Unmark^      ^Skip^        ^Misc^          ^Insert^
 ^-^-----   ^-^--------   ^-^--------   ^-^----------   ^-^--------

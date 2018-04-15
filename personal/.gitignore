@@ -1,6 +1,8 @@
 !savefile/
 savefile/abbrev_defs
 savefile/.mc-lists.el
+omnisharp-server
+savefile
 
 # emacs server socket file directory
 server/

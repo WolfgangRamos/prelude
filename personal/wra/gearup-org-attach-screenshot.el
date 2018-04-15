@@ -3,26 +3,32 @@
 ;;; Commentary:
 
 ;;; Code:
-(prelude-require-package 'org-attach-screenshot)
+;;(prelude-require-package 'org-attach-screenshot)
+(require 'org-attach-screenshot-loaddefs)
+;;(require 'org-attach-screenshot)
 
-(setq org-attach-screenshot-dirfunction
-      (lambda ()
-        (progn (assert (buffer-file-name))
-               (concat (file-name-sans-extension (buffer-file-name))
-                       "-attachments"))))
+(defun gearup-org--get-default-attachments-directory ()
+  "Create default attachment directory for current org buffer."
+  (assert (buffer-file-name))
+  (concat (file-name-sans-extension (buffer-file-name))
+          "-attachments"))
+
+(custom-set-variables
+ '(org-attach-screenshot-dirfunction
+   'gearup-org--get-default-attachments-directory)
+ '(org-attach-screenshot-command-line (expand-file-name "GearupScreenshot.exe %f" gearup-tools-dir))
+ '(org-attach-screenshot-relative-links t)
+ '(org-attach-screenshot-auto-refresh nil))
 
 (defun gearup-org-insert-image-from-clipboard ()
-  "Insert image from clipboard.
-Image Magick's \"convert\" command is used to insert an image
-from the clipboard. A siple C# implementation of a
-copy-image-from-clipboard-command can be found here URL
-`https://stackoverflow.com/questions/17435995/paste-an-image-on-clipboard-to-emacs-org-mode-file-without-saving-it'."
+  "Insert image from clipboard using `org-attach-screenshot' and GearupScreenshot.exe."
   (interactive)
-  (let ((org-attach-screenshot-command-line "convert clipboard: %f")
-        (current-prefix-arg '(4)))
+  (let ((current-prefix-arg '(4)))
     (call-interactively 'org-attach-screenshot)))
 
-;; (call-process "convert" nil t nil "screenshot:" "c://Users//wra//foo77.png")
+(define-key org-mode-map (kbd "C-c b") 'gearup-org-insert-image-from-clipboard)
+
+(push "Hit <C-c b> in org-mode to insert a screenshot from the clipboard." prelude-tips)
 
 (provide 'gearup-org-attach-screenshot)
 ;;; gearup-org-attach-screenshot.el ends here

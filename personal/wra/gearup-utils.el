@@ -39,7 +39,7 @@ bottom of window."
 
 ;; gearup sizing menu
 (global-set-key (kbd "C-c s")
-                (defhydra hydra-sizing (:foreign-keys nil)
+                (defhydra gearup-sizing-hydra (:foreign-keys nil)
                   "
 ^Font size^    ^Vertical window size^   ^Horizontal window size
 ^----------^   ^--------------------^   ^----------------------

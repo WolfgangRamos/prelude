@@ -9,10 +9,13 @@ namespace EmacsFindReferencesTest
     class Folder
     {
         public string Name { get; set;}
+        public DateTime timestamp;
 
         public Folder(string name)
         {
             this.Name = name;
+            DateTime tmp = new DateTime();
+            this.timestamp = tmp.Date;
         } 
 
         public override string ToString()
