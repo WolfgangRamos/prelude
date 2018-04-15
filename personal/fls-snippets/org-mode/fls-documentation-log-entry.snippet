@@ -8,14 +8,17 @@
 # --
 #+STARTUP: showall
 #+OPTIONS: toc:nil num:nil
+#+BIND: org-ascii-verbatim-format "%s"
+#+BIND: org-ascii-caption-above t
+#+BIND: org-ascii-text-width 72
 #+PROPERTY: header-args:restclient :var vtserver="http://localhost:89" :var content_type_text="text/xml; charset=utf-8" :var basic_authentification_credentials=(base64-encode-string "FLS:1147")
 #+PROPERTY: header-args:sql :engine mssql :dbhost MSSQL2014 :dbuser $4 :dbport :dbpassword $5 :database DEV_CLIENT_WR
 
 - Auftragsnummer: ${1:`(file-name-sans-extension (file-name-nondirectory (buffer-file-name)))`}
 - [X] Standard
 - [ ] Kundenanpassung
-- Modul:
-- Kunde: $2
+- Module: $2
+- Kunde: $3
 - Fixed in Revision:
 
 * DB Queries         :no_export:
