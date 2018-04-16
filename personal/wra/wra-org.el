@@ -360,8 +360,7 @@ than treating it as reflowable whitespace."
 (org-export-define-derived-backend 'ascii-reduced 'ascii
   :translate-alist '((italic . gearup-ox--ascii-reduced-no-formatting)
                      (bold . gearup-ox--ascii-reduced-no-formatting)
-                     (strike-through . gearup-ox--ascii-reduced-no-formatting)
-                     (verbatim . gearup-ox--ascii-reduced-no-formatting))
+                     (strike-through . gearup-ox--ascii-reduced-no-formatting))
   :menu-entry '(?t 1
                    ((?R "As ASCII buffer with reduced markup" gearup-ox--export-as-ascii-reduced)
                     (?r "As ASCII file with reduced markup" gearup-ox--export-to-ascii-reduced))))
