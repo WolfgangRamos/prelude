@@ -66,7 +66,8 @@ Here are some sample elements to see if they convert to html reasonably.
     - def1 :: first definition
 
     A checklist:
-    - [ ] A checkbox
+    - [ ] An unchecked checkbox
+    - [X] A checked checkbox 
 
 
     Here is a numbered list:

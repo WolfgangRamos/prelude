@@ -322,11 +322,11 @@ INFO is a plist used as a communication channel."
                (org-export-data (org-element-property :tag item) info) ": "
                (org-trim contents)))
       (ordered
-       (concat (make-string depth ?#) " "
+       (concat (make-string depth ?#) " " checkbox
                (org-trim contents)))
       (t
        (concat (make-string depth ?-)
-               " "
+               " " checkbox
                (org-trim contents))))))
 
 (defun gearup-ox--confluence-table-cell  (table-cell contents info)
