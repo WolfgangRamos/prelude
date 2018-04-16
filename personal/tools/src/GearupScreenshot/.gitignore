@@ -1,0 +1,5 @@
+.vs/
+/GearupScreenshot/bin/*
+!/GearupScreenshot/bin/.gitkeep
+/GearupScreenshot/obj/*
+!GearupScreenshot/obj/.gitkeep

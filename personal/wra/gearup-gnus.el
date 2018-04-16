@@ -121,7 +121,8 @@ BASE-DIR defaults to ~/.emacs.d/personal/gnus/"
     "Hit <M-g> in gnus group summary to fetch new messages; with prefix <C-u> also fetch unread."
     "Hit <S l> in gnus group buffer to set the level of the group under point."
     "Hit <u>/<U> in gnus group buffer to subscribe a group."
-    "Hit <C-k> in gnus group buffer to kill group under point.")))
+    "Hit <C-k> in gnus group buffer to kill group under point."
+    "Hit <M m>/<M u> in gnus group buffer to mark/unmark group under point.")))
     
 (provide 'gearup-gnus)
 ;;; gearup-gnus.el ends here

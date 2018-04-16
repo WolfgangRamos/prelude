@@ -88,8 +88,8 @@
 
 * List of free C-c bindings
 
-- a :: currently bound to org-agenda
-- b ::
+- a :: org-agenda
+- b :: gearup
 - c ::
 - d :: duplicate current line or region
 - e :: crux-eval-and-replace
@@ -100,13 +100,13 @@
 - j :: currently bound to avy-goto-word1 -> unbind this
 - k :: crux-kill all buffers
 - l :: org-store-link
-- m :: gearup-multiple-cursors
+- m :: gearup-multiple-cursors-hydra
 - n :: crux-cleanup; be carefull this calls untabify
 - o :: crux-open-with (opens current file in another application)
 - p :: projectile prefix
 - q ::
 - r :: crux-rename-file-and-buffer
-- s :: crux-swap-windows -> unbind this
+- s :: gearup-sizing-hydra
 - t :: opens shell
 - u :: crux-view-url (opens buffer containing content of url)
 - v ::

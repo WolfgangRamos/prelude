@@ -112,7 +112,7 @@ Toggles between: “all lower”, “Init Caps”, “ALL CAPS”."
     (getenv "HOME")))
 
 (setq default-directory (wra-try-get-home-dir))
-
+(setq gearup-tools-dir (expand-file-name "tools/bin" prelude-personal-dir))
 
 
 (gearup--set-font-size-12)
