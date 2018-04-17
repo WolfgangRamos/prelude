@@ -292,6 +292,70 @@
 ;;(custom-set-variables '(epg-gpg-program "c:/Program Files (x86)/GnuPG/bin/gpg.exe"))
 
 
+;; export to confluence
+(require 'ox-confluence)
+
+(org-export-define-derived-backend 'confluence-improved 'confluence
+  :translate-alist '((paragraph . gearup-ox--confluence-paragraph)
+                     (table-cell . gearup-ox--confluence-table-cell)
+                     (item . gearup-ox--confluence-item))
+  :menu-entry '(?w "Wiki"
+                   ((?C "As confluence wiki buffer" gearup-ox--export-as-confluence-wiki)
+                    (?c "As confluence wiki file" gearup-ox--export-to-confluence-wiki))))
+
+
+(defun gearup-ox--confluence-checkbox (item info)
+  "Return checkbox string for ITEM or nil.
+INFO is a plist used as a communication channel."
+  (cl-case (org-element-property :checkbox item)
+    (on "☑ ")
+    (off "☐ ")
+    (trans "☒ ")))
+
+(defun gearup-ox--confluence-item (item contents info)
+  (let ((list-type (org-element-property :type (org-export-get-parent item)))
+        (checkbox (gearup-ox--confluence-checkbox item info))
+        (depth (1+ (org-confluence--li-depth item))))
+    (cl-case list-type
+      (descriptive
+       (concat (make-string depth ?-) " "
+               (org-export-data (org-element-property :tag item) info) ": "
+               (org-trim contents)))
+      (ordered
+       (concat (make-string depth ?#) " " checkbox
+               (org-trim contents)))
+      (t
+       (concat (make-string depth ?-)
+               " " checkbox
+               (org-trim contents))))))
+
+(defun gearup-ox--confluence-table-cell  (table-cell contents info)
+  "Wrap table cell contents in whitespace.
+Without the extra whitespace, cells will collapse together thanks
+to confluence's table header syntax being multiple pipes."
+  (let ((table-row (org-export-get-parent table-cell)))
+    (concat
+     (when (org-export-table-row-starts-header-p table-row info)
+       "|")
+     " " contents " |")))
+
+(defun gearup-ox--confluence-paragraph (paragraph contents info)
+  "Strip newlines from paragraphs.
+Confluence will include any line breaks in the paragraph, rather
+than treating it as reflowable whitespace."
+  (replace-regexp-in-string "\n" " " contents))
+
+(defun gearup-ox--export-as-confluence-wiki (&optional a s v b e)
+  "Export buffer as confluence wiki."
+  (interactive)
+  (org-export-to-buffer 'confluence-improved "*Org CONFLUENCE Wiki Markup Export*" a s v b e (lambda () (text-mode))))
+
+(defun gearup-ox--export-to-confluence-wiki (&optional a s v b e)
+  "Export buffer to confluence wiki file."
+  (interactive)
+  (let ((file (org-export-output-file-name ".txt" subtreep)))
+    (org-export-to-file 'confluence-improved file a s v b)))
+
 ;; reduced ascii backend
 (org-export-define-derived-backend 'ascii-reduced 'ascii
   :translate-alist '((italic . gearup-ox--ascii-reduced-no-formatting)
