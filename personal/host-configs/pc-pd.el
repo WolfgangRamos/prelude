@@ -180,7 +180,7 @@ If FORWARD is ntn-nil start search from current point position. If CASE is not-n
 
 
 ;;(require 'gearup-omnisharp)
-(gearup-omnisharp--setup-omnisharp-completion (expand-file-name "omnisharp-server/OmniSharp.exe" prelude-personal-dir))
+(gearup-omnisharp--setup-omnisharp-completion (expand-file-name "omnisharp-server/v1.26.3/OmniSharp.exe" prelude-personal-dir))
 
 
 
