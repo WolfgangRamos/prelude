@@ -12,6 +12,7 @@
 (prelude-require-package 'ob-restclient)
 (require 'ob-restclient)
 (require 'ob-sql)
+(require 'org-inlinetask)
 
 (define-key org-mode-map (kbd "C-,") nil)
 (global-set-key (kbd "C-c b") nil)
@@ -380,7 +381,12 @@ than treating it as reflowable whitespace."
   (let ((file (org-export-output-file-name ".txt" subtreep)))
     (org-export-to-file 'ascii-reduced file a s v b)))
 
+;;; Tips:
 
+(setq prelude-tips 
+ (append prelude-tips
+  '("Hit <C-c C-x t> in org mode to insert an inline task."
+  "Hit <C-c C-x p> in org mode to insert a property.")))
 
 (provide 'wra-org)
 ;;; wra-org.el ends here
