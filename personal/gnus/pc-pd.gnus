@@ -7,6 +7,10 @@
                (nnimap-server-port 993)
                (nnimap-stream ssl)))
 
-(setq smtpmail-smtp-server "smtp.office365.com"
-      smtpmail-smtp-service 587
+(setq smtpmail-smtp-server "fastleansmart-com.mail.protection.outlook.com"
+      smtpmail-smtp-service 25
       gnus-ignored-newsgroups "^to\\.\\|^[0-9. ]+\\( \\|$\\)\\|^[\"]\"[#'()]")
+
+;; (setq smtpmail-smtp-server "smtp.office365.com"
+;;       smtpmail-smtp-service 587
+;;       gnus-ignored-newsgroups "^to\\.\\|^[0-9. ]+\\( \\|$\\)\\|^[\"]\"[#'()]")

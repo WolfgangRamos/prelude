@@ -10,8 +10,8 @@
 ;; disable flyspell
 (setq prelude-flyspell nil)
 
-;; add sunrise commanders ELPA repo
-(add-to-list 'package-archives '("SC"   . "http://joseito.republika.pl/sunrise-commander/") t)
+;; disable global whitespace-mode
+(setq prelude-whitespace nil)
 
 ;; add org ELPA repo
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
