@@ -19,8 +19,7 @@ FILES must be a list of strings."
           "lisp/essh"
           "lisp/org-wc"
           "lisp/vimgolf"
-          "lisp/x-dict"
-          "lisp/org-screenshot")
+          "lisp/x-dict")
         prelude-personal-dir)
        load-path))
 

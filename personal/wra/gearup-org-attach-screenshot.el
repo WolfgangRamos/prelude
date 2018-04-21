@@ -3,8 +3,7 @@
 ;;; Commentary:
 
 ;;; Code:
-;;(prelude-require-package 'org-attach-screenshot)
-(require 'org-attach-screenshot-loaddefs)
+(prelude-require-package 'org-attach-screenshot)
 ;;(require 'org-attach-screenshot)
 
 (defun gearup-org--get-default-attachments-directory ()
@@ -18,7 +17,7 @@
    'gearup-org--get-default-attachments-directory)
  '(org-attach-screenshot-command-line (expand-file-name "GearupScreenshot.exe %f" gearup-tools-dir))
  '(org-attach-screenshot-relative-links t)
- '(org-attach-screenshot-auto-refresh nil))
+ '(org-attach-screenshot-auto-refresh 'never))
 
 (defun gearup-org-insert-image-from-clipboard ()
   "Insert image from clipboard using `org-attach-screenshot' and GearupScreenshot.exe."
