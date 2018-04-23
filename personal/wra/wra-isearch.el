@@ -3,6 +3,8 @@
 ;;; Commentary:
 
 ;;; Code
+(global-set-key (kbd "C-S-s") 'isearch-forward)
+
 ;; Move to beginning of word before yanking word in isearch-mode.
 ;; Make C-s C-w and C-r C-w act like Vim's g* and g#, keeping Emacs'
 ;; C-s C-w [C-w] [C-w]... behaviour.

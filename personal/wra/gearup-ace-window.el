@@ -4,6 +4,7 @@
 
 ;;; Code:
 (prelude-require-package 'ace-window)
+(prelude-require-package 'key-chord)
 ;; use home row for window selection
 (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
 
@@ -11,6 +12,7 @@
 (setq aw-background nil)
 
 (global-set-key (kbd "C-x o") 'ace-window)
+(key-chord-define-global "ww" 'ace-window)
 
 ;; tips
 (push "Press <x> to delete a window in ace window dispatch." prelude-tips)

@@ -6,8 +6,8 @@
 
 (prelude-require-packages '(wgrep wgrep-helm wgrep-ag))
 
-;; open recent files with C-x C-r
 (global-set-key (kbd "C-x C-r") 'helm-recentf)
+(global-set-key (kbd "C-s") 'helm-occur)
 
 (setq helm-ag-base-command "c:/msys64/mingw64/bin/ag.exe --vimgrep")
 
