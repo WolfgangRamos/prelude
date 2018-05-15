@@ -95,6 +95,10 @@ BASE-DIR defaults to ~/.emacs.d/personal/gnus/"
     ("q" nil "cancel"))
   (global-set-key (kbd "C-c C-y") 'gearup-gnus--message-hydra/body))
 
+(defun gearup-gnus--set-key-bindings ()
+  "Setup keybindings for gnus."
+  (global-set-key (kbd "C-x m") 'compose-mail))
+
 (with-eval-after-load 'gnus-group
   (gearup-gnus--setup-group-mode-hydra)
   (gearup-gnus--keybind-show-all-subscribed-groups-command)
@@ -110,7 +114,7 @@ BASE-DIR defaults to ~/.emacs.d/personal/gnus/"
 (with-eval-after-load 'message
   (gearup-gnus--setup-message-mode-hydra))
 
-
+(gearup-gnus--set-key-bindings)
 
 (setq prelude-tips
   (append prelude-tips

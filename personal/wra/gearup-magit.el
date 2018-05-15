@@ -6,6 +6,10 @@
 (require 'gearup-utils)
 (require 'magit)
 
+(defun geraup-magit--revision-buffer-hide-additional-refs ()
+  "Do not show parent commit ref in revision buffer."
+  (custom-set-variables '(magit-revision-insert-related-refs nil)))
+
 (defun gearup-magit--commit-disable-automatic-diff ()
   "Do not show diffs in commit view."
   (remove-hook 'server-switch-hook 'magit-commit-diff))
@@ -51,8 +55,15 @@
   (define-key magit-status-mode-map (kbd "C-c C-f") 'gearup-magit--toggle-revision-buffer-follow-status-buffer)
   (define-key magit-log-mode-map (kbd "C-c C-f") 'gearup-magit--toggle-revision-buffer-follow-log-buffer))
 
+(defun gearup-magit--revision-buffer-wrap-lines ()
+  "Turn on line wrapping in revision buffers."
+  (add-hook 'magit-revision-mode-hook
+            'visual-line-mode))
+
 (gearup-magit--commit-disable-automatic-diff)
 (gearup-magit--disable-vc-for-git-repos)
+(geraup-magit--revision-buffer-hide-additional-refs)
+(gearup-magit--revision-buffer-wrap-lines)
 
 (with-eval-after-load 'magit
   (gearup-magit--bind-keys))

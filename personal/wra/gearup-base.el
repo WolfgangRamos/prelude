@@ -16,6 +16,10 @@
 (custom-set-variables '(grep-command "grep -Hnrwi \".\" -e "))
 (global-set-key (kbd "C-,") 'just-one-space)
 
+(defun gearup-base--show-fringe-indicators-in-visual-line-mode ()
+  "Show right and left arrow in visual line mode."
+  (custom-set-variables '(visual-line-fringe-indicators (quote (left-curly-arrow right-curly-arrow)))))
+
 ;; set save file for abbrev mode (i think ess is somehow using it???)
 (custom-set-variables '(abbrev-file-name (expand-file-name "savefile/abbrev_defs" prelude-personal-dir)))
 
@@ -121,6 +125,7 @@ Toggles between: “all lower”, “Init Caps”, “ALL CAPS”."
 (gearup--set-utf-8-with-signature-coding-system-mode-line-mnemonic-to-B)
 (gearup--enable-fast-kill-ring-cycling)
 (gearup--immediately-show-register-preview)
+(gearup-base--show-fringe-indicators-in-visual-line-mode)
 
 (provide 'gearup-base)
 ;;; gearup-base.el ends here

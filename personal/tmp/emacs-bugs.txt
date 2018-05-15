@@ -1,0 +1,5 @@
+* Org Mode
+
+#+begin_example
+magit-insert-head-branch-header: Wrong type argument: stringp, nil
+#+end_example
