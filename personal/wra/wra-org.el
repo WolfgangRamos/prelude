@@ -299,12 +299,72 @@
 (org-export-define-derived-backend 'confluence-improved 'confluence
   :translate-alist '((paragraph . gearup-ox--confluence-paragraph)
                      (table-cell . gearup-ox--confluence-table-cell)
-                     (item . gearup-ox--confluence-item))
+                     (item . gearup-ox--confluence-item)
+                     (target . gearup-ox--confluence-target)
+                     (headline . gearup-ox--confluence-headline)
+                     (link . gearup-ox--confluence-link))
   :menu-entry '(?w "Wiki"
                    ((?C "As confluence wiki buffer" gearup-ox--export-as-confluence-wiki)
                     (?c "As confluence wiki file" gearup-ox--export-to-confluence-wiki))))
 
+(defun gearup-ox--confluence-target (target contents info)
+  "Transcode org targets to Confluence anchors."
+  (let ((name (org-element-property :value target)))
+    (when (org-string-nw-p name)
+      (gearup-ox--confluence-create-target name))))
 
+(defun gearup-ox--confluence-create-target (name)
+  "Create anchor markup for target NAME."
+  (format "{anchor:%s}" name))
+
+(defun gearup-ox--confluence-headline (headline contents info)
+  "Transcode org headlines as confluence headlines.
+
+`:CUSTOM_ID' properties of headlines are transcoded transcoded as
+confluence anchors."
+  (let* ((low-level-rank (org-export-low-level-p headline info))
+         (text (org-export-data (org-element-property :title headline)
+                                info))
+         (todo (org-export-data (org-element-property :todo-keyword headline)
+                                info))
+         (level (org-export-get-relative-level headline info))
+         (todo-text (if (or (not (plist-get info :with-todo-keywords))
+                            (string= todo ""))
+                        ""
+                      (format "*{{%s}}* " todo)))
+         (custom-id (org-export-get-node-property :CUSTOM_ID headline)))
+    (format "h%s. %s%s%s\n%s" level todo-text text
+            (if (org-string-nw-p custom-id) (format "\n%s" (gearup-ox--confluence-create-target custom-id)) "")
+            (if (org-string-nw-p contents) contents ""))))
+
+(defun gearup-ox--confluence-link (link desc info)
+  "Transcode org links to confluence links.
+
+Confluence only supports a subset of the link types provided by org mode. Currently only the following link types are transcoded correctly:
+
+- Links to targets
+- Links to `:CUSTOM_ID's."
+  (let ((type (org-element-property :type link))
+        (raw-link (org-element-property :raw-link link)))
+    (cond
+     ((string= type "fuzzy")
+      (let* ((target (org-export-resolve-fuzzy-link link info))
+             (target-type (when target (org-element-type target))))
+        (cond
+         ((eq target-type 'target)
+          (format "[#%s]" raw-link)))))
+     (t
+      (concat "["
+              (when (org-string-nw-p desc) (format "%s|" desc))
+              (cond
+               ((string-match "^confluence:" raw-link)
+                (replace-regexp-in-string "^confluence:" "" raw-link))
+               (t
+                raw-link))
+              "]")))))
+
+(defun gearup-ox--confluence-parse-properties-alist (content)
+  "Parse the text CONTENT of an org mode buffer")
 (defun gearup-ox--confluence-checkbox (item info)
   "Return checkbox string for ITEM or nil.
 INFO is a plist used as a communication channel."
@@ -383,10 +443,10 @@ than treating it as reflowable whitespace."
 
 ;;; Tips:
 
-(setq prelude-tips 
- (append prelude-tips
-  '("Hit <C-c C-x t> in org mode to insert an inline task."
-  "Hit <C-c C-x p> in org mode to insert a property.")))
+(setq prelude-tips
+      (append prelude-tips
+              '("Hit <C-c C-x t> in org mode to insert an inline task."
+                "Hit <C-c C-x p> in org mode to insert a property.")))
 
 (provide 'wra-org)
 ;;; wra-org.el ends here
