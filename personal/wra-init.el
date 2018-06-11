@@ -53,7 +53,6 @@
 ;;(require 'gearup-psvn) ;; switched to git svn via magit
 (require 'gearup-magit)
 (require 'gearup-iedit)
-(require 'gearup-magit)
 (require 'gearup-gnus)
 (require 'gearup-bookmarkp)
 (require 'gearup-org-attach-screenshot)

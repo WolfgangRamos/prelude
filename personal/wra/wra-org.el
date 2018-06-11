@@ -20,6 +20,12 @@
 
 (setq org-image-actual-width nil)
 
+(defun gearup--org-id-cache-use-gearup-savefile-dir ()
+  "Point org-id cache location to gearup savefile dir."
+  (custom-set-variables '(org-id-locations-file (expand-file-name "~/.emacs.d/personal/savefile/.org-id-locations"))))
+
+(gearup--org-id-cache-use-gearup-savefile-dir)
+
 ;; allow alphabetical lists, like a), b) ... or a., b. ...
 (setq org-list-allow-alphabetical t)
 
@@ -162,7 +168,7 @@
  '((emacs-lisp . t)
    (sql . t)
    (restclient . t)
-   (sh . t)))
+   (shell . t)))
 
 
 

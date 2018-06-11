@@ -60,6 +60,10 @@
   (add-hook 'magit-revision-mode-hook
             'visual-line-mode))
 
+(defun gearup-magit--commit-disable-autofill ()
+  "Disable auto-fill mode in commit message buffers."
+  (remove-hook 'git-commit-setup-hook 'git-commit-turn-on-auto-fill))
+
 (gearup-magit--commit-disable-automatic-diff)
 (gearup-magit--disable-vc-for-git-repos)
 (geraup-magit--revision-buffer-hide-additional-refs)
