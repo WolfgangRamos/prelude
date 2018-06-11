@@ -1,0 +1,67 @@
+#+TITLE: A Org Export Demo
+#+AUTHOR: Wolfgang Ramos
+#+OPTIONS: toc:nil
+#+BIND: org-ascii-verbatim-format "%s"
+#+BIND: org-ascii-text-width 1000
+
+Here are some sample elements to see if they convert to html reasonably.
+
+* Markup
+  *bold*
+
+  _underlined_
+
+  /italics/
+
+  +strikethrough+
+
+  ~code~
+
+  Subscripts: H_{2}O
+  Superscripts: H^{+}
+  An entity: To \infty and beyond
+
+[[#a-link]]
+
+[[another-link]]
+
+** A Sub-Heading
+
+   Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+   nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
+   erat, sed diam voluptua. At vero eos et accusam et justo duo
+   dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
+   sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
+   consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
+   ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero
+   eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
+   gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+
+* Equations
+  :PROPERTIES:
+  :CUSTOM_ID: a-link
+  :DESCRIPTION: foobar
+  :END:
+
+  \(x^2\)
+
+  \[x^4\]
+
+  $e^x$
+
+** Another subheading
+
+* Tables
+
+  #+caption: A table for you.
+  | x | y |
+  |---+---|
+  | 1 | 2 |
+
+* Lists
+<<another-link>>
+
+  A checklist:
+  - [ ] An unchecked checkbox
+  - [X] A checked checkbox 
+
