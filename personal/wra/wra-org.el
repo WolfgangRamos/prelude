@@ -162,7 +162,7 @@
  '((emacs-lisp . t)
    (sql . t)
    (restclient . t)
-   (sh . t)))
+   (shell . t)))
 
 
 
