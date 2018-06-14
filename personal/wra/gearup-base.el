@@ -13,7 +13,7 @@
 (gearup--hide-system-load-in-mode-line)
 (setq display-time-format "%a, %d.%m.%Y %H:%M")
 (display-time-mode 1)
-(custom-set-variables '(grep-command "grep -Hnrwi \".\" -e "))
+(custom-set-variables '(grep-command "grep --with-filename --line-number --recursive --ignore-case --regexp <REGEX> <FILES>"))
 (global-set-key (kbd "C-,") 'just-one-space)
 
 (defun gearup-base--show-fringe-indicators-in-visual-line-mode ()

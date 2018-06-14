@@ -6,6 +6,7 @@
 # expand-env: ((yas-indent-line 'fixed))
 # type: snippet
 # --
+#+TITLE: ${9:Titel der Email an Miriam}
 #+STARTUP: showall
 #+OPTIONS: toc:nil num:nil ^:nil H:5
 #+BIND: org-ascii-verbatim-format "%s"
@@ -14,14 +15,28 @@
 #+PROPERTY: header-args:restclient :var vtserver="http://localhost:89" :var content_type_text="text/xml; charset=utf-8" :var basic_authentification_credentials=(base64-encode-string "FLS:1147")
 #+PROPERTY: header-args:sql :engine mssql :dbhost MSSQL2014 :dbuser $4 :dbport :dbpassword $5 :database DEV_CLIENT_WR
 
+Hallo Miriam,
+
+nachfolgend meine Dokumentation für ${8:Kurze Beschreibung des features}.
+
+Eine Beschreibung der zugehörigen Use Cases findest du im Abschnitt
+[[#use-cases]]. Eine Übersicht über die benutzten Localization IDs findest du im Abschnitt
+[[#localization-ids]].
+
+Liebe Grüße
+
+Wolfgang
+
+* Allgemeine Informationen
+
 - Auftragsnummer: ${1:`(file-name-sans-extension (file-name-nondirectory (buffer-file-name)))`}
 - [X] Standard
-- [ ] Kundenanpassung
+- [ ] Kundenanpassung: $3
 - Module: $2
-- Kunde: $3
 - Fixed in Revision:
 
-* DB Queries         :no_export:
+
+* DB Queries :noexport:
 
 #+CAPTION: Query
 #+BEGIN_SRC sql :exports both :cache yes
@@ -32,7 +47,7 @@ Select * from vtsorderreport;
 #+RESULTS:
 
 
-* Web Requests :no_export:
+* Web Requests :noexport:
 
 #+CAPTION: Request
 #+BEGIN_SRC restclient :exports both :cache yes
@@ -48,25 +63,18 @@ Select * from vtsorderreport;
 
 
 * Technical Documentation / Tested Use Cases
+   :PROPERTIES:
+   :CUSTOM_ID: use-cases
+   :END:
 
-#+NAME: translate
-#+BEGIN_SRC sql :exports none :var id="error_id" :var lang="English" :engine oracle :dbhost vm-oracle-utf :dbuser $6 :dbport 1521 :dbpassword $7 :database orcl.serverfls.com
-  select k.sectionkey as id, l.language as sprache, t.text
-  from keys k
-  inner join texte t
-  on k.logicalkey = t.logicalkey
-  inner join LANGUAGES l
-  on t.lang_nr = l.nr
-  where l.language = '\$lang' and
-  k.sectionkey = '\$id'
-  Order by id, sprache;
-#+END_SRC
-
-Some localzation id call_translate(n="time_zone_id") in english
+Eine Übersicht über die benutzten Localization IDs findet sich im Abschnitt [[#localization-ids]].
 
 $0
 
 ** Used Localization IDs
+   :PROPERTIES:
+   :CUSTOM_ID: localization-ids
+   :END:
 
 #+BEGIN_SRC sql :exports results :cache yes :engine oracle :dbhost vm-oracle-utf :dbuser $6 :dbport 1521 :dbpassword $7 :database orcl.serverfls.com
   select k.sectionkey as id, l.language as sprache, t.text
@@ -83,10 +91,10 @@ $0
 #+CAPTION: List of new or modified localization IDs
 #+RESULTS:
 
-* Implementation Details
+* Implementation Details :noexport:
 
-#+BEGIN_SRC sh :exports results :cache yes
-git --no-pager log --author="Wolfgang Ramos" --grep="$1"
+#+BEGIN_SRC sh :exports results :cache yes :results output verbatim code replace
+git -C "C:\\Users\Wolfgang.Ramos\\visitour\\client3" --no-pager log --reverse --author="wolfgang.ramos" --grep="$1" --format=format:'%cI:%n%B'
 #+END_SRC
 
 #+CAPTION: List of Changes

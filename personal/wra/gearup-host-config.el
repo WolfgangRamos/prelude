@@ -15,7 +15,7 @@ The init file is identified by name. The naming pattern is
 DIR. If DIR is a relative path, it is assumed to be in
 `user-emacs-directory'."
   (let ((filename
-         (expand-file-name system-name
+         (expand-file-name (downcase system-name)
                            (expand-file-name dir))))
     (when (file-exists-p (concat filename ".el"))
       (message "Loading host init file %s" (concat filename ".el"))

@@ -53,7 +53,7 @@ Returns an alist of attribute-value-pairs where attibute is used as key."
 (ert-deftest gearup-parse-xml-attributes-test ()
   "Test xml attribute string parsing."
   (should (equal (gearup-parse-xml-attributes "Name=\"Service\"") '(("Name" "Service"))))
-  (should (equal (gearup-parse-xml-attributes "UsedbyName=\"Layout\"  UsedbyName = \"Service\"	UsedByType=\"Form\" Attr=\"\"")
+  (should (equal (gearup-parse-xml-attributes "UsedbyName=\"Layout\"  UsedbyName = \"Service\"  UsedByType=\"Form\" Attr=\"\"")
                  '(("Attr" "") ("UsedByType" "Form") ("UsedbyName" "Service") ("UsedbyName" "Layout")))))
 
 (defun gearup-generic-list-subset-p (subset set extract lessp equalp)
@@ -112,8 +112,8 @@ Signal an error if point is not inside a form tag."
   (interactive)
   (if (and
        (save-excursion
-        (move-beginning-of-line nil)
-        (re-search-forward "</Form>" nil t))
+         (move-beginning-of-line nil)
+         (re-search-forward "</Form>" nil t))
        (save-excursion
          (move-end-of-line nil)
          (re-search-backward "<Form[[:space:]]+Name=\"\\([^\"]+\\)\"" nil t)))
@@ -141,9 +141,9 @@ Signal an error if point is not inside a form tag."
   FORM is the name of the form. If called with a prefix argument read form name from mini buffer. Otherwise use the form point is in (if any)."
   (interactive "p")
   (fls-find-layout-node
-    (or
-     (and (> prefix 1) (read-string "Form name: "))
-     (fls-current-form-name))))
+   (or
+    (and (> prefix 1) (read-string "Form name: "))
+    (fls-current-form-name))))
 
 ;; (defun fls-jump-to-xml-node (name attributes incremental)
 ;;   "Jump to."
@@ -155,7 +155,7 @@ Signal an error if point is not inside a form tag."
   "Jump to entity node.
 User is queried for an entity name. The name is searched case-insensitive."
   (interactive "p")
-  (gearup-query-find-xml-node "Entity" (list (list "Name" (read-string "Entity-name: "))) (> prefix 0))))
+  (gearup-query-find-xml-node "Entity" (list (list "Name" (read-string "Entity-name: "))) (> prefix 0)))
 
 (defun gearup-generic-find-xml-node (tag attributes  &optional forward)
   "Jump to TAG with ATTRIBUTES.
@@ -183,8 +183,37 @@ If FORWARD is ntn-nil start search from current point position. If CASE is not-n
 (gearup-omnisharp--setup-omnisharp-completion (expand-file-name "omnisharp-server/v1.26.3/OmniSharp.exe" prelude-personal-dir))
 
 
-
+(gearup-magit--commit-disable-autofill)
 (gearup-gnus--set-gnus-init-file "pc-pd.gnus")
 
-(message "Loaded host config for PC-PD.")
+(org-link-set-parameters
+ "file"
+ :follow (lambda (path)
+           (funcall
+            (helm :sources
+                  `((name . "Action")
+                    (candidates . ,(append
+                                    (loop for f in '(find-file
+                                                     org-open-file)
+                                          collect (cons (symbol-name f) f))
+                                    '(("dired" . (lambda (path)
+                                                   (dired (file-name-directory path))
+                                                   (re-search-forward (file-name-nondirectory path))))
+                                      ("copy org link" . (lambda (path)
+                                                           (kill-new (format "[[file:%s]]" path))))
+                                      ("MS Paint" . gearup-org--open-image-with-paint))))
+                    (action . identity)))
+            path)))
 
+(defun gearup-org--open-image-with-paint (path)
+  (interactive "sFull path to file: ")
+  (if (not (eq system-type 'windows-nt))
+      (message "Emacs is not running on windows.")
+    (if (not (locate-file "mspaint.exe" exec-path))
+        (message "mspaint.exe not found in Emacs exec-path.")
+      (start-process "mspaint" nil "mspaint" (convert-standard-filename path)))))
+
+
+
+(locate-file "mspaint.exe" exec-path)
+(message "Loaded host config for PC-PD.")
