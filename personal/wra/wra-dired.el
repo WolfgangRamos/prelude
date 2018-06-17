@@ -5,7 +5,6 @@
 ;;; Code
 
 ;; dired
-(prelude-require-package 'dired+)
 (require 'dired)
 
 (defun gearup--allow-edit-file-permissions ()
@@ -68,7 +67,13 @@
           (function (lambda () (load "dired-x"))))
 
 ;; dired+
-(require 'dired+)
+;; As of Emacs 26.1 dired+ is no longer available from MELPA.
+;; Dired+ is added as git submodule to gearup.
+(let ((generated-autoload-file (expand-file-name "dired-plus/dired+-autoloads.el" gearup-foreign-modules-dir)))
+  (update-directory-autoloads (expand-file-name "dired-plus" gearup-foreign-modules-dir)))
+(byte-recompile-directory (expand-file-name "dired-plus" gearup-foreign-modules-dir) 0)
+
+(require 'dired+-autoloads)
 (diredp-toggle-find-file-reuse-dir 1)
 
 ;; borrowed from steve purcell
