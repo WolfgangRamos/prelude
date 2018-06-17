@@ -1,3 +1,6 @@
 [submodule "personal/modules/foreign/bookmark-plus"]
 	path = personal/modules/foreign/bookmark-plus
 	url = https://github.com/emacsmirror/bookmark-plus.git
+[submodule "personal/modules/foreign/dired-plus"]
+	path = personal/modules/foreign/dired-plus
+	url = https://github.com/emacsmirror/dired-plus.git
