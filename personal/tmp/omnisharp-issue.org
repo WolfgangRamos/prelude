@@ -1,0 +1,42 @@
+#+TITLE: Allow omisharp to manage .cs files outside server-project-root
+
+I have a folder structure where some =.csproj= and their =.cs= files
+live outside of the directory where the =.sln= file resides. The
+folder structure looks something like this:
+
+#+begin_example
+
+<common root>
+      |
+      +-- projects
+      |          |
+      |          +-- project1.csproj
+      |                     |
+      |                     +-- subdirs with .cs files
+      |
+      +-- solution
+             |
+             +-- my.sln
+             |
+             +-- project2_subdir
+             |          |
+             |          +-- project2.csproj
+             |                     |
+             |                     +-- subdirs with .cs files
+             |
+             +-- project3_subdir
+                        |
+                        +-- project3.csproj
+                                   |
+                                   +-- subdirs with .cs files
+#+end_example
+
+When I call =omnisharp-start-server= with (the path to) =my.sln= I get
+intellisense in all =.cs= files below the =solution= subdirectory. In all
+=.cs= files below the =projects= directory I only get the message
+
+#+begin_example
+omnisharp: buffer will not be managed by omnisharp: <filename> is outside the root directory of the project loaded on the current OmniSharp server: <solution directory>.
+#+end_example
+
+The projects in =projects= dir are however part of =my.sln=.
