@@ -3,7 +3,7 @@
 ;;; Commentary:
 
 ;;; Code:
-(prelude-require-package 'hydra)
+(require 'gearup-hydra)
 
 ;; copy buffer file name (full path) to kill ring and clipboard
 (defun gearup-file-name-to-clipboard ()
@@ -39,7 +39,7 @@ bottom of window."
 
 ;; gearup sizing menu
 (global-set-key (kbd "C-c s")
-                (defhydra gearup-sizing-hydra (:foreign-keys nil)
+                (defhydra gearup-sizing-hydra (:foreign-keys nil :body-pre gearup-hydra--before-enter-hydra-state :post gearup-hydra--before-exit-hydra-state)
                   "
 ^Font size^    ^Vertical window size^   ^Horizontal window size
 ^----------^   ^--------------------^   ^----------------------
