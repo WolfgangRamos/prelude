@@ -359,6 +359,8 @@ Confluence only supports a subset of the link types provided by org mode. Curren
         (cond
          ((eq target-type 'target)
           (format "[#%s]" raw-link)))))
+     ((string= type "file")
+      (format "[^%s]" (file-name-nondirectory raw-link)))
      (t
       (concat "["
               (when (org-string-nw-p desc) (format "%s|" desc))
