@@ -5,9 +5,25 @@
 ;;; Code
 
 (prelude-require-packages '(wgrep wgrep-helm wgrep-ag))
+(require 'helm)
 
 (global-set-key (kbd "C-x C-r") 'helm-recentf)
 (global-set-key (kbd "C-s") 'helm-occur)
+
+(defun gearup-helm--quit-and-enter-isearch ()
+  "Quit helm session and enter `isearch-forward'."
+  (interactive)
+  (with-helm-alive-p
+    (let ((user-input (minibuffer-contents-no-properties)))
+      (helm-run-after-exit (lambda (search-str)
+                             (isearch-forward nil t)
+                             (isearch-yank-string search-str)) user-input))))
+
+(defun gearup-helm--occur-add-isearch-keybinding ()
+  "Bind `isearch-forward' to C-s in `helm-source-occur' keymap."
+  (define-key helm-moccur-map (kbd "C-s") 'gearup-helm--quit-and-enter-isearch))
+
+(gearup-helm--occur-add-isearch-keybinding)
 
 (setq helm-ag-base-command "c:/msys64/mingw64/bin/ag.exe --vimgrep")
 
