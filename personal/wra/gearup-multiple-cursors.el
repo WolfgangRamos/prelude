@@ -5,9 +5,26 @@
 ;;; Code:
 (prelude-require-package 'multiple-cursors)
 
+(defun gearup-mc--toggle-prelude-easy-kill-remapping ()
+  "Disable or enable preludes remapping of `kill-ring-save' to
+`easy-kill' when entering `multiple-cursors-mode'.
+
+Prelude remaps `kill-ring-save' to `easy-kill'. However,
+multiple-cursors-mode chokes on this remapping. So we have to
+undo the remapping of kill-ring-save to easy-kill while in
+`multiple-cursors-mode' and afterward restore it."
+  (if (and (local-variable-p 'multiple-cursors-mode) multiple-cursors-mode)
+      (global-set-key [remap kill-ring-save] nil)
+    (global-set-key [remap kill-ring-save] 'easy-kill)))
+
 ;; set file for storing run-once and run-all command lists
-(setq mc/list-file (expand-file-name "savefile/.mc-lists.el" prelude-personal-dir))
+(custom-set-variables
+ '(mc/list-file (expand-file-name "savefile/.mc-lists.el" prelude-personal-dir))
+ '(mc/insert-numbers-default 1))
+
 (require 'multiple-cursors)
+
+(add-hook 'multiple-cursors-mode-hook 'gearup-mc--toggle-prelude-easy-kill-remapping)
 
 ;; make return insert a newline
 (define-key mc/keymap (kbd "<return>") nil)
