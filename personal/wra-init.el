@@ -8,7 +8,7 @@
 ;;; Code:
 (load-file (expand-file-name "wra/gearup-set-load-path.el" prelude-personal-dir)) ;; load this first
 (require 'gearup-utils) ;; load this second
-(require 'gearup-base)
+(require 'gearup-base)  ;; load this third
 (require 'gearup-hl-tags-mode)
 (require 'gearup-prelude)
 (require 'gearup-expand-region)

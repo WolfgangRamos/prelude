@@ -36,7 +36,7 @@ BASE-DIR defaults to ~/.emacs.d/personal/gnus/"
 
 (defun gearup-gnus--setup-group-mode-hydra ()
   "Create hydra for gnus group mode and bind it to \"y\"."
-  (defhydra gearup-gnus--group-mode-hydra (:color blue)
+  (defhydra gearup-gnus--group-mode-hydra (:color blue :body-pre gearup-hydra--before-enter-hydra-state :post gearup-hydra--before-exit-hydra-state)
     "Do?"
     ("a" gnus-group-list-active "REMOTE groups A A")
     ("l" gnus-group-list-all-groups "LOCAL groups L")
@@ -53,7 +53,7 @@ BASE-DIR defaults to ~/.emacs.d/personal/gnus/"
 
 (defun gearup-gnus--setup-summary-mode-hydra ()
   "Create hydra for gnus summary mode and bind it to \"y\""
-  (defhydra gearup-gnus--summary-mode-hydra (:color blue)
+  (defhydra gearup-gnus--summary-mode-hydra (:color blue :body-pre gearup-hydra--before-enter-hydra-state :post gearup-hydra--before-exit-hydra-state)
     "Do?"
     ("s" gnus-summary-show-thread "Show thread")
     ("h" gnus-summary-hide-thread "Hide thread")
@@ -74,7 +74,7 @@ BASE-DIR defaults to ~/.emacs.d/personal/gnus/"
 
 (defun gearup-gnus--setup-article-mode-hydra ()
   "Create hydra for gnus article mode and bind it to \"y\"."
-  (defhydra gearup-gnus--article-mode-hydra (:color blue)
+  (defhydra gearup-gnus--article-mode-hydra (:color blue :body-pre gearup-hydra--before-enter-hydra-state :post gearup-hydra--before-exit-hydra-state)
     "Do?"
     ("f" gnus-summary-mail-forward "Forward")
     ("R" gnus-article-reply-with-original "Reply with original R")
@@ -88,7 +88,7 @@ BASE-DIR defaults to ~/.emacs.d/personal/gnus/"
 
 (defun gearup-gnus--setup-message-mode-hydra ()
   "Create hydra for gnus message mode and bind it to \"C-c C-y\""
-  (defhydra gearup-gnus--message-hydra (:color blue)
+  (defhydra gearup-gnus--message-hydra (:color blue :body-pre gearup-hydra--before-enter-hydra-state :post gearup-hydra--before-exit-hydra-state)
     "Do?"
     ("ca" mml-attach-file "Attach C-c C-a")
     ("cc" message-send-and-exit "Send C-c C-c")

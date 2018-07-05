@@ -16,6 +16,16 @@
 (custom-set-variables '(grep-command "grep --with-filename --line-number --recursive --ignore-case --regexp <REGEX> <FILES>"))
 (global-set-key (kbd "C-,") 'just-one-space)
 
+(defvar gearup-foreign-modules-dir (expand-file-name "modules/foreign" prelude-personal-dir)
+  "Directory for gearup foreign modules.")
+
+(defun gearup--assert-savefile-dir-exists ()
+  "Assert gearup's savefile dir exists. If not create it."
+  (let ((savefile-dir (expand-file-name "savefile" prelude-personal-dir)))
+    (unless (file-directory-p savefile-dir)
+      (message "Creating geraup savefile directory.")
+      (make-directory savefile-dir t))))
+
 (defun gearup-base--show-fringe-indicators-in-visual-line-mode ()
   "Show right and left arrow in visual line mode."
   (custom-set-variables '(visual-line-fringe-indicators (quote (left-curly-arrow right-curly-arrow)))))
@@ -126,6 +136,7 @@ Toggles between: “all lower”, “Init Caps”, “ALL CAPS”."
 (gearup--enable-fast-kill-ring-cycling)
 (gearup--immediately-show-register-preview)
 (gearup-base--show-fringe-indicators-in-visual-line-mode)
+(gearup--assert-savefile-dir-exists)
 
 (provide 'gearup-base)
 ;;; gearup-base.el ends here

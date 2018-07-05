@@ -3,6 +3,7 @@
 ;;; Commentary
 
 ;;; Code
+(prelude-require-package 'auctex) ;; cdlatex requires auctex
 (prelude-require-package 'cdlatex)
 
 ;; add environments

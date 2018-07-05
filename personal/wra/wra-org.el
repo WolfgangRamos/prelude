@@ -4,6 +4,7 @@
 ;;; Commentary:
 
 ;;; Code
+(prelude-require-package 'org-plus-contrib)
 (require 'org)
 (require 'yasnippet)
 (require 'cdlatex)

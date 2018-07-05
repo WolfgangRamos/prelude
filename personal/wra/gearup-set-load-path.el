@@ -14,7 +14,11 @@ FILES must be a list of strings."
 (setq load-path
       (append
        (gearup--expand-file-names
-        '("wra"
+        '(;;"lisp/org-mode/lisp"
+          ;;"lisp/org-mode/contrib/lisp"
+          "wra"
+          "modules/foreign/dired-plus"
+          "modules/foreign/bookmark-plus"
           "lisp/hl-tags-mode"
           "lisp/essh"
           "lisp/org-wc"

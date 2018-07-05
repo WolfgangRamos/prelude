@@ -3,6 +3,7 @@ savefile/abbrev_defs
 savefile/.mc-lists.el
 omnisharp-server
 savefile
+lisp/*
 
 # emacs server socket file directory
 server/
