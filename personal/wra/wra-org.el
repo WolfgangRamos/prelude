@@ -308,10 +308,24 @@
                      (item . gearup-ox--confluence-item)
                      (target . gearup-ox--confluence-target)
                      (headline . gearup-ox--confluence-headline)
+                     (src-block . geraup-ox--confluence-src-block)
                      (link . gearup-ox--confluence-link))
   :menu-entry '(?w "Wiki"
                    ((?C "As confluence wiki buffer" gearup-ox--export-as-confluence-wiki)
                     (?c "As confluence wiki file" gearup-ox--export-to-confluence-wiki))))
+
+(defun geraup-ox--confluence-src-block (src-block contents info)
+  ;; FIXME: provide a user-controlled variable for theme
+  (let* ((lang (org-element-property :language src-block))
+         (caption (org-export-get-caption src-block))
+         (language (or (cdr (assoc lang org-confluence-lang-alist)) lang))
+         (content (org-export-format-code-default src-block info)))
+    (concat "\{code:theme=Emacs"
+            (when language (format "|language=%s" language))
+            (when caption (format "|title=%s" (substring-no-properties (org-export-data caption info))))
+            "|collapse=true\}\n"
+            content
+            "\{code\}\n")))
 
 (defun gearup-ox--confluence-target (target contents info)
   "Transcode org targets to Confluence anchors."

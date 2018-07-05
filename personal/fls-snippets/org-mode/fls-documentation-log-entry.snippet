@@ -15,28 +15,6 @@
 #+PROPERTY: header-args:restclient :var vtserver="http://localhost:89" :var content_type_text="text/xml; charset=utf-8" :var basic_authentification_credentials=(base64-encode-string "FLS:1147")
 #+PROPERTY: header-args:sql :engine mssql :dbhost MSSQL2014 :dbuser $4 :dbport :dbpassword $5 :database DEV_CLIENT_WR
 
-#+BEGIN_EXPORT html
-<p>
-Hallo Miriam,
-</p>
-<p>
-nachfolgend meine Dokumentation für eine Warnmeldung beim Lesen von
-Arbeitszeiten ohne Zeitzoneninformationen (Auftragsnummer
-ANF-17629-H1X6Q0).
-</p>
-<p>
-Eine Beschreibung der zugehörigen Use Cases findest du im Abschnitt
-<a href="#use-cases">Technical Documentation / Tested Use Cases</a>. Eine Übersicht über die benutzten Localization IDs findest du im Abschnitt
-<a href="#localization-ids">Used Localization IDs</a>.
-</p>
-<p>
-Liebe Grüße
-</p>
-<p>
-Wolfgang
-</p>
-#+END_EXPORT
-
 * Allgemeine Informationen
 
 - Auftragsnummer: ${1:`(file-name-sans-extension (file-name-nondirectory (buffer-file-name)))`}
@@ -81,12 +59,13 @@ Eine Übersicht über die benutzten Localization IDs findet sich im Abschnitt [[
 
 $0
 
-** Used Localization IDs
+** Localizer Keys
    :PROPERTIES:
    :CUSTOM_ID: localization-ids
    :END:
 
-#+BEGIN_SRC sql :exports results :cache yes :engine oracle :dbhost vm-oracle-utf :dbuser $6 :dbport 1521 :dbpassword $7 :database orcl.serverfls.com
+#+CAPTION: sql query for localizer DB
+#+BEGIN_SRC sql :exports noth :cache yes :engine oracle :dbhost vm-oracle-utf :dbuser $6 :dbport 1521 :dbpassword $7 :database orcl.serverfls.com
   select k.sectionkey as id, l.language as sprache, t.text
   from keys k
   inner join texte t
@@ -101,12 +80,13 @@ $0
 #+CAPTION: List of new or modified localization IDs
 #+RESULTS:
 
-* Implementation Details :noexport:
+* Implementation Details
 
-#+BEGIN_SRC sh :exports results :cache yes :results output verbatim code replace
+#+CAPTION: git log query
+#+BEGIN_SRC sh :exports both :cache no :results output verbatim code replace
 git -C "C:\\Users\Wolfgang.Ramos\\visitour\\client3" --no-pager log --reverse --author="wolfgang.ramos" --grep="$1" --format=format:'%cI:%n%B'
 #+END_SRC
 
-#+CAPTION: List of Changes
+#+CAPTION: git log entries for $1
 #+RESULTS:
 
