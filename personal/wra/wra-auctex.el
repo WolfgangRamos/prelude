@@ -4,6 +4,7 @@
 
 ;;; Code
 (prelude-require-package 'auctex)
+(prelude-require-package 'cdlatex)
 
 ;; AucTeX
 ;;(require 'tex-site)

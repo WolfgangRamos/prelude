@@ -5,6 +5,7 @@
 ;;; Code:
 (require 'gearup-utils)
 (require 'magit)
+(prelude-require-package 'magit-svn)
 
 (defun geraup-magit--revision-buffer-hide-additional-refs ()
   "Do not show parent commit ref in revision buffer."

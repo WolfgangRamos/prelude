@@ -23,7 +23,9 @@
   "Insert image from clipboard using `org-attach-screenshot' and GearupScreenshot.exe."
   (interactive)
   (let ((current-prefix-arg '(4)))
-    (call-interactively 'org-attach-screenshot)))
+    (save-excursion
+      (call-interactively 'org-attach-screenshot))
+    (insert "#+ATTR_ORG: :width 400\n")))
 
 (define-key org-mode-map (kbd "C-c b") 'gearup-org-insert-image-from-clipboard)
 

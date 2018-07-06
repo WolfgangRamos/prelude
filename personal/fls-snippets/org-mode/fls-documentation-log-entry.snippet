@@ -15,14 +15,9 @@
 #+PROPERTY: header-args:restclient :var vtserver="http://localhost:89" :var content_type_text="text/xml; charset=utf-8" :var basic_authentification_credentials=(base64-encode-string "FLS:1147")
 #+PROPERTY: header-args:sql :engine mssql :dbhost MSSQL2014 :dbuser $4 :dbport :dbpassword $5 :database DEV_CLIENT_WR
 
-* Allgemeine Informationen
+${1:`(file-name-sans-extension (file-name-nondirectory (buffer-file-name)))`}
 
-- Auftragsnummer: ${1:`(file-name-sans-extension (file-name-nondirectory (buffer-file-name)))`}
-- [X] Standard
-- [ ] Kundenanpassung: $3
-- Module: $2
-- Fixed in Revision:
-
+#+TOC: headlines 3
 
 * DB Queries :noexport:
 
@@ -39,14 +34,54 @@ Select * from vtsorderreport;
 
 #+CAPTION: Request
 #+BEGIN_SRC restclient :exports both :cache yes
-  POST :vtserver/VTS/WS/GetNextActivity
-  Content-Type: :content_type_text
-  Authorization: Basic :basic_authentification_credentials
+POST :vtserver/VTS/WS/GetNextActivity
+Content-Type: :content_type_text
+Authorization: Basic :basic_authentification_credentials
 
-  <GetNextActivity><User>1</User><ActivityNr>0</ActivityNr><ProcessInstance></ProcessInstance><ShowNextProcess>true</ShowNextProcess></GetNextActivity>
+<GetNextActivity><User>1</User><ActivityNr>0</ActivityNr><ProcessInstance></ProcessInstance><ShowNextProcess>true</ShowNextProcess></GetNextActivity>
 #+END_SRC
 
 #+CAPTION: Response
+#+RESULTS:
+
+
+* Beschreibung
+
+- Anforderungsnummer: $1
+- [X] Standard
+- [ ] Kundenanpassung: $3
+- Module: $2
+- Fixed in Revision:
+
+* Links zu Teilfunktionen
+
+* Technical name and basic details
+
+| Technical name |Category|Data type|Value range|Default value|Description (English)|
+|----------------|--------|---------|-----------|-------------|---------------------|
+|                |        |         |           |             |                     |
+
+* Navigationspfad
+
+** Localizer Keys
+:PROPERTIES:
+:CUSTOM_ID: localization-ids
+:END:
+
+#+CAPTION: sql query for localizer DB
+#+BEGIN_SRC sql :exports both :cache yes :engine oracle :dbhost vm-oracle-utf :dbuser $6 :dbport 1521 :dbpassword $7 :database orcl.serverfls.com
+select k.sectionkey as id, l.language as sprache, t.text
+from keys k
+inner join texte t
+on k.logicalkey = t.logicalkey
+inner join LANGUAGES l
+on t.lang_nr = l.nr
+where Regexp_like (l.language, '^(German|English)$') and
+Regexp_like (k.sectionkey, '^(abidances_id|error_id)$')
+Order by id, sprache;
+#+END_SRC
+
+#+CAPTION: List of new or modified localization IDs
 #+RESULTS:
 
 
@@ -55,30 +90,13 @@ Select * from vtsorderreport;
    :CUSTOM_ID: use-cases
    :END:
 
-Eine Übersicht über die benutzten Localization IDs findet sich im Abschnitt [[#localization-ids]].
+* Benutzerinfos
+
+** Feature-Infos
+
+** Benutzerhandlungen
 
 $0
-
-** Localizer Keys
-   :PROPERTIES:
-   :CUSTOM_ID: localization-ids
-   :END:
-
-#+CAPTION: sql query for localizer DB
-#+BEGIN_SRC sql :exports noth :cache yes :engine oracle :dbhost vm-oracle-utf :dbuser $6 :dbport 1521 :dbpassword $7 :database orcl.serverfls.com
-  select k.sectionkey as id, l.language as sprache, t.text
-  from keys k
-  inner join texte t
-  on k.logicalkey = t.logicalkey
-  inner join LANGUAGES l
-  on t.lang_nr = l.nr
-  where Regexp_like (l.language, '^(German|English)$') and
-  Regexp_like (k.sectionkey, '^(abidances_id|error_id)$')
-  Order by id, sprache;
-#+END_SRC
-
-#+CAPTION: List of new or modified localization IDs
-#+RESULTS:
 
 * Implementation Details
 
