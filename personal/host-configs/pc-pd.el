@@ -211,7 +211,7 @@ If FORWARD is ntn-nil start search from current point position. If CASE is not-n
       (message "Emacs is not running on windows.")
     (if (not (locate-file "mspaint.exe" exec-path))
         (message "mspaint.exe not found in Emacs exec-path.")
-      (start-process "mspaint" nil "mspaint" (convert-standard-filename path)))))
+      (start-process "mspaint" nil "mspaint" (replace-regexp-in-string "/" "\\" (w32-convert-standard-filename (expand-file-name path)) t t)))))
 
 
 

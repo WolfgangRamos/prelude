@@ -22,10 +22,17 @@
 (defun gearup-org-insert-image-from-clipboard ()
   "Insert image from clipboard using `org-attach-screenshot' and GearupScreenshot.exe."
   (interactive)
-  (let ((current-prefix-arg '(4)))
+  (let ((current-prefix-arg '(4))
+        caption-start-position)
     (save-excursion
       (call-interactively 'org-attach-screenshot))
-    (insert "#+ATTR_ORG: :width 400\n")))
+    (insert "#+CAPTION: ")
+    (setq caption-start-position (point))
+    (newline-and-indent)
+    (insert "#+ATTR_ORG: :width 400")
+    (newline-and-indent)
+    (crux-top-join-line)
+    (goto-char caption-start-position)))
 
 (define-key org-mode-map (kbd "C-c b") 'gearup-org-insert-image-from-clipboard)
 
