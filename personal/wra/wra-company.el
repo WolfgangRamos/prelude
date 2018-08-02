@@ -8,7 +8,7 @@
 (require 'company)
 
 
-(setq company-idle-delay 0.1)
+(custom-set-variables '(company-idle-delay nil))
 
 (defun gearup-company--set-company-keybindings ()
   "Set keybindings for `company-mode'."

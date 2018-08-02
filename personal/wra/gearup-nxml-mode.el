@@ -44,7 +44,6 @@
    ;; disable validation
   (when (> (buffer-size) 80000)
     (turn-off-show-smartparens-mode)
-    (hl-tags-mode 1)
     (flycheck-mode -1)))
 
 (add-hook 'nxml-mode-hook

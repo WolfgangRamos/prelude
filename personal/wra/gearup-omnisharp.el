@@ -24,7 +24,8 @@ PATH must be the path to the omnisharp executable."
   "Create keybindings for `omnisharp-mode'."
   (define-key omnisharp-mode-map (kbd "C-c o f") 'omnisharp-find-usages)
   (define-key omnisharp-mode-map (kbd "C-c o d") 'omnisharp-go-to-definition)
-  (define-key omnisharp-mode-map (kbd "C-c o i") 'omnisharp-find-implementations))
+  (define-key omnisharp-mode-map (kbd "C-c o i") 'omnisharp-find-implementations)
+  (define-key omnisharp-mode-map (kbd "C-c o r") 'omnisharp-rename))
 
 (with-eval-after-load 'omnisharp
   (gearup-omnisharp--bind-keys))
