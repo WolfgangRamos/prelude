@@ -24,10 +24,16 @@
   (interactive)
   (let ((current-prefix-arg '(4))
         (indentation (make-string (current-indentation) ?\s))
-        caption-start-position)
+        caption-start-position
+        (filename "")
+        (caption ""))
     (save-excursion
       (call-interactively 'org-attach-screenshot))
-    (insert "#+CAPTION: ")
+    (save-excursion
+      (when (search-forward-regexp "\\[\\[file:\\([^\]]+\\)\\]\\]" nil t)
+        (setq filename (file-name-base (match-string-no-properties 1)))
+        (setq caption (mapconcat (lambda (s) (capitalize s)) (split-string filename "[_-]+") " "))))
+    (insert "#+CAPTION: " caption)
     (setq caption-start-position (point))
     (insert "\n" indentation "#+ATTR_ORG: :width 400\n" indentation)
     (goto-char caption-start-position)))

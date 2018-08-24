@@ -366,7 +366,8 @@ Confluence only supports a subset of the link types provided by org mode. Curren
 - Links to targets
 - Links to `:CUSTOM_ID's."
   (let ((type (org-element-property :type link))
-        (raw-link (org-element-property :raw-link link)))
+        (raw-link (org-element-property :raw-link link))
+        (path (org-element-property :path link)))
     (cond
      ((string= type "fuzzy")
       (let* ((target (org-export-resolve-fuzzy-link link info))
@@ -375,7 +376,9 @@ Confluence only supports a subset of the link types provided by org mode. Curren
          ((eq target-type 'target)
           (format "[#%s]" raw-link)))))
      ((string= type "file")
-      (format "[^%s]" (file-name-nondirectory raw-link)))
+      (if (org-file-image-p raw-link)
+          (format "!%s|width=400!" (file-name-nondirectory path))
+        (format "[^%s]" (file-name-nondirectory raw-link))))
      (t
       (concat "["
               (when (org-string-nw-p desc) (format "%s|" desc))

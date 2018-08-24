@@ -6,7 +6,7 @@
 # expand-env: ((yas-indent-line 'fixed))
 # type: snippet
 # --
-#+TITLE: ${9:Titel der Email an Miriam}
+#+TITLE: ${1:`(file-name-sans-extension (file-name-nondirectory (buffer-file-name)))`} ${9:Titel}
 #+STARTUP: showall
 #+OPTIONS: toc:nil num:nil ^:nil H:5
 #+BIND: org-ascii-verbatim-format "%s"
@@ -15,7 +15,7 @@
 #+PROPERTY: header-args:restclient :var vtserver="http://localhost:89" :var content_type_text="text/xml; charset=utf-8" :var basic_authentification_credentials=(base64-encode-string "FLS:1147")
 #+PROPERTY: header-args:sql :engine mssql :dbhost MSSQL2014 :dbuser $4 :dbport :dbpassword $5 :database DEV_CLIENT_WR
 
-${1:`(file-name-sans-extension (file-name-nondirectory (buffer-file-name)))`}
+$1
 
 #+TOC: headlines 3
 
