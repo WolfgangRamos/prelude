@@ -16,6 +16,7 @@
 (require 'gearup-hippie-expand)
 (require 'gearup-ace-window)
 (require 'gearup-avy)
+(require 'gearup-sql)
 (require 'wra-helm)
 (require 'wra-image)
 ;;(require 'wra-ispell)

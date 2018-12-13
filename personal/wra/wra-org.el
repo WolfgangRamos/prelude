@@ -171,7 +171,14 @@
    (restclient . t)
    (shell . t)))
 
+(defvar gearup-org-src-known-languages (list "asymptote" "C" "clojure" "d" "dot" "Lisp" "gnuplot" "java" "latex" "lisp" "lua" "mscgen" "octave" "oz" "plantuml" "python" "ruby" "scheme" "sed" "sql" "vala" "awk" "C++" "css" "ditaa" "calc" "fortran" "haskell" "js" "ledger" "lilypond" "matlab" "ocaml" "org" "perl" "processing" "r" "sass" "screen" "sh" "sqlite")
+  "List of known languages for org mode src blocks.")
 
+;; org capture
+(defun gearup-org--setup-org-capture (fallback-file)
+  "Setup org capture."
+  (setq org-default-notes-file fallback-file)
+  (define-key global-map "\C-cc" 'org-capture))
 
 ;; latex math fragments preview
 ;;(setq org-latex-create-formula-image-program 'dvipng)
@@ -310,10 +317,17 @@
                      (target . gearup-ox--confluence-target)
                      (headline . gearup-ox--confluence-headline)
                      (src-block . geraup-ox--confluence-src-block)
-                     (link . gearup-ox--confluence-link))
+                     (link . gearup-ox--confluence-link)
+                     (horizontal-rule . gearup-ox--confluence-horizontal-rule))
   :menu-entry '(?w "Wiki"
                    ((?C "As confluence wiki buffer" gearup-ox--export-as-confluence-wiki)
                     (?c "As confluence wiki file" gearup-ox--export-to-confluence-wiki))))
+
+(defun gearup-ox--confluence-horizontal-rule (_horizontal-rule _contents _info)
+  "Transcode HORIZONTAL-RULE element into Confluence wiki markdown format.
+CONTENTS is the horizontal rule contents.  INFO is a plist used
+as a communication channel."
+  "----")
 
 (defun geraup-ox--confluence-src-block (src-block contents info)
   ;; FIXME: provide a user-controlled variable for theme

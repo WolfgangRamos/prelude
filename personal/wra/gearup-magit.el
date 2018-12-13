@@ -78,5 +78,33 @@
       (append prelude-tips
               '("Hit <C-c C-d> in magit commit to show diff.")))
 
+(defun gearup-magit-generate-patch-dwim (range paths)
+  (interactive
+   (let* ((commit-hash (magit-commit-at-point))
+          (range (read-string "Range: " (concat commit-hash "^.." commit-hash)))
+          (paths (read-string "Included files/paths: " "source/vs2010/projects/FlsControlsForms/VisiTourClient/EmbeddedLayouts/LayoutControlDefinition.xml")))
+     (list range paths)))
+  (let ((paths-present (and (stringp paths) (not (string-empty-p paths))))
+        (buffername (concat "*Patchfile " range "*")))
+    (when (and (stringp range) (not (string-empty-p range)))
+      (if paths-present
+          (call-process "git" nil buffername nil
+                        "diff"
+                        "--unified=5"
+                        "--binary"
+                        range
+                        "--"
+                        paths)
+          (call-process "git" nil buffername nil
+                        "diff"
+                        "--unified=5"
+                        "--binary"
+                        range))
+      (when (get-buffer buffername) (switch-to-buffer-other-window buffername)))))
+
+(defun gearup-magit--status-register-keybindings ()
+  (define-key magit-status-mode-map (kbd "C-c f p") 'gearup-magit-generate-patch-dwim))
+(add-hook 'magit-status-mode-hook 'gearup-magit--status-register-keybindings)
+
 (provide 'gearup-magit)
 ;;; gearup-magit.el ends here

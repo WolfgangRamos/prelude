@@ -1,3 +1,5 @@
+(require 's)
+
 (setq fls-localizer-db-username nil
       fls-localizer-db-password nil)
 
@@ -57,5 +59,15 @@ Tries to read password from cache. If cache is empty read it from mini buffer."
 (defun fls--finish-localizer-sql-process (process)
   "Finish sql porcess."
   (process-send-string "EXIT"))
-  
+
+(defun fls-projecttool-create-project-title (customer-id cr-id cr-title)
+  "Create a title for a project tool project according to
+developer manual guidelines."
+  (interactive "sCustomer Abbreviation: \nsCR 5 digit ID: \nsCR title abbreviated:")
+  (let ((title (concat (s-trim customer-id) (s-trim cr-id) " " (s-trim cr-title))))    
+    (with-temp-buffer
+      (insert title)
+      (clipboard-kill-ring-save (point-min) (point-max)))
+    (message "\"%s\" has been copied to the clipboard. Remember to link CRM issue to project tool project." title)))
+
 (provide 'gearup-fls)

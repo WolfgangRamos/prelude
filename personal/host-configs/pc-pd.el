@@ -215,5 +215,12 @@ If FORWARD is ntn-nil start search from current point position. If CASE is not-n
 
 
 
-(locate-file "mspaint.exe" exec-path)
+(gearup-org--setup-org-capture "C:/Users/Wolfgang.Ramos/visitour/found_bugs/found-bugs.org")
+
+(setq org-capture-templates
+      '(("c" "Client" entry (file+headline "~/visitour/found_bugs/found-bugs.org" "Client")
+         "** INCOMPLETE %?\n   :LOGBOOK:\n   - State \"INCOMPLETE\"       from              %U\n   :END:" :prepend t :empty-lines 1)
+        ("s" "Server" entry (file+headline "~/visitour/found_bugs/found-bugs.org" "Server")
+         "** INCOMPLETE %?\n   :LOGBOOK:\n   - State \"INCOMPLETE\"       from              %U\n   :END:" :prepend t :empty-lines 1)))
+
 (message "Loaded host config for PC-PD.")

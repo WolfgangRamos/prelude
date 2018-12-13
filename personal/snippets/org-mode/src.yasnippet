@@ -3,6 +3,10 @@
 # key: src
 # expand-env: ((yas-wrap-around-region t))
 # --
-#+begin_src ${1:language}
+#+CAPTION: ${9:Title}
+#+BEGIN_SRC ${1:$$(yas-choose-value gearup-org-src-known-languages)} :eval ${2:$$(yas-choose-value '("no" "query" "no-export" "query-export"))} :exports ${3:$$(yas-choose-value '("code" "results" "both" "none"))} :cache ${4:$$(yas-choose-value '("yes" "no"))'}
 $0
-#+end_src
+#+END_SRC
+#+CAPTION: $9
+#+RESULTS:
+{placeholder}
