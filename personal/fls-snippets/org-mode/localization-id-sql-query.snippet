@@ -1,0 +1,24 @@
+# contributor: Wolfgang Ramos
+# name: fls localization id sql query
+# key: entry
+# group: fls
+# condition: t
+# type: snippet
+# --
+#+CAPTION: SQL query for new or modified localization IDs
+#+BEGIN_SRC sql :exports both :cache yes :wrap :engine oracle :dbhost vm-oracle-utf :dbuser $1 :dbport 1521 :dbpassword $2 :database orcl.serverfls.com
+select k.sectionkey as id, k.logicalkey, l.language as language, t.text
+from keys k
+inner join texte t
+on k.logicalkey = t.logicalkey
+inner join LANGUAGES l
+on t.lang_nr = l.nr
+where Regexp_like (l.language, '^(German|English)$') and
+Regexp_like (k.sectionkey, '^($0)$')
+Order by id, language;
+#+END_SRC
+#+CAPTION: List of new or modified localization IDs
+#+RESULTS:
+#+BEGIN_RESULTS
+{placeholder}
+#+END_RESULTS
