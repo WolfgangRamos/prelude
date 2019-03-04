@@ -65,6 +65,8 @@
   "Disable auto-fill mode in commit message buffers."
   (remove-hook 'git-commit-setup-hook 'git-commit-turn-on-auto-fill))
 
+(magit-define-popup-switch 'magit-rebase-popup ?n "No Fast-Forward" "--no-ff")
+
 (gearup-magit--commit-disable-automatic-diff)
 (gearup-magit--disable-vc-for-git-repos)
 (geraup-magit--revision-buffer-hide-additional-refs)
@@ -78,14 +80,31 @@
       (append prelude-tips
               '("Hit <C-c C-d> in magit commit to show diff.")))
 
-(defun gearup-magit-generate-patch-dwim (range paths)
+(defun gearup-magit-generate-patch-dwim (range paths &optional filename)
   (interactive
-   (let* ((commit-hash (magit-commit-at-point))
-          (range (read-string "Range: " (concat commit-hash "^.." commit-hash)))
-          (paths (read-string "Included files/paths: " "source/vs2010/projects/FlsControlsForms/VisiTourClient/EmbeddedLayouts/LayoutControlDefinition.xml")))
-     (list range paths)))
-  (let ((paths-present (and (stringp paths) (not (string-empty-p paths))))
-        (buffername (concat "*Patchfile " range "*")))
+   (let* ((repo-root-dir default-directory)
+          (commit-range-end (if (region-active-p)
+                                  (save-excursion
+                                    (goto-char (region-beginning))
+                                    (magit-commit-at-point))
+                                  (magit-commit-at-point)))
+          (commit-range-start (if (region-active-p)
+                                (save-excursion
+                                  (goto-char (region-end))
+                                  (magit-commit-at-point))
+                              nil))
+          (ticket-id (gearup-magit--get-ticket-id-from-commit commit-range-end))
+          (range (read-string "Range: " (format "%s^..%s" (or commit-range-start commit-range-end) commit-range-end)))
+          (preselected-file (if (file-exists-p "DefaultEntities.xml")
+                                "DefaultEntities.xml"
+                              "source/vs2010/projects/FlsControlsForms/VisiTourClient/EmbeddedLayouts/LayoutControlDefinition.xml"))
+          (paths (helm-comp-read "Files to include: " (split-string (shell-command-to-string "git ls-files") "\n" t) :marked-candidates t :initial-input preselected-file))
+          (filename (or (and ticket-id (format "%s%s.patch" repo-root-dir ticket-id))
+                        (helm-read-file-name "Save patch to: " :initial-input repo-root-dir))))
+     (list range paths filename)))
+  (let* ((paths-present (and (listp paths) (not (null paths))))
+         
+         (buffername (concat "*Patchfile " range "*")))
     (when (and (stringp range) (not (string-empty-p range)))
       (if paths-present
           (call-process "git" nil buffername nil
@@ -94,13 +113,25 @@
                         "--binary"
                         range
                         "--"
-                        paths)
-          (call-process "git" nil buffername nil
-                        "diff"
-                        "--unified=5"
-                        "--binary"
-                        range))
-      (when (get-buffer buffername) (switch-to-buffer-other-window buffername)))))
+                        (mapconcat 'identity paths " "))
+        (call-process "git" nil buffername nil
+                      "diff"
+                      "--unified=5"
+                      "--binary"
+                      range))
+      (when (get-buffer buffername)
+        (switch-to-buffer-other-window buffername)
+        (when (stringp filename)
+          (write-file filename))))))
+
+(defun gearup-magit--get-ticket-id-from-commit (commit-hash)
+  (let* ((commit-msg (shell-command-to-string (format "git --no-pager log -1 --format=format:'%%B' %s" commit-hash)))
+         (ticket-id-start (and (stringp commit-msg)
+                               (string-match "ANF-[0-9]\\{5\\}-[0-9A-Z]\\{6\\}" commit-msg)))
+         (ticket-id-length 16))
+    (if ticket-id-start
+        (substring commit-msg ticket-id-start (+ ticket-id-start ticket-id-length))
+      nil)))
 
 (defun gearup-magit--status-register-keybindings ()
   (define-key magit-status-mode-map (kbd "C-c f p") 'gearup-magit-generate-patch-dwim))

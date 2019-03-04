@@ -30,5 +30,8 @@ clear the buffers undo-tree before saving the file."
 (push "Hit <f> in undo-tree-visualizer to select next branch." prelude-tips)
 (push "Hit <b> in undo-tree-visualizer to select previous branch." prelude-tips)
 
+;; undo tree appears to cause overflows
+(global-undo-tree-mode -1)
+
 (provide 'gearup-undo-tree)
 ;;; gearup-undo-tree.el ends here

@@ -6,3 +6,9 @@
 	path = personal/modules/foreign/dired-plus
 	url = https://github.com/emacsmirror/dired-plus.git
 	ignore = untracked
+[submodule "personal/modules/sqlparser"]
+	path = personal/modules/sqlparser
+	url = https://github.com/WolfgangRamos/sqlparser.git
+[submodule "personal/modules/fls"]
+	path = personal/modules/fls
+	url = http://172.16.20.43/wolfgang.ramos/fls.el.git

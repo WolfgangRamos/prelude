@@ -175,8 +175,8 @@
   "List of known languages for org mode src blocks.")
 
 ;; org capture
-(defun gearup-org--setup-org-capture (fallback-file)
-  "Setup org capture."
+(defun gearup-org--set-capture-fallback-file (fallback-file)
+  "Set org capture fallback destination file."
   (setq org-default-notes-file fallback-file)
   (define-key global-map "\C-cc" 'org-capture))
 

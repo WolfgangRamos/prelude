@@ -8,9 +8,11 @@
 
 (defun gearup-org--get-default-attachments-directory ()
   "Create default attachment directory for current org buffer."
-  (assert (buffer-file-name))
-  (concat (file-name-sans-extension (buffer-file-name))
-          "-attachments"))
+  (let ((buffer-file-name (buffer-file-name))
+        (org-capture-mode-active (local-variable-p 'org-capture-mode)))
+    (cond
+     (org-capture-mode-active (gearup-org--get-temporary-directory))
+     (buffer-file-name (concat (file-name-sans-extension buffer-file-name) "-attachments")))))
 
 (custom-set-variables
  '(org-attach-screenshot-dirfunction
@@ -41,6 +43,15 @@
 (define-key org-mode-map (kbd "C-c b") 'gearup-org-insert-image-from-clipboard)
 
 (push "Hit <C-c b> in org-mode to insert a screenshot from the clipboard." prelude-tips)
+
+(defvar gearup-org--screenshots-in-org-capture-buffer nil
+  "File names of image files inserted into org-caputre buffers.")
+
+(defun gearup-org--get-temporary-directory ()
+  "Get temp directory."
+  (if (eq system-type 'windows-nt)
+      (getenv "TEMP")
+    ""))
 
 (provide 'gearup-org-attach-screenshot)
 ;;; gearup-org-attach-screenshot.el ends here

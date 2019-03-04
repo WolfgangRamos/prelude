@@ -6,6 +6,9 @@
 ;; add git svn fucntionality to magit
 (add-hook 'magit-mode-hook 'magit-svn-mode)
 
+(require 'gearup-fls)
+(require 'fls-localization)
+
 ;; functions to jump to xml tags
 (defun gearup-get-xml-node-position (tag &optional attributes start)
   "Find xml node by TAG name and ATTRIBUTES.
@@ -108,18 +111,25 @@ Returns t if all elements of SUBSET are also elements of SET."
 
 (defun fls-current-form-name ()
   "Return name of the form point is cerrently in.
-Signal an error if point is not inside a form tag."
+Signal an error if point is not inside a form or layout tag."
   (interactive)
-  (if (and
-       (save-excursion
-         (move-beginning-of-line nil)
-         (re-search-forward "</Form>" nil t))
-       (save-excursion
-         (move-end-of-line nil)
-         (re-search-backward "<Form[[:space:]]+Name=\"\\([^\"]+\\)\"" nil t)))
+  (if (or (and
+           (save-excursion
+             (move-beginning-of-line nil)
+             (re-search-forward "</Form>" nil t))
+           (save-excursion
+             (move-end-of-line nil)
+             (re-search-backward "<Form[[:space:]]+Name=\"\\([^\"]+\\)\"" nil t)))
+          (and
+           (save-excursion
+             (move-beginning-of-line nil)
+             (re-search-forward "</Layout>" nil t))
+           (save-excursion
+             (move-end-of-line nil)
+             (re-search-backward "<Layout.+?UsedbyName=\"\\([^\"]+\\)\"" nil t))))
       (match-string-no-properties 1)
     ;; else
-    (error "Could not find enclosing <Form> tag")))
+    (error "Could not find enclosing <Form> or <Layout> tag")))
 
 (defun fls-find-layout-node (&optional form)
   "Move point to layout node of FORM."
@@ -132,15 +142,40 @@ Signal an error if point is not inside a form tag."
         (setq found t)))
     (if layout-position
         (progn
+          (push-mark)
           (goto-char layout-position)
-          (move-beginning-of-line nil))
+          (crux-move-beginning-of-line nil))
       (error "Could not find layout node for form %s" form))))
+
+(defun fls-find-form-node (form)
+  "Move point to <Form> node of FORM."
+  (let ((form-regex (concat "^[[:blank:]]*<Form.*?Name=\"" form "\""))
+        form-node-start)
+    (save-excursion
+      (goto-char (point-min))
+      (setq form-node-start (re-search-forward form-regex nil t)))
+    (if (not form-node-start)
+        (error "Could not find layout node for form %s" form)
+      (push-mark)
+      (goto-char form-node-start)
+      (crux-move-beginning-of-line nil))))
 
 (defun fls-goto-layout-node (prefix)
   "Move point to form's layout tag.
-  FORM is the name of the form. If called with a prefix argument read form name from mini buffer. Otherwise use the form point is in (if any)."
+
+If called with a prefix argument read form name from mini buffer. Otherwise use the form point is in (if any)."
   (interactive "p")
   (fls-find-layout-node
+   (or
+    (and (> prefix 1) (read-string "Form name: "))
+    (fls-current-form-name))))
+
+(defun fls-goto-form-node (prefix)
+  "Move point to form's node.
+
+If called with a prefix argument read form name from mini buffer. Otherwise use the form point is in (if any)."
+  (interactive "p")
+  (fls-find-form-node
    (or
     (and (> prefix 1) (read-string "Form name: "))
     (fls-current-form-name))))
@@ -178,7 +213,11 @@ If FORWARD is ntn-nil start search from current point position. If CASE is not-n
   (interactive)
   nil)
 
+(require 'nxml-mode)
+(define-key nxml-mode-map (kbd "C-c f l") 'fls-goto-layout-node)
+(define-key nxml-mode-map (kbd "C-c f f") 'fls-goto-form-node)
 
+(global-set-key (kbd "C-c C-k") 'crux-kill-whole-line)
 ;;(require 'gearup-omnisharp)
 (gearup-omnisharp--setup-omnisharp-completion (expand-file-name "omnisharp-server/v1.26.3/OmniSharp.exe" prelude-personal-dir))
 
@@ -215,12 +254,13 @@ If FORWARD is ntn-nil start search from current point position. If CASE is not-n
 
 
 
-(gearup-org--setup-org-capture "C:/Users/Wolfgang.Ramos/visitour/found_bugs/found-bugs.org")
+(gearup-org--set-capture-fallback-file "C:/Users/Wolfgang.Ramos/visitour/found_bugs/found-bugs.org")
 
 (setq org-capture-templates
       '(("c" "Client" entry (file+headline "~/visitour/found_bugs/found-bugs.org" "Client")
          "** INCOMPLETE %?\n   :LOGBOOK:\n   - State \"INCOMPLETE\"       from              %U\n   :END:" :prepend t :empty-lines 1)
         ("s" "Server" entry (file+headline "~/visitour/found_bugs/found-bugs.org" "Server")
-         "** INCOMPLETE %?\n   :LOGBOOK:\n   - State \"INCOMPLETE\"       from              %U\n   :END:" :prepend t :empty-lines 1)))
+         "** INCOMPLETE %?\n   :LOGBOOK:\n   - State \"INCOMPLETE\"       from              %U\n   :END:" :prepend t :empty-lines 1)
+        ("m" "Mattorunden-Frage" entry (file+headline "~/visitour/mattorunde/questions.org" "Aktuell") "** TODO %?\n   :LOGBOOK:\n   - State \"TODO\"       from              %U\n   :END:" :prepend t :empty-lines 1)))
 
 (message "Loaded host config for PC-PD.")
