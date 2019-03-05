@@ -12,3 +12,6 @@
 [submodule "personal/modules/fls"]
 	path = personal/modules/fls
 	url = http://172.16.20.43/wolfgang.ramos/fls.el.git
+[submodule "personal/modules/codecaser"]
+	path = personal/modules/codecaser
+	url = https://github.com/WolfgangRamos/codecaser-el.git
