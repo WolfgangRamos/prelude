@@ -8,6 +8,9 @@
 
 (require 'gearup-fls)
 (require 'fls-localization)
+(require 'codecaser)
+
+(global-set-key (kbd "C-c f u") 'codecaser-thing-at-point-camel-case-to-snake-case-dwim)
 
 ;; functions to jump to xml tags
 (defun gearup-get-xml-node-position (tag &optional attributes start)
