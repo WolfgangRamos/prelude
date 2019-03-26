@@ -171,7 +171,7 @@
    (restclient . t)
    (shell . t)))
 
-(defvar gearup-org-src-known-languages (list "asymptote" "C" "clojure" "d" "dot" "Lisp" "gnuplot" "java" "latex" "lisp" "lua" "mscgen" "octave" "oz" "plantuml" "python" "ruby" "scheme" "sed" "sql" "vala" "awk" "C++" "css" "ditaa" "calc" "fortran" "haskell" "js" "ledger" "lilypond" "matlab" "ocaml" "org" "perl" "processing" "r" "sass" "screen" "sh" "sqlite")
+(defvar gearup-org-src-known-languages (list "asymptote" "C" "clojure" "d" "dot" "Lisp" "gnuplot" "java" "latex" "lisp" "lua" "mscgen" "octave" "oz" "plantuml" "python" "ruby" "scheme" "sed" "sql" "vala" "awk" "C++" "css" "ditaa" "calc" "fortran" "haskell" "js" "ledger" "lilypond" "matlab" "ocaml" "org" "perl" "processing" "r" "sass" "screen" "sh" "sqlite" "restclient" "emacs-lisp")
   "List of known languages for org mode src blocks.")
 
 ;; org capture
