@@ -152,8 +152,9 @@ Signal an error if point is not inside a form or layout tag."
 
 (defun fls-find-form-node (form)
   "Move point to <Form> node of FORM."
-  (let ((form-regex (concat "^[[:blank:]]*<Form.*?Name=\"" form "\""))
-        form-node-start)
+  (let* ((case-fold-search t)
+         (form-regex (concat "^[[:blank:]]*<Form.*?Name=\"" form "\""))
+         form-node-start)
     (save-excursion
       (goto-char (point-min))
       (setq form-node-start (re-search-forward form-regex nil t)))
