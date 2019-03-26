@@ -84,16 +84,18 @@
   (interactive
    (let* ((repo-root-dir default-directory)
           (commit-range-end (if (region-active-p)
-                                  (save-excursion
-                                    (goto-char (region-beginning))
-                                    (magit-commit-at-point))
-                                  (magit-commit-at-point)))
-          (commit-range-start (if (region-active-p)
                                 (save-excursion
-                                  (goto-char (region-end))
+                                  (goto-char (region-beginning))
                                   (magit-commit-at-point))
-                              nil))
-          (ticket-id (gearup-magit--get-ticket-id-from-commit commit-range-end))
+                              (magit-commit-at-point)))
+          (commit-range-start (if (region-active-p)
+                                  (save-excursion
+                                    (goto-char (region-end))
+                                    (magit-commit-at-point))
+                                nil))
+          (ticket-id (or
+                      (gearup-magit--get-ticket-id-from-commit commit-range-end)
+                      (gearup-magit--get-ticket-id-from-branch-name)))
           (range (read-string "Range: " (format "%s^..%s" (or commit-range-start commit-range-end) commit-range-end)))
           (preselected-file (if (file-exists-p "DefaultEntities.xml")
                                 "DefaultEntities.xml"
@@ -103,7 +105,7 @@
                         (helm-read-file-name "Save patch to: " :initial-input repo-root-dir))))
      (list range paths filename)))
   (let* ((paths-present (and (listp paths) (not (null paths))))
-         
+
          (buffername (concat "*Patchfile " range "*")))
     (when (and (stringp range) (not (string-empty-p range)))
       (if paths-present
@@ -126,11 +128,18 @@
 
 (defun gearup-magit--get-ticket-id-from-commit (commit-hash)
   (let* ((commit-msg (shell-command-to-string (format "git --no-pager log -1 --format=format:'%%B' %s" commit-hash)))
-         (ticket-id-start (and (stringp commit-msg)
-                               (string-match "ANF-[0-9]\\{5\\}-[0-9A-Z]\\{6\\}" commit-msg)))
-         (ticket-id-length 16))
-    (if ticket-id-start
-        (substring commit-msg ticket-id-start (+ ticket-id-start ticket-id-length))
+         (commit-msg-head-line (if (stringp commit-msg)
+                                   (car (split-string commit-msg "[\r\n]"))
+                                 nil)))
+    (if (and (stringp commit-msg-head-line)
+             (string-match "^[\t ]*\(ANF-[0-9]\\{5\\}-[0-9A-Z]\\{6\\}\)" commit-msg-head-line))
+        (match-string 1)
+      nil)))
+
+(defun gearup-magit--get-ticket-id-from-branch-name ()
+  (let ((branch-name (shell-command-to-string "git rev-parse --abbrev-ref HEAD")))
+    (if (string-match "^ANF-[0-9]\\{5\\}-[0-9A-Z]\\{6\\}" branch-name)
+        (match-string 0 branch-name)
       nil)))
 
 (defun gearup-magit--status-register-keybindings ()
