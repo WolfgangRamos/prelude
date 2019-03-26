@@ -15,3 +15,6 @@
 [submodule "personal/modules/codecaser"]
 	path = personal/modules/codecaser
 	url = https://github.com/WolfgangRamos/codecaser-el.git
+[submodule "personal/modules/dsvn"]
+	path = personal/modules/dsvn
+	url = https://github.com/emacsmirror/dsvn.git
