@@ -18,3 +18,6 @@
 [submodule "personal/modules/dsvn"]
 	path = personal/modules/dsvn
 	url = https://github.com/emacsmirror/dsvn.git
+[submodule "personal/modules/ob-charp"]
+	path = personal/modules/ob-charp
+	url = https://github.com/thomas-villagers/ob-csharp.git
