@@ -10,6 +10,8 @@
 (require 'fls-localization)
 (require 'codecaser)
 
+(custom-set-variables '(epg-gpg-program "c:/msys64/usr/bin/gpg.exe"))
+
 (global-set-key (kbd "C-c f u") 'codecaser-thing-at-point-camel-case-to-snake-case-dwim)
 
 ;; functions to jump to xml tags
@@ -266,5 +268,12 @@ If FORWARD is ntn-nil start search from current point position. If CASE is not-n
         ("s" "Server" entry (file+headline "~/visitour/found_bugs/found-bugs.org" "Server")
          "** INCOMPLETE %?\n   :LOGBOOK:\n   - State \"INCOMPLETE\"       from              %U\n   :END:" :prepend t :empty-lines 1)
         ("m" "Mattorunden-Frage" entry (file+headline "~/visitour/mattorunde/questions.org" "Aktuell") "** TODO %?\n   :LOGBOOK:\n   - State \"TODO\"       from              %U\n   :END:" :prepend t :empty-lines 1)))
+
+(defun gearup-fls-diff-with-beyond-compare (base modified)
+  (let ((title-modified "/title2=Modified")
+        (title-base "/title1=Base"))
+    (call-process "BComp.exe" nil nil nil base modified title-base title-modified)))
+
+(setq gearup-svn-diff-function 'gearup-fls-diff-with-beyond-compare)
 
 (message "Loaded host config for PC-PD.")

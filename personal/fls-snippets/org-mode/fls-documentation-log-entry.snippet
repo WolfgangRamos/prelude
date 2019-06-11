@@ -1,5 +1,5 @@
 # contributor: Wolfgang Ramos
-# name: fls cr/bug documentation
+# name: fls ticket documentation
 # key: entry
 # group: fls
 # condition: t
@@ -7,7 +7,7 @@
 # type: snippet
 # --
 #+TITLE: ${1:`(file-name-sans-extension (file-name-nondirectory (buffer-file-name)))`} | ${7:Titel}
-#+OPTIONS: toc:nil num:nil ^:nil H:5
+#+OPTIONS: toc:nil num:nil ^:nil H:5 title:nil
 #+BIND: org-ascii-verbatim-format "%s"
 #+BIND: org-ascii-caption-above t
 #+BIND: org-ascii-text-width 72
@@ -16,13 +16,13 @@
 
 $1 | $7
 
-* Beschreibung*
+* TODO Beschreibung*
   :PROPERTIES:
   :CUSTOM_ID: description
   :VISIBILITY: folded
   :END:
 
-
+$0
 
 *** Umsetzung*
 
@@ -56,7 +56,7 @@ $1 | $7
   :VISIBILITY: folded
   :END:
 
-  See use cases under [[#use-cases]].
+See [[#description][Beschreibung]] and use cases under [[#use-cases][Use Cases (Benutzerhandlungen)]].
 
 * Localizer Keys
   :PROPERTIES:
@@ -70,7 +70,7 @@ $1 | $7
   :VISIBILITY: folded
   :END:
 
-See use cases under [[#use-cases]].
+See [[#description][Beschreibung]] use cases under [[#use-cases][Use Cases (Benutzerhandlungen)]].
 
 --------------------------------------------------------------------------------
 
@@ -86,8 +86,8 @@ See use cases under [[#use-cases]].
    :CUSTOM_ID: use-cases
    :END:
 
-$0
-
+  See also [[#description][Beschreibung]].
+  
 * Implementation Details :noexport:
   :PROPERTIES:
   :CUSTOM_ID: implementation-details

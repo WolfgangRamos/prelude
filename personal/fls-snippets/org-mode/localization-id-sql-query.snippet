@@ -6,7 +6,7 @@
 # type: snippet
 # --
 #+CAPTION: SQL query for new or modified localization IDs
-#+BEGIN_SRC sql :exports both :cache yes :wrap :engine oracle :dbhost vm-oracle-utf :dbuser $1 :dbport 1521 :dbpassword $2 :database orcl.serverfls.com
+#+BEGIN_SRC sql :exports both :cache yes :wrap :engine oracle :dbhost vm-oracle-utf8 :dbuser $1 :dbport 1521 :dbpassword $2 :database orcl.serverfls.com
 select k.sectionkey as id, k.logicalkey, l.language as language, t.text
 from keys k
 inner join texte t

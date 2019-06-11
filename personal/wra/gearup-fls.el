@@ -77,7 +77,7 @@ developer manual guidelines."
 (defun fls-show-control-size-recommendations ()
   ""
   (interactive)
-  (let ((msg-string (mapconcat (lambda (name-size-pair) (format "%s: %d" (car name-size-pair) (cdr name-size-pair))) fls-control-size-recommendations "\n")))
+  (let ((msg-string (mapconcat (lambda (name-size-pair) (format "%s: %d" (car name-size-pair) (cadr name-size-pair))) fls-control-size-recommendations "\n")))
     (message msg-string)))
 
 (provide 'gearup-fls)

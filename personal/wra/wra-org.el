@@ -18,6 +18,7 @@
 (define-key org-mode-map (kbd "C-,") nil)
 (global-set-key (kbd "C-c b") nil)
 
+(setq org-log-into-drawer t)
 
 (setq org-image-actual-width nil)
 
@@ -164,14 +165,17 @@
 (add-hook 'org-mode-hook 'gearup-org-mode-free-user-keybindings)
 
 ;; enable evaluation of code blocks for specific languages
+(require 'ob-csharp)
+
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((emacs-lisp . t)
    (sql . t)
    (restclient . t)
-   (shell . t)))
+   (shell . t)
+   (csharp . t)))
 
-(defvar gearup-org-src-known-languages (list "asymptote" "C" "clojure" "d" "dot" "Lisp" "gnuplot" "java" "latex" "lisp" "lua" "mscgen" "octave" "oz" "plantuml" "python" "ruby" "scheme" "sed" "sql" "vala" "awk" "C++" "css" "ditaa" "calc" "fortran" "haskell" "js" "ledger" "lilypond" "matlab" "ocaml" "org" "perl" "processing" "r" "sass" "screen" "sh" "sqlite" "restclient" "emacs-lisp")
+(defvar gearup-org-src-known-languages (list "asymptote" "C" "clojure" "d" "dot" "Lisp" "gnuplot" "java" "latex" "lisp" "lua" "mscgen" "octave" "oz" "plantuml" "python" "ruby" "scheme" "sed" "sql" "vala" "awk" "C++" "csharp" "css" "ditaa" "calc" "fortran" "haskell" "js" "ledger" "lilypond" "matlab" "ocaml" "org" "perl" "processing" "r" "sass" "screen" "sh" "sqlite" "restclient" "emacs-lisp")
   "List of known languages for org mode src blocks.")
 
 ;; org capture
@@ -303,8 +307,8 @@
 
 ;;; Playground
 (prelude-require-package 'org-mime)
-;;(require 'org-mime)
-;;(custom-set-variables '(epg-gpg-program "c:/Program Files (x86)/GnuPG/bin/gpg.exe"))
+(require 'org-mime)
+;(custom-set-variables '(epg-gpg-program "c:/Program Files (x86)/GnuPG/bin/gpg.exe"))
 
 
 ;; export to confluence
@@ -318,10 +322,27 @@
                      (headline . gearup-ox--confluence-headline)
                      (src-block . geraup-ox--confluence-src-block)
                      (link . gearup-ox--confluence-link)
-                     (horizontal-rule . gearup-ox--confluence-horizontal-rule))
+                     (horizontal-rule . gearup-ox--confluence-horizontal-rule)
+                     (code . gearup-ox--confluence-code)
+                     (verbatim . gearup-ox--confluence-verbatim))
   :menu-entry '(?w "Wiki"
                    ((?C "As confluence wiki buffer" gearup-ox--export-as-confluence-wiki)
                     (?c "As confluence wiki file" gearup-ox--export-to-confluence-wiki))))
+
+(defvar gearup-ox-confluence-char-replace-alist
+  '(("{" . "\\{")
+    ("}" . "\\}"))
+  "Alist of characters to be converted for confluence markup export.")
+
+(defun gearup-ox--confluence-escape-reserved-chars (text)
+  (dolist (pair gearup-ox-confluence-char-replace-alist text)
+    (setq text (replace-regexp-in-string (car pair) (cdr pair) text t t))))
+
+(defun gearup-ox--confluence-code (code contents info)
+  (format "\{\{%s\}\}" (gearup-ox--confluence-escape-reserved-chars (org-element-property :value code))))
+
+(defun gearup-ox--confluence-verbatim (verbatim contents info)
+  (format "\{\{%s\}\}" (gearup-ox--confluence-escape-reserved-chars (org-element-property :value verbatim))))
 
 (defun gearup-ox--confluence-horizontal-rule (_horizontal-rule _contents _info)
   "Transcode HORIZONTAL-RULE element into Confluence wiki markdown format.
@@ -461,10 +482,22 @@ than treating it as reflowable whitespace."
 (org-export-define-derived-backend 'ascii-reduced 'ascii
   :translate-alist '((italic . gearup-ox--ascii-reduced-no-formatting)
                      (bold . gearup-ox--ascii-reduced-no-formatting)
+                     (link . gearup-ox--ascii-reduced-link)
                      (strike-through . gearup-ox--ascii-reduced-no-formatting))
   :menu-entry '(?t 1
                    ((?R "As ASCII buffer with reduced markup" gearup-ox--export-as-ascii-reduced)
                     (?r "As ASCII file with reduced markup" gearup-ox--export-to-ascii-reduced))))
+
+(defun gearup-ox--ascii-reduced-link (link desc info)
+  "Export links."
+  (let ((type (org-element-property :type link))
+        (raw-link (org-element-property :raw-link link))
+        (path (org-element-property :path link)))
+    (cond
+     ((string= type "file")
+      (format "See file in attached notes: `%s'" (file-name-nondirectory path)))
+     (t
+      ""))))
 
 (defun gearup-ox--ascii-reduced-no-formatting (_italic contents _info)
   "Return CONTENTS without adding formatting."
