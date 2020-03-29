@@ -1,0 +1,18 @@
+# contributor: Wolfgang Ramos
+# name: fls git log query
+# key: git
+# group: fls
+# condition: t
+# expand-env: ((yas-indent-line 'fixed))
+# type: snippet
+# --
+#+CAPTION: ${1:$$(yas-choose-value '("Client" "Server"))} Repo Git Log Query
+#+BEGIN_SRC sh :exports both :cache no :results output verbatim code replace
+git -C "${2:$$(yas-choose-value '("C:/Users/Wolfgang.Ramos/visitour/client3" "Z:/server_dev/VTServer_Public"))}" --no-pager log --reverse --author="wolfgang.ramos" --grep="${3:`(file-name-sans-extension (file-name-nondirectory (buffer-file-name)))`}" --format=format:'%cI:%n%B'
+#+END_SRC
+#+CAPTION: $1 Repo Log Entries for $3
+#+RESULTS:
+#+BEGIN_SRC
+{placeholder}
+#+END_SRC
+$0

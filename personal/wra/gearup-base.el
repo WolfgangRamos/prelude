@@ -16,6 +16,12 @@
 (custom-set-variables '(grep-command "grep --with-filename --line-number --recursive --ignore-case --regexp <REGEX> <FILES>"))
 (global-set-key (kbd "C-,") 'just-one-space)
 
+(defconst smerge-begin-re "^<<<<<<< \\{0,1\\}\\(.*\\)\r\\{0,1\\}\n")
+(defconst smerge-end-re "^>>>>>>> \\{0,1\\}\\(.*\\)\r\\{0,1\\}\n")
+(defconst smerge-base-re "^||||||| \\{0,1\\}\\(.*\\)\r\\{0,1\\}\n")
+(defconst smerge-other-re "^=======\r\\{0,1\\}\n")
+
+
 (defvar gearup-foreign-modules-dir (expand-file-name "modules/foreign" prelude-personal-dir)
   "Directory for gearup foreign modules.")
 

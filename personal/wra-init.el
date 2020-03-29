@@ -17,6 +17,7 @@
 (require 'gearup-hippie-expand)
 (require 'gearup-ace-window)
 (require 'gearup-avy)
+(require 'gearup-sql)
 (require 'wra-helm)
 (require 'wra-image)
 ;;(require 'wra-ispell)
@@ -50,12 +51,12 @@
 (require 'gearup-undo-tree)
 (require 'gearup-projectile)
 (require 'gearup-multiple-cursors)
-;;(require 'gearup-psvn) ;; switched to git svn via magit
 (require 'gearup-magit)
 (require 'gearup-iedit)
 (require 'gearup-gnus)
 (require 'gearup-org-attach-screenshot)
 (require 'gearup-cc-mode)
+(require 'gearup-svn)
 (require 'gearup-host-config) ;; load this last
 
 ;;; wra-init.el ends here

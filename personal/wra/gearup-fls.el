@@ -1,3 +1,5 @@
+(require 's)
+
 (setq fls-localizer-db-username nil
       fls-localizer-db-password nil)
 
@@ -40,9 +42,9 @@ Tries to read username from cache. If cache is empty read it from mini buffer."
   
 Tries to read password from cache. If cache is empty read it from mini buffer."
   (or fls--localizer-db-password
-      (setq fls--localizer-db-password (read-password "Password: ")))
+      (setq fls--localizer-db-password (read-password "Password: "))))
 
-(defun fls--create-localizer-logical-key-query key ()
+(defun fls--create-localizer-logical-key-query (key)
   "Create query string to lookup logical key."
   (concat "SELECT ..."))
   
@@ -52,10 +54,30 @@ Tries to read password from cache. If cache is empty read it from mini buffer."
     (goto-char (point-min))
     (if (re-search-forward "<td>\\([^<]*\\)</td>" nil t)
         (match-string 1)
-      (concat "KEY \"" key "\" NOT FOUND."))
-  
+      (concat "KEY \"" key "\" NOT FOUND."))))
+
 (defun fls--finish-localizer-sql-process (process)
   "Finish sql porcess."
   (process-send-string "EXIT"))
-  
+
+(defun fls-projecttool-create-project-title (customer-id cr-id cr-title)
+  "Create a title for a project tool project according to
+developer manual guidelines."
+  (interactive "sCustomer Abbreviation: \nsCR 5 digit ID: \nsCR title abbreviated:")
+  (let ((title (concat (s-trim customer-id) (s-trim cr-id) " " (s-trim cr-title))))    
+    (with-temp-buffer
+      (insert title)
+      (clipboard-kill-ring-save (point-min) (point-max)))
+    (message "\"%s\" has been copied to the clipboard. Remember to link CRM issue to project tool project." title)))
+
+(defvar fls-control-size-recommendations
+  '(("ID Column" 50) ("Summary Column" 150) ("Date time column or field" 130))
+  "List of <control description> <width> pairs.")
+
+(defun fls-show-control-size-recommendations ()
+  ""
+  (interactive)
+  (let ((msg-string (mapconcat (lambda (name-size-pair) (format "%s: %d" (car name-size-pair) (cadr name-size-pair))) fls-control-size-recommendations "\n")))
+    (message msg-string)))
+
 (provide 'gearup-fls)

@@ -32,10 +32,15 @@
   "Set indentation of child elements."
   (setq nxml-child-indent 2))
 
+(defun gearup-nxml--make-underscore-word-part ()
+  "Make \"_\" a word constituent, i.e. a word character."
+  (modify-syntax-entry ?_ "w" nxml-mode-syntax-table))
+
 (with-eval-after-load 'nxml-mode
   (gearup-nxml--set-child-indent-two-spaces)
   (gearup-nxml--setup-hideshow)
-  (gearup-nxml--disable-auto-validation))
+  (gearup-nxml--disable-auto-validation)
+  (gearup-nxml--make-underscore-word-part))
 
 (setq rng-complete-end-tags-after-< nil)
 
@@ -44,7 +49,6 @@
    ;; disable validation
   (when (> (buffer-size) 80000)
     (turn-off-show-smartparens-mode)
-    (hl-tags-mode 1)
     (flycheck-mode -1)))
 
 (add-hook 'nxml-mode-hook

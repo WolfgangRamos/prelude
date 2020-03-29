@@ -1,0 +1,18 @@
+# contributor: Wolfgang Ramos
+# name: fls visitour web request
+# key: entry
+# group: fls
+# condition: t
+# type: snippet
+# --
+#+CAPTION: $1 Request
+#+BEGIN_SRC restclient :exports both :cache no
+POST :vtserver/VTS/WS/GetNextActivity
+Content-Type: :content_type_text
+Authorization: Basic :basic_authentification_credentials
+
+$0<GetNextActivity><User>1</User><ActivityNr>0</ActivityNr><ProcessInstance></ProcessInstance><ShowNextProcess>true</ShowNextProcess></GetNextActivity>
+#+END_SRC
+#+CAPTION: $1 Response
+#+RESULTS:
+{placeholder}

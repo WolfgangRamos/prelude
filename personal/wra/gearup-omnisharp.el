@@ -20,5 +20,15 @@ PATH must be the path to the omnisharp executable."
         (define-key csharp-mode-map (kbd "TAB") 'company-complete))
     (error "Could not setup omnisharp completion: Omnisharp executable was not found. Path given was %s" path)))
 
+(defun gearup-omnisharp--bind-keys ()
+  "Create keybindings for `omnisharp-mode'."
+  (define-key omnisharp-mode-map (kbd "C-c o f") 'omnisharp-find-usages)
+  (define-key omnisharp-mode-map (kbd "C-c o d") 'omnisharp-go-to-definition)
+  (define-key omnisharp-mode-map (kbd "C-c o i") 'omnisharp-find-implementations)
+  (define-key omnisharp-mode-map (kbd "C-c o r") 'omnisharp-rename))
+
+(with-eval-after-load 'omnisharp
+  (gearup-omnisharp--bind-keys))
+
 (provide 'gearup-omnisharp)
 ;;; gearup-omnisharp.el ends here

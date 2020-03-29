@@ -1,110 +1,112 @@
 # contributor: Wolfgang Ramos
-# name: fls documentation log entry
+# name: fls ticket documentation
 # key: entry
 # group: fls
 # condition: t
 # expand-env: ((yas-indent-line 'fixed))
 # type: snippet
 # --
-#+TITLE: ${9:Titel der Email an Miriam}
-#+STARTUP: showall
-#+OPTIONS: toc:nil num:nil ^:nil H:5
+#+TITLE: ${1:`(file-name-sans-extension (file-name-nondirectory (buffer-file-name)))`} | ${7:Titel}
+#+OPTIONS: toc:nil num:nil ^:nil H:5 title:nil
 #+BIND: org-ascii-verbatim-format "%s"
 #+BIND: org-ascii-caption-above t
 #+BIND: org-ascii-text-width 72
 #+PROPERTY: header-args:restclient :var vtserver="http://localhost:89" :var content_type_text="text/xml; charset=utf-8" :var basic_authentification_credentials=(base64-encode-string "FLS:1147")
-#+PROPERTY: header-args:sql :engine mssql :dbhost MSSQL2014 :dbuser $4 :dbport :dbpassword $5 :database DEV_CLIENT_WR
+#+PROPERTY: header-args:sql :engine mssql :dbhost MSSQL2014 :dbuser $5 :dbpassword $6 :database DEV_CLIENT_WR
 
-${1:`(file-name-sans-extension (file-name-nondirectory (buffer-file-name)))`}
+$1 | $7
 
-#+TOC: headlines 3
+* TODO Beschreibung*
+  :PROPERTIES:
+  :CUSTOM_ID: description
+  :VISIBILITY: folded
+  :END:
 
-* DB Queries :noexport:
+$0
 
-#+CAPTION: Query
-#+BEGIN_SRC sql :exports both :cache yes
-Select * from vtsorderreport;
-#+END_SRC
+*** Umsetzung*
 
-#+CAPTION: Result
-#+RESULTS:
+- [ ] Als Standardfunktion$2
+- [ ] Als Modul: $3
+- [ ] Als Anpassung: $4
 
-
-* Web Requests :noexport:
-
-#+CAPTION: Request
-#+BEGIN_SRC restclient :exports both :cache yes
-POST :vtserver/VTS/WS/GetNextActivity
-Content-Type: :content_type_text
-Authorization: Basic :basic_authentification_credentials
-
-<GetNextActivity><User>1</User><ActivityNr>0</ActivityNr><ProcessInstance></ProcessInstance><ShowNextProcess>true</ShowNextProcess></GetNextActivity>
-#+END_SRC
-
-#+CAPTION: Response
-#+RESULTS:
-
-
-* Beschreibung
-
-- Anforderungsnummer: $1
-- [X] Standard
-- [ ] Kundenanpassung: $3
-- Module: $2
-- Fixed in Revision:
+--------------------------------------------------------------------------------
 
 * Links zu Teilfunktionen
+  :PROPERTIES:
+  :VISIBILITY: folded
+  :END:
+
+  <none>
+
+--------------------------------------------------------------------------------
 
 * Technical name and basic details
+  :PROPERTIES:
+  :VISIBILITY: folded
+  :END:
 
-| Technical name |Category|Data type|Value range|Default value|Description (English)|
-|----------------|--------|---------|-----------|-------------|---------------------|
-|                |        |         |           |             |                     |
-
-* Navigationspfad
-
-** Localizer Keys
-:PROPERTIES:
-:CUSTOM_ID: localization-ids
-:END:
-
-#+CAPTION: sql query for localizer DB
-#+BEGIN_SRC sql :exports both :cache yes :engine oracle :dbhost vm-oracle-utf :dbuser $6 :dbport 1521 :dbpassword $7 :database orcl.serverfls.com
-select k.sectionkey as id, l.language as sprache, t.text
-from keys k
-inner join texte t
-on k.logicalkey = t.logicalkey
-inner join LANGUAGES l
-on t.lang_nr = l.nr
-where Regexp_like (l.language, '^(German|English)$') and
-Regexp_like (k.sectionkey, '^(abidances_id|error_id)$')
-Order by id, sprache;
-#+END_SRC
-
-#+CAPTION: List of new or modified localization IDs
-#+RESULTS:
+  | Technical name | Category | Data type | Value range | Default value | Description (English) |
+  |----------------+----------+-----------+-------------+---------------+-----------------------|
+  |                |          |           |             |               |                       |
 
 
-* Technical Documentation / Tested Use Cases
-   :PROPERTIES:
-   :CUSTOM_ID: use-cases
-   :END:
+* Navigationspfad*
+  :PROPERTIES:
+  :VISIBILITY: folded
+  :END:
+
+See [[#description][Beschreibung]] and use cases under [[#use-cases][Use Cases (Benutzerhandlungen)]].
+
+* Localizer Keys
+  :PROPERTIES:
+  :CUSTOM_ID: localization-ids
+  :END:
+
+  <none>
+
+* (Englische) Screenshots
+  :PROPERTIES:
+  :VISIBILITY: folded
+  :END:
+
+See [[#description][Beschreibung]] and use cases under [[#use-cases][Use Cases (Benutzerhandlungen)]].
+
+--------------------------------------------------------------------------------
 
 * Benutzerinfos
 
 ** Feature-Infos
+  :PROPERTIES:
+  :VISIBILITY: folded
+  :END:
 
 ** Benutzerhandlungen
+   :PROPERTIES:
+   :CUSTOM_ID: use-cases
+   :END:
 
-$0
+  See also [[#description][Beschreibung]].
 
-* Implementation Details
+* Implementation Details :noexport:
+  :PROPERTIES:
+  :CUSTOM_ID: implementation-details
+  :END:
 
-#+CAPTION: git log query
-#+BEGIN_SRC sh :exports both :cache no :results output verbatim code replace
-git -C "C:\\Users\Wolfgang.Ramos\\visitour\\client3" --no-pager log --reverse --author="wolfgang.ramos" --grep="$1" --format=format:'%cI:%n%B'
-#+END_SRC
+  <none>
 
-#+CAPTION: git log entries for $1
-#+RESULTS:
+** Example SQL Queries
+   :PROPERTIES:
+   :CUSTOM_ID: example-sql-queries
+   :VISIBILITY: folded
+   :END:
 
+   <none>
+
+** Example Web Requests
+   :PROPERTIES:
+   :CUSTOM_ID: example-web-requests
+   :VISIBILITY: folded
+   :END:
+
+   <none>

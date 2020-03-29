@@ -1,0 +1,17 @@
+# contributor: Wolfgang Ramos
+# name: fls bug or cr
+# key: cr
+# group: fls
+# condition: t
+# type: snippet
+# --
+#+TITLE: ${1:`(file-name-sans-extension (file-name-nondirectory (buffer-file-name)))`}
+
+* Case Details
+
+- Anfragenummer:
+- Type: ${2:$$(yas-choose-value '("bug" "cr"))}
+
+* Beschreibung
+
+$0

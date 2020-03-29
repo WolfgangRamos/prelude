@@ -38,6 +38,9 @@
 (define-key prelude-mode-map [(shift return)] nil) ;; masks org-table-copy-down
 (define-key prelude-mode-map [(meta shift up)] nil)
 (define-key prelude-mode-map [(meta shift down)] nil)
+(define-key prelude-mode-map (kbd "C-c o") nil)
+(define-key prelude-mode-map (kbd "C-c O") 'crux-open-with)
+(define-key prelude-mode-map (kbd "C-c f") nil) ;; unbind helm-recentf
 
 ;; tips
 (push "Hit <C-Backsp> to backward kill line." prelude-tips)
