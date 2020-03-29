@@ -39,7 +39,7 @@ undo the remapping of kill-ring-save to easy-kill while in
 (global-set-key (kbd "C-c m")
                 (defhydra gearup-multiple-cursors-hydra (:foreign-keys nil :body-pre gearup-hydra--before-enter-hydra-state :post gearup-hydra--before-exit-hydra-state)
                   "
-^Line^     ^Unmark^      ^Skip^        ^Misc^          ^Insert^
+^Region^   ^Unmark^      ^Skip^        ^Misc^          ^Insert^
 ^-^-----   ^-^--------   ^-^--------   ^-^----------   ^-^--------
 _j_ next   _k_ lowest    _h_ lowest    _r_ rectangle   _n_ numbers
 _f_ prev   _d_ highest   _g_ highest   _a_ mark all    _c_ chars

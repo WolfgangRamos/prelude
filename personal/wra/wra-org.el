@@ -8,6 +8,7 @@
 (require 'org)
 (require 'yasnippet)
 (require 'cdlatex)
+(prelude-require-package 'org-wc)
 (require 'org-wc) ;; provides function 'org-word-count
 (prelude-require-package 'org-ref)
 (prelude-require-package 'ob-restclient)

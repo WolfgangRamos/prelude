@@ -57,34 +57,48 @@
 
 * C-[single char]
 
-- a :: move-beginning-of-line
-- b :: backward-char
-- c :: mode-specific-command-prefix
-- d :: delete-char
-- e :: move-end-of-line
-- f :: forward-char
-- g :: keyboard-quit
-- h :: help-command
-- i :: = TAB
-- j :: electric-newline-and-maybe-indent
-- k :: kill-line
-- l :: recenter-top-bottom
-- m :: = RET
-- n :: next-line
-- o :: open-line
-- p :: previous-line
-- q :: quoted-insert
-- r :: isearch-backward
-- s :: isearch-forward
-- t :: transpose-chars
-- u :: universal-argument
-- v :: scroll-up-command
-- w :: kill-region
-- x :: Control-X-prefix
-- y :: yank
-- z :: suspend-frame -> replaceable
-- : :: *[none]* -> just-one-space
-
+| Char     | Default Command                   | mode/package         | replacable | Suggested Command              |
+|----------+-----------------------------------+----------------------+------------+--------------------------------|
+| a        | move-beginning-of-line            |                      | no         |                                |
+| b        | backward-char                     |                      | no         |                                |
+| c        | mode-specific-command-prefix      |                      | no         |                                |
+| d        | delete-char                       |                      | no         |                                |
+| e        | move-end-of-line                  |                      | no         |                                |
+| f        | forward-char                      |                      | no         |                                |
+| g        | keyboard-quit                     |                      | no         |                                |
+| h        | help-command                      |                      | no         |                                |
+| i        | TAB                               |                      | no         |                                |
+| j        | electric-newline-and-maybe-indent | electric-indent-mode | no         |                                |
+| k        | kill-line                         |                      | no         |                                |
+| l        | recenter-top-bottom               |                      | yes        |                                |
+| m        | RET                               |                      | no         | newline-and-indent             |
+| n        | next-line                         |                      | no         |                                |
+| o        | open-line                         |                      | yes        |                                |
+| p        | previous-line                     |                      | no         |                                |
+| q        | quoted-insert                     |                      | no         |                                |
+| r        | isearch-backward                  |                      | yes        |                                |
+| s        | isearch-forward                   |                      | no         |                                |
+| t        | transpose-chars                   |                      | yes        |                                |
+| u        | universal-argument                |                      | no         |                                |
+| v        | scroll-up-command                 |                      | no         |                                |
+| w        | kill-region                       |                      | no         |                                |
+| x        | Control-X-prefix                  |                      | no         |                                |
+| y        | yank                              |                      | no         |                                |
+| z        | suspend-frame                     |                      | yes        |                                |
+| .        | [none]                            |                      | yes        |                                |
+| ,        | [none]                            |                      | yes        | new prefix for 2nd user keymap |
+| -        | text-scale-decrease               |                      | yes        |                                |
+| #        | [none]                            |                      | yes        |                                |
+| +        | text-scale-increase               |                      | yes        |                                |
+| <        | [none]                            |                      | yes        |                                |
+| RET      | [none]                            |                      | yes        |                                |
+| TAB      | [none]                            |                      | yes        |                                |
+| PageUp   | scroll-right                      |                      |            |                                |
+| PageDown | scroll-left                       |                      |            |                                |
+| Home     | beginning-of-buffer               |                      | yes        |                                |
+| End      | end-of-buffer                     |                      | yes        |                                |
+| Insert   | [none]                            |                      | yes        |                                |
+| DEL      | [none]                            |                      | yes        | backward-kill-line             |
 
 * List of free C-c bindings
 

@@ -16,12 +16,12 @@ FILES must be a list of strings."
        (gearup--expand-file-names
         '(;;"lisp/org-mode/lisp"
           ;;"lisp/org-mode/contrib/lisp"
+          "lisp/hydra"
           "wra"
-          "modules/foreign/dired-plus"
-          "modules/foreign/bookmark-plus"
+          "modules/viztab"
+          "modules/melpa/package-build"
           "lisp/hl-tags-mode"
           "lisp/essh"
-          "lisp/org-wc"
           "lisp/vimgolf"
           "lisp/x-dict")
         prelude-personal-dir)

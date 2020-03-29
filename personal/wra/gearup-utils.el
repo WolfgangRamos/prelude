@@ -60,26 +60,26 @@ _f_ decrease   _d_ shrink               _s_ shrink
   (interactive)
   (if (= (count-windows) 2)
       (let* ((this-win-buffer (window-buffer))
-         (next-win-buffer (window-buffer (next-window)))
-         (this-win-edges (window-edges (selected-window)))
-         (next-win-edges (window-edges (next-window)))
-         (this-win-2nd (not (and (<= (car this-win-edges)
-                     (car next-win-edges))
-                     (<= (cadr this-win-edges)
-                     (cadr next-win-edges)))))
-         (splitter
-          (if (= (car this-win-edges)
-             (car (window-edges (next-window))))
-          'split-window-horizontally
-        'split-window-vertically)))
-    (delete-other-windows)
-    (let ((first-win (selected-window)))
-      (funcall splitter)
-      (if this-win-2nd (other-window 1))
-      (set-window-buffer (selected-window) this-win-buffer)
-      (set-window-buffer (next-window) next-win-buffer)
-      (select-window first-win)
-      (if this-win-2nd (other-window 1))))))
+             (next-win-buffer (window-buffer (next-window)))
+             (this-win-edges (window-edges (selected-window)))
+             (next-win-edges (window-edges (next-window)))
+             (this-win-2nd (not (and (<= (car this-win-edges)
+                                         (car next-win-edges))
+                                     (<= (cadr this-win-edges)
+                                         (cadr next-win-edges)))))
+             (splitter
+              (if (= (car this-win-edges)
+                     (car (window-edges (next-window))))
+                  'split-window-horizontally
+                'split-window-vertically)))
+        (delete-other-windows)
+        (let ((first-win (selected-window)))
+          (funcall splitter)
+          (if this-win-2nd (other-window 1))
+          (set-window-buffer (selected-window) this-win-buffer)
+          (set-window-buffer (next-window) next-win-buffer)
+          (select-window first-win)
+          (if this-win-2nd (other-window 1))))))
 
 (global-set-key (kbd "C-x |") 'toggle-window-split)
 
@@ -139,7 +139,36 @@ has BOM. This char corresponds to the bit sequence 0xEF 0xBB
       (when (string= bom (string ?\uFEFF))
         t))))
 
+(defface gearup-whitespace-tab-face '((default (:background "yellow2"))) "some doc")
+(defface gearup-whitespace-space-face '((default (:background "unspecified" :foreground "gray74"))) "some doc")
+(defface gearup-whitespace-newline-face '((default (:background "unspecified" :foreground "gray81"))) "some doc")
+
 ;; Whitespace mode configuration
+(defun gearup-aggressive-display-whitespace ()
+  "Display ALL whitespace characters."
+  (interactive)
+  (let ((tab-face-additions (face-remap-add-relative 'whitespace-tab 'gearup-whitespace-tab-face))
+        (space-face-additions (face-remap-add-relative 'whitespace-space 'gearup-whitespace-space-face))
+        (newline-face-additions (face-remap-add-relative 'whitespace-newline 'gearup-whitespace-newline-face)))
+    (setq-local gearup-whitespace-face-additions (list tab-face-additions space-face-additions newline-face-additions))
+    (setq-local whitespace-style '(face tabs spaces newline space-mark tab-mark newline-mark))
+    (setq-local whitespace-display-mappings
+                '((space-mark 32 [183] [46])
+                  (space-mark 160 [164] [95])
+                  (newline-mark 10 [182 10])
+                  (tab-mark 9 [187 9] [92 9] [9655 9])))
+    (whitespace-mode 1)))
+
+(defun gearup-whitespace-restore ()
+  "Restore whitespace highlighting to previous state."
+  (interactive)
+  (whitespace-mode -1)
+  (kill-local-variable 'whitespace-style)
+  (kill-local-variable 'whitespace-display-mappings)
+  (when (local-variable-p 'gearup-whitespace-face-additions)
+    (mapcar 'face-remap-remove-relative gearup-whitespace-face-additions)
+    (kill-local-variable 'gearup-whitespace-face-additions)))
+
 (setq whitespace-display-mappings ;; all numbers are unicode codepoint in decimal. e.g. (insert-char 182 1)
       '((space-mark 32 [183] [46])
         (space-mark 160 [164] [95])

@@ -11,6 +11,7 @@
 (require 'gearup-base)  ;; load this third
 (require 'gearup-hl-tags-mode)
 (require 'gearup-prelude)
+(require 'gearup-zop-to-char)
 (require 'gearup-expand-region)
 (require 'gearup-easy-kill)
 (require 'gearup-hippie-expand)
@@ -21,7 +22,7 @@
 ;;(require 'wra-ispell)
 (require 'wra-essh)
 (require 'wra-ess)
-(require 'wra-dired)
+(require 'gearup-dired)
 (require 'wra-org)
 (require 'wra-yasnippet) ;; must  be loaded before auto complete?
 (require 'wra-auctex)
@@ -34,7 +35,6 @@
 (require 'gearup-flycheck)
 (require 'gearup-smartparens)
 (require 'gearup-ms-windows)
-;; (require 'wra-nameses)
 ;;(require 'wra-sunrise-commander)
 (require 'gearup-re-builder)
 (require 'wra-savehist)
@@ -54,8 +54,8 @@
 (require 'gearup-magit)
 (require 'gearup-iedit)
 (require 'gearup-gnus)
-(require 'gearup-bookmarkp)
 (require 'gearup-org-attach-screenshot)
+(require 'gearup-cc-mode)
 (require 'gearup-host-config) ;; load this last
 
 ;;; wra-init.el ends here
