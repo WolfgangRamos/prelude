@@ -1,11 +1,9 @@
 ;;; prelude-editor.el --- Emacs Prelude: enhanced core editing experience.
 ;;
-;; Copyright © 2011-2018 Bozhidar Batsov
+;; Copyright © 2011-2021 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/prelude
-;; Version: 1.0.0
-;; Keywords: convenience
 
 ;; This file is not part of GNU Emacs.
 
@@ -57,11 +55,6 @@
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
 
-;; autosave the undo-tree history
-(setq undo-tree-history-directory-alist
-      `((".*" . ,temporary-file-directory)))
-(setq undo-tree-auto-save-history t)
-
 ;; revert buffers automatically when underlying files are changed externally
 (global-auto-revert-mode t)
 
@@ -110,10 +103,7 @@
 ;; saveplace remembers your location in a file when saving files
 (setq save-place-file (expand-file-name "saveplace" prelude-savefile-dir))
 ;; activate it for all buffers
-(if (< emacs-major-version 25)
-    (progn (require 'saveplace)
-           (setq-default save-place t))
-  (save-place-mode 1))
+(save-place-mode 1)
 
 ;; savehist keeps track of some history
 (require 'savehist)
@@ -152,34 +142,11 @@
 
 ;; automatically save buffers associated with files on buffer switch
 ;; and on windows switch
-(defun prelude-auto-save-command ()
-  "Save the current buffer if `prelude-auto-save' is not nil."
-  (when (and prelude-auto-save
-             buffer-file-name
-             (buffer-modified-p (current-buffer))
-             (file-writable-p buffer-file-name))
-    (save-buffer)))
-
-(defmacro advise-commands (advice-name commands class &rest body)
-  "Apply advice named ADVICE-NAME to multiple COMMANDS.
-
-The body of the advice is in BODY."
-  `(progn
-     ,@(mapcar (lambda (command)
-                 `(defadvice ,command (,class ,(intern (concat (symbol-name command) "-" advice-name)) activate)
-                    ,@body))
-               commands)))
-
-;; advise all window switching functions
-(advise-commands "auto-save"
-                 (switch-to-buffer other-window windmove-up windmove-down windmove-left windmove-right)
-                 before
-                 (prelude-auto-save-command))
-
-(add-hook 'mouse-leave-buffer-hook 'prelude-auto-save-command)
-
-(when (version<= "24.4" emacs-version)
-  (add-hook 'focus-out-hook 'prelude-auto-save-command))
+(require 'super-save)
+;; add integration with ace-window
+(add-to-list 'super-save-triggers 'ace-window)
+(super-save-mode +1)
+(diminish 'super-save-mode)
 
 (defadvice set-buffer-major-mode (after set-major-mode activate compile)
   "Set buffer major mode according to `auto-mode-alist'."
@@ -255,7 +222,7 @@ The body of the advice is in BODY."
 ;; projectile is a project management mode
 (require 'projectile)
 (setq projectile-cache-file (expand-file-name  "projectile.cache" prelude-savefile-dir))
-(projectile-global-mode t)
+(projectile-mode t)
 
 ;; avy allows us to effectively navigate to visible things
 (require 'avy)
@@ -319,6 +286,16 @@ The body of the advice is in BODY."
   (if (<= (- end beg) prelude-yank-indent-threshold)
       (indent-region beg end nil)))
 
+(defmacro advise-commands (advice-name commands class &rest body)
+  "Apply advice named ADVICE-NAME to multiple COMMANDS.
+
+The body of the advice is in BODY."
+  `(progn
+     ,@(mapcar (lambda (command)
+                 `(defadvice ,command (,class ,(intern (concat (symbol-name command) "-" advice-name)) activate)
+                    ,@body))
+               commands)))
+
 (advise-commands "indent" (yank yank-pop) after
   "If current mode is one of `prelude-yank-indent-modes',
 indent yanked text (with prefix arg don't indent)."
@@ -331,6 +308,7 @@ indent yanked text (with prefix arg don't indent)."
 
 ;; abbrev config
 (add-hook 'text-mode-hook 'abbrev-mode)
+(diminish 'abbrev-mode)
 
 ;; make a shell script executable automatically on save
 (add-hook 'after-save-hook
@@ -377,9 +355,14 @@ indent yanked text (with prefix arg don't indent)."
 (add-hook 'compilation-filter-hook #'prelude-colorize-compilation-buffer)
 
 ;; enable Prelude's keybindings
-(prelude-global-mode t)
+(prelude-mode t)
 
-;; sensible undo
+;; supercharge your undo/redo with undo-tree
+(require 'undo-tree)
+;; autosave the undo-tree history
+(setq undo-tree-history-directory-alist
+      `((".*" . ,temporary-file-directory)))
+(setq undo-tree-auto-save-history t)
 (global-undo-tree-mode)
 (diminish 'undo-tree-mode)
 
@@ -434,6 +417,7 @@ and file 'filename' will be opened and cursor set on line 'linenumber'"
 ;; use settings from .editorconfig file when present
 (require 'editorconfig)
 (editorconfig-mode 1)
+(diminish 'editorconfig-mode)
 
 (provide 'prelude-editor)
 
