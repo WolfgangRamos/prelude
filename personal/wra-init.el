@@ -1,4 +1,4 @@
-;;; wra-init.el --- My Prelude User Init File
+ ;;; wra-init.el --- My Prelude User Init File
 
 ;;; Commentary:
 
@@ -9,7 +9,7 @@
 (load-file (expand-file-name "wra/gearup-set-load-path.el" prelude-personal-dir)) ;; load this first
 (menu-bar-mode t)
 (require 'gearup-utils) ;; load this second
-;(require 'gearup-base)  ;; load this third
+(require 'gearup-base)  ;; load this third
 ;(require 'gearup-hl-tags-mode)
 ;(require 'gearup-prelude)
 ;(require 'gearup-zop-to-char)
@@ -49,11 +49,11 @@
 ;(require 'gearup-misc-prelude-tips)
 ;(require 'gearup-csharp-mode)
 ;(require 'gearup-omnisharp)
-;(require 'gearup-undo-tree)
+(require 'gearup-undo-tree)
 ;(require 'gearup-projectile)
-;(require 'gearup-multiple-cursors)
+(require 'gearup-multiple-cursors)
 ;(require 'gearup-magit)
-;(require 'gearup-iedit)
+(require 'gearup-iedit)
 ;(require 'gearup-gnus)
 ;(require 'gearup-org-attach-screenshot)
 ;(require 'gearup-cc-mode)

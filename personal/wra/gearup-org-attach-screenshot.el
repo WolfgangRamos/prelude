@@ -5,6 +5,7 @@
 ;;; Code:
 (prelude-require-package 'org-attach-screenshot)
 ;;(require 'org-attach-screenshot)
+(setq gearup-tools-dir (expand-file-name "tools/bin" prelude-personal-dir))
 
 (defun gearup-org--get-default-attachments-directory ()
   "Create default attachment directory for current org buffer."

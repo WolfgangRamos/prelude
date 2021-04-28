@@ -83,8 +83,8 @@ Toggles between: “all lower”, “Init Caps”, “ALL CAPS”."
 
 (global-set-key (kbd "M-c") 'gearup-toggle-case)
 
-(defun gearup--enable-fast-kill-ring-cycling ()
-  "Allow for fast kill ring cycling with <C-u C-SPC> (first) <C-SPC> (next)."
+(defun gearup--enable-fast-mark-ring-cycling ()
+  "Allow for fast mark ring cycling with <C-u C-SPC> (first) <C-SPC> (next)."
   (setq set-mark-command-repeat-pop 1))
 
 (defun gearup--set-font-size-12 ()
@@ -132,14 +132,12 @@ Toggles between: “all lower”, “Init Caps”, “ALL CAPS”."
     (getenv "HOME")))
 
 (setq default-directory (wra-try-get-home-dir))
-(setq gearup-tools-dir (expand-file-name "tools/bin" prelude-personal-dir))
-
 
 (gearup--set-font-size-12)
 (gearup-ediff---make-split-window-horizontally)
 (gearup--set-preferred-coding-system-utf-8)
 (gearup--set-utf-8-with-signature-coding-system-mode-line-mnemonic-to-B)
-(gearup--enable-fast-kill-ring-cycling)
+(gearup--enable-fast-mark-ring-cycling)
 (gearup--immediately-show-register-preview)
 (gearup-base--show-fringe-indicators-in-visual-line-mode)
 (gearup--assert-savefile-dir-exists)

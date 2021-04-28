@@ -30,6 +30,9 @@ undo the remapping of kill-ring-save to easy-kill while in
 (define-key mc/keymap (kbd "<return>") nil)
 (global-set-key (kbd "C-c SPC") 'set-rectangular-region-anchor)
 (global-set-key (kbd "C-S-<mouse-1>") 'mc/add-cursor-on-click)
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/unmark-next-like-this)
+(global-set-key (kbd "C-?") 'mc/skip-to-next-like-this)
 
 (push "Hit <C-c SPC> to create a rectangular region with multiple cursors." prelude-tips)
 (push "Hit <C-x r y> to yank from the kill ring of multiple cursors." prelude-tips)
@@ -37,7 +40,7 @@ undo the remapping of kill-ring-save to easy-kill while in
 
 ;; hydra menu
 (global-set-key (kbd "C-c m")
-                (defhydra gearup-multiple-cursors-hydra (:foreign-keys nil :body-pre gearup-hydra--before-enter-hydra-state :post gearup-hydra--before-exit-hydra-state)
+                (defhydra gearup-multiple-cursors-hydra (:foreign-keys nil)
                   "
 ^Region^   ^Unmark^      ^Skip^        ^Misc^          ^Insert^
 ^-^-----   ^-^--------   ^-^--------   ^-^----------   ^-^--------

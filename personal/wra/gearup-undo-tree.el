@@ -23,12 +23,13 @@ clear the buffers undo-tree before saving the file."
           (message "Cancelled clearing undo-tree of buffer: %s" (buffer-name buff)))
       (error "Buffer %s has no local binding of `buffer-undo-tree'" (buffer-name buff)))))
 
-(push "Hit <d> in undo-tree-visualizer to toggle diff display." prelude-tips)
-(push "Hit <t> in undo-tree-visualizer to toggle display of timestamps." prelude-tips)
-(push "Hit <q> in undo-tree-visualizer to exit visualizer at selected undo node." prelude-tips)
-(push "Hit <C-q> in undo-tree-visualizer to exit visualizer without changing undo node." prelude-tips)
-(push "Hit <f> in undo-tree-visualizer to select next branch." prelude-tips)
-(push "Hit <b> in undo-tree-visualizer to select previous branch." prelude-tips)
+(setq prelude-tips (append prelude-tips
+                           '("Hit <d> in undo-tree-visualizer to toggle diff display."
+                             "Hit <t> in undo-tree-visualizer to toggle display of timestamps."
+                             "Hit <q> in undo-tree-visualizer to exit visualizer at selected undo node."
+                             "Hit <C-q> in undo-tree-visualizer to exit visualizer without changing undo node."
+                             "Hit <f> in undo-tree-visualizer to select next branch."
+                             "Hit <b> in undo-tree-visualizer to select previous branch.")))
 
 ;; undo tree appears to cause overflows
 (global-undo-tree-mode -1)
