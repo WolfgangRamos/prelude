@@ -7,12 +7,19 @@
 (set-language-environment "English")
 (setq-default tab-width 4)
 (menu-bar-mode 1)
-(defun gearup--hide-system-load-in-mode-line ()
-  "Do not show system load indicator in the mode line."
-  (setq display-time-default-load-average nil))
-(gearup--hide-system-load-in-mode-line)
+
+;; Show clock in mode line
+(setq display-time-default-load-average nil)
 (setq display-time-format "%a, %d.%m.%Y %H:%M")
 (display-time-mode 1)
+
+;; Additional commands
+(prelude-require-package 'crux)
+(global-set-key (kbd "C-S-k") 'crux-kill-whole-line)
+(global-set-key (kbd "C-o") 'crux-smart-open-line)
+(global-set-key (kbd "C-S-o") 'crux-smart-open-line-above)
+
+;; CONTINUE CLEANUP HERE
 (custom-set-variables '(grep-command "grep --with-filename --line-number --recursive --ignore-case --regexp <REGEX> <FILES>"))
 (global-set-key (kbd "C-,") 'just-one-space)
 
@@ -21,9 +28,6 @@
 (defconst smerge-base-re "^||||||| \\{0,1\\}\\(.*\\)\r\\{0,1\\}\n")
 (defconst smerge-other-re "^=======\r\\{0,1\\}\n")
 
-
-(defvar gearup-foreign-modules-dir (expand-file-name "modules/foreign" prelude-personal-dir)
-  "Directory for gearup foreign modules.")
 
 (defun gearup--assert-savefile-dir-exists ()
   "Assert gearup's savefile dir exists. If not create it."

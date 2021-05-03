@@ -12,10 +12,6 @@
   "Set eshell as default shell in prelude's keymap."
   (define-key prelude-mode-map (kbd "C-c t") 'eshell))
 
-(defun gearup-prelude--disable-beacon-mode ()
-  "Disable beacon mode."
-  (beacon-mode -1))
-
 (defun gearup-prelude--disable-whitespace-cleanup-on-save ()
   "Disable prelude's auto whitespace cleanup on save feature."
   (setq prelude-clean-whitespace-on-save nil))
@@ -30,7 +26,6 @@
 (gearup-prelude--disable-global-diff-hl-mode)
 (gearup-prelude--set-eshell-as-default-shell)
 (gearup-prelude--disable-whitespace-cleanup-on-save)
-(gearup-prelude--disable-beacon-mode)
 
 ;; remove bindings
 (define-key prelude-mode-map (kbd "C-c y") nil) ;; my expand-yasnippet command
@@ -43,10 +38,11 @@
 (define-key prelude-mode-map (kbd "C-c f") nil) ;; unbind helm-recentf
 
 ;; tips
-(push "Hit <C-Backsp> to backward kill line." prelude-tips)
-(push "Hit <C-c e> to replace preceding sexp with its value." prelude-tips)
-(push "Hit <C-+> to increase font size." prelude-tips)
-(push "Hit <C--> to decrease font size." prelude-tips)
+(setq prelude-tips (append prelude-tips
+                           '("Hit <C-Backsp> to backward kill line."
+                             "Hit <C-c e> to replace preceding sexp with its value."
+                             "Hit <C-+> to increase font size."
+                             "Hit <C--> to decrease font size.")))
 
 (provide 'gearup-prelude)
 ;;; gearup-prelude.el ends here

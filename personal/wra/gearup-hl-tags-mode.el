@@ -3,7 +3,7 @@
 ;;; Commentary:
 
 ;;; Code:
-(require 'hl-tags-mode-loaddefs)
+(prelude-require-package 'hl-tags-mode-loaddefs)
 
 (defun gearup-hl-tags-mode--set-face ()
   "Set face used to higlight tags."
