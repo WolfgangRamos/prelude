@@ -18,6 +18,7 @@
 ;; (require 'prelude-common-lisp)
 ;; (require 'prelude-css)
 (require 'prelude-emacs-lisp)
+(require 'prelude-lsp) ;; Base setup for the Language Server Protocol
 ;; (require 'prelude-erlang)
 ;; (require 'prelude-elixir)
 ;; (require 'prelude-go)

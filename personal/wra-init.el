@@ -47,7 +47,7 @@
 ;(require 'gearup-nxml-mode)
 ;(require 'gearup-smart-mode-line)
 ;(require 'gearup-misc-prelude-tips)
-;(require 'gearup-csharp-mode)
+(require 'gearup-csharp-mode)
 ;(require 'gearup-omnisharp)
 (require 'gearup-undo-tree)
 ;(require 'gearup-projectile)
