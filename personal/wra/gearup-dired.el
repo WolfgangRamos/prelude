@@ -4,8 +4,9 @@
 
 ;;; Code:
 
-(prelude-require-package 'ace-window)
-;;(require 'dired)
+(prelude-require-packages '(ace-window wdired find-dired))
+
+(setq dired-guess-shell-alist-user '(("\.mp3$" "vlc.exe --one-instance --playlist-enqueue")))
 
 (defun gearup--allow-edit-file-permissions ()
   "Make file permisions editable in wdired mode."
@@ -32,10 +33,6 @@
                         (aw-switch-to-window window)
                         (find-file file)))
       (find-file-other-window file))))
-
-;; X-dired
-;; (add-hook 'dired-load-hook
-;;           (function (lambda () (load "dired-x"))))
 
 (defun gearup--dired-initially-hide-details ()
   "Initially hide details in dired buffers."

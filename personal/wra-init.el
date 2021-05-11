@@ -24,7 +24,7 @@
 ;;;(require 'wra-ispell)
 ;(require 'wra-essh)
 ;(require 'wra-ess)
-;(require 'gearup-dired)
+(require 'gearup-dired)
 ;(require 'wra-org)
 ;(require 'wra-yasnippet) ;; must  be loaded before auto complete?
 ;(require 'wra-auctex)
