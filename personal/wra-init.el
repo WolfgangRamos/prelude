@@ -52,7 +52,7 @@
 (require 'gearup-undo-tree)
 ;(require 'gearup-projectile)
 (require 'gearup-multiple-cursors)
-;(require 'gearup-magit)
+(require 'gearup-magit)
 (require 'gearup-iedit)
 ;(require 'gearup-gnus)
 ;(require 'gearup-org-attach-screenshot)
