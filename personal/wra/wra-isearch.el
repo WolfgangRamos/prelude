@@ -31,11 +31,9 @@
 			      'my-isearch-yank-word-or-char-from-beginning
 			      isearch-mode-map)))
 
-(defun gearup-hs--open-foldings-for-isearch ()
-  "Aumatically unfold blocks as necessary during isearch."
-  (setq hs-isearch-open t))
-  
-(gearup-hs--open-foldings-for-isearch)
+(with-eval-after-load 'hs
+  (setq hs-isearch-open t)              ; "Automatically unfold blocks as necessary during isearch."
+  )
 
 (provide 'wra-isearch)
 ;;; wra-isearch.el ends here
