@@ -8,7 +8,7 @@
 (require 'helm)
 
 (global-set-key (kbd "C-x C-r") 'helm-recentf)
-(global-set-key (kbd "C-s") 'helm-occur)
+(global-set-key (kbd "C-S-s") 'helm-occur)
 
 (defun gearup-helm--quit-and-enter-isearch ()
   "Quit helm session and enter `isearch-forward'."
