@@ -16,7 +16,7 @@
 ;(require 'gearup-zop-to-char)
 (require 'gearup-expand-region)
 ;(require 'gearup-easy-kill)
-;(require 'gearup-hippie-expand)
+(require 'gearup-hippie-expand)
 (require 'gearup-ace-window)
 ;(require 'gearup-avy)
 ;(require 'gearup-sql)
@@ -27,7 +27,7 @@
 ;(require 'wra-ess)
 (require 'gearup-dired)
 ;(require 'wra-org)
-;(require 'wra-yasnippet) ;; must  be loaded before auto complete?
+;(require 'wra-yasnippet) ;; must be loaded before auto complete?
 ;(require 'wra-auctex)
 ;(require 'wra-cdlatex)
 ;(require 'wra-shell)
@@ -37,7 +37,6 @@
 ;; (require 'wra-restclient)
 ;(require 'gearup-flycheck)
 ;(require 'gearup-smartparens)
-;(require 'gearup-ms-windows)
 ;;(require 'wra-sunrise-commander)
 ;(require 'gearup-re-builder)
 ;(require 'wra-savehist)
