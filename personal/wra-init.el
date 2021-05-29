@@ -48,7 +48,6 @@
 ;(require 'gearup-smart-mode-line)
 ;(require 'gearup-misc-prelude-tips)
 (require 'gearup-csharp-mode)
-;(require 'gearup-omnisharp)
 (require 'gearup-undo-tree)
 ;(require 'gearup-projectile)
 (require 'gearup-multiple-cursors)
