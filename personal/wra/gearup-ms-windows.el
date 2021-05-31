@@ -12,6 +12,7 @@
   (setenv "GIT_ASKPASS" "git-gui--askpass")) ; allow magit to do https authentication by GUI
 
 (prelude-require-packages '(powershell w32-browser))
+(require 'w32-browser)
 
 (provide 'gearup-ms-windows)
 ;;; gearup-ms-windows.el ends here
