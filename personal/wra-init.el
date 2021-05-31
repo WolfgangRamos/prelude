@@ -53,6 +53,7 @@
 (require 'gearup-multiple-cursors)
 (require 'gearup-magit)
 (require 'gearup-iedit)
+(require 'gearup-atomic-chrome)
 ;(require 'gearup-gnus)
 ;(require 'gearup-org-attach-screenshot)
 ;(require 'gearup-cc-mode)
