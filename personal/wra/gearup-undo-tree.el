@@ -32,7 +32,8 @@ clear the buffers undo-tree before saving the file."
                              "Hit <b> in undo-tree-visualizer to select previous branch.")))
 
 ;; undo tree appears to cause overflows
-(global-undo-tree-mode -1)
+(setq undo-tree-auto-save-history nil)
+(global-undo-tree-mode)
 
 (provide 'gearup-undo-tree)
 ;;; gearup-undo-tree.el ends here

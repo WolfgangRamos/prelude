@@ -5,8 +5,10 @@
 ;;; Code:
 (prelude-require-package 'iedit)
 (require 'iedit)
+(global-unset-key (kbd "C-M-;"))
+
 (setq prelude-tips (append prelude-tips
-              '("Hit <C-;> to call iedit on symbol, url or tag at point. Hit <C-;> again to quit."
+              '("Hit <M-;> to call iedit on symbol, url or tag at point. Hit <M-;> again to quit."
                 "Hit <M-H> in iedit mode to restrict selections to current function."
                 "Hit <M-}> in iedit mode to widen selection one line up."
                 "Hit <M-{> in iedit mode to widen selection one line down."
