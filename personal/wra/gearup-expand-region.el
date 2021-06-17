@@ -5,7 +5,7 @@
 ;;; Code:
 (prelude-require-package 'expand-region)
 
-(global-set-key (kbd "M-=") 'er/expand-region)
+(global-set-key (kbd "M-=") 'er/contract-region)
 
 ;;; Tips:
 (push "Hit <M-=> to expand region to word, symbol, sexp, ..." prelude-tips)

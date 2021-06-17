@@ -3,6 +3,10 @@
 ;;; Commentary:
 
 ;;; Code
+(setq w32-pass-lwindow-to-system t)
+(setq w32-pass-rwindow-to-system t)
+(setq w32-pass-apps-to-system t)
+
 (defun gearup-w32--recentf-save-wrapper (terminal)
   "Save recentf list."
   (recentf-save-list))
