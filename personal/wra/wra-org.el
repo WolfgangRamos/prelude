@@ -22,6 +22,7 @@
 (setq org-log-into-drawer t)
 
 (setq org-image-actual-width nil)
+(setq org-table-convert-region-max-lines 2000)
 
 (defun gearup--org-id-cache-use-gearup-savefile-dir ()
   "Point org-id cache location to gearup savefile dir."
