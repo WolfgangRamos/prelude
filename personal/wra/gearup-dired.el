@@ -6,7 +6,8 @@
 
 (prelude-require-packages '(ace-window wdired find-dired))
 
-(setq dired-guess-shell-alist-user '(("\.mp3$" "vlc.exe --one-instance --playlist-enqueue")))
+(setq dired-guess-shell-alist-user '(("\.mp3$" "vlc.exe --one-instance --playlist-enqueue")
+                                     ("\.pdf$" "\"C:/Program Files (x86)/Foxit Software/Foxit Reader/FoxitReader.exe\"")))
 
 (defun gearup--allow-edit-file-permissions ()
   "Make file permisions editable in wdired mode."

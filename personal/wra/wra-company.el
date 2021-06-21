@@ -10,18 +10,13 @@
 
 
 (custom-set-variables '(company-idle-delay nil))
+(define-key company-active-map (kbd "M-n") nil)
+(define-key company-active-map (kbd "M-p") nil)
+(define-key company-active-map (kbd "C-n") 'company-select-next)
+(define-key company-active-map (kbd "C-p") 'company-select-previous)
+(define-key company-mode-map (kbd "C-;") 'company-complete)
 
-(defun gearup-company--set-company-keybindings ()
-  "Set keybindings for `company-mode'."
-  (define-key company-active-map (kbd "M-n") nil)
-  (define-key company-active-map (kbd "M-p") nil)
-  (define-key company-active-map (kbd "C-n") 'company-select-next)
-  (define-key company-active-map (kbd "C-p") 'company-select-previous)
-  (define-key company-mode-map (kbd "M-#") 'company-complete))
-
-(gearup-company--set-company-keybindings)
-
-(define-key company-mode-map (kbd "M-j") 'helm-company)
+(define-key company-mode-map (kbd "C-M-;") 'helm-company)
 
 (provide 'wra-company)
 ;;; wra-company.el ends here
