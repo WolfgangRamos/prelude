@@ -18,6 +18,9 @@
 (global-set-key (kbd "C-S-k") 'crux-kill-whole-line)
 (global-set-key (kbd "C-o") 'crux-smart-open-line)
 (global-set-key (kbd "C-S-o") 'crux-smart-open-line-above)
+(global-set-key (kbd "C-S-p") 'move-text-up)
+(global-set-key (kbd "C-S-n") 'move-text-down)
+
 
 ;; CONTINUE CLEANUP HERE
 (custom-set-variables '(grep-command "grep --with-filename --line-number --recursive --ignore-case --regexp <REGEX> <FILES>"))
