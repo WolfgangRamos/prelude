@@ -34,6 +34,7 @@ clear the buffers undo-tree before saving the file."
 ;; undo tree appears to cause overflows
 (setq undo-tree-auto-save-history nil)
 (global-undo-tree-mode)
+(define-key undo-tree-map (kbd "C-?") nil)
 
 (provide 'gearup-undo-tree)
 ;;; gearup-undo-tree.el ends here

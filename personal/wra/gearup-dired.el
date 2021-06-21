@@ -16,9 +16,7 @@
   "Make deletion in dired move files to system trash."
   (custom-set-variables '(delete-by-moving-to-trash t)))
   
-(defun gearup--use-other-dired-buffer-as-default-target-directory ()
-  "Make copy, move commands use other dired buffer as target (if there is one)."
-  (custom-set-variables '(dired-dwim-target t)))
+(setq dired-dwim-target 'dired-dwim-target-recent) ;; prefere most recent viewed buffer as dired target
   
 (defun gearup-find-dired--speedup-formatting ()
   "By default Emacs will pass -exec to find and that makes it very slow. It is better to collate the matches and then use xargs to run the command. See URL `https://www.masteringemacs.org/article/working-multiple-files-dired'."
@@ -65,7 +63,6 @@
 (with-eval-after-load 'dired
   (load "dired-x")
   (gearup--use-system-trash)
-  (gearup--use-other-dired-buffer-as-default-target-directory)
   (gearup-dired--bind-buffer-reusing-visiting-commands)
   (gearup--dired-initially-hide-details)
   (define-key dired-mode-map "o" 'gearup-find-file-ace-window))

@@ -38,6 +38,16 @@ undo the remapping of kill-ring-save to easy-kill while in
 (push "Hit <C-x r y> to yank from the kill ring of multiple cursors." prelude-tips)
 (push "Hit <C-S-<mouse-1>> to add multiple cursors using the mouse." prelude-tips)
 
+(defun gearup-multiple-cursors-insert-numbers-starting-at-prefix (arg raw)
+  "Insert increasing numbers for each cursor, starting at ARG or zero.
+
+Zero is used as starting number when no explicit prefix argument is given."
+  (interactive "p\nP")
+  (let ((start (if raw
+                   arg
+                 0)))
+    (mc/insert-numbers start)))
+
 ;; hydra menu
 (global-set-key (kbd "C-c m")
                 (defhydra gearup-multiple-cursors-hydra (:foreign-keys nil)
@@ -59,7 +69,7 @@ _f_ prev   _d_ highest   _g_ highest   _a_ mark all    _c_ chars
                   ("r" set-rectangular-region-anchor nil)
                   ("a" mc/mark-all-dwim nil)
                   ("u" mc/edit-lines nil)
-                  ("n" mc/insert-numbers nil)
+                  ("n" gearup-multiple-cursors-insert-numbers-starting-at-prefix nil)
                   ("c" mc/insert-letters nil)
                   ("s" mc/sort-regions nil)
                   ("S" mc/reverse-regions nil)
