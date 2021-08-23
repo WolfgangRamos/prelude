@@ -9,7 +9,7 @@
 ;;(require 'gearup-hl-tags-mode)
 
 (add-hook 'nxml-mode-hook 'gearup-disable-whitespace-mode)
-(add-hook 'nxml-mode-hook 'yas-minor-mode-on)
+;;(add-hook 'nxml-mode-hook 'yas-minor-mode-on)
 
 (defun gearup-nxml--disable-auto-validation ()
   "Disable Validation for XML buffers."

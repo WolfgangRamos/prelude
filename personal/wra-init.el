@@ -44,7 +44,7 @@
 ;;(require 'gearup-web-mode)
 ;(require 'gearup-lisp)
 ;;(require 'gearup-rebox2)
-;(require 'gearup-nxml-mode)
+(require 'gearup-nxml-mode)
 ;(require 'gearup-smart-mode-line)
 ;(require 'gearup-misc-prelude-tips)
 (require 'gearup-csharp-mode)
