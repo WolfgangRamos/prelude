@@ -5,7 +5,11 @@
 (add-hook 'csharp-mode-hook 'gearup-disable-whitespace-mode)
 ;; TODO re-register hook when yasnippet is loaded
 ;;(add-hook 'csharp-mode-hook 'yas-minor-mode-on)
-(add-hook 'csharp-mode-hook #'lsp)
+(defun gearup-csharp-mode-set-solution-file-and-start-lsp-server ()
+  (when (string-prefix-p "C:/dev-secure/visitour/" buffer-file-name t)
+    (setq-local lsp-csharp-solution-file "C:\\dev-secure\\visitour\\visitour\\VisiTour.sln"))
+  (lsp))
+(add-hook 'csharp-mode-hook 'gearup-csharp-mode-set-solution-file-and-start-lsp-server) ;; set solution file in csharp mode hook because dir-local varialbes are applied to late
 
 ;; use this command in cmd
 ;; "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\Common7\IDE\devenv.exe" /Edit .\src\VisiTourDomain\Shared\Errors.cs /Command "Edit.GoTo <linenumber>"
