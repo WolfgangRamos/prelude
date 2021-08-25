@@ -6,22 +6,19 @@
 
 (prelude-require-packages '(ace-window wdired find-dired))
 
-(setq dired-guess-shell-alist-user '(("\.mp3$" "vlc.exe --one-instance --playlist-enqueue")
-                                     ("\.pdf$" "\"C:/Program Files (x86)/Foxit Software/Foxit Reader/FoxitReader.exe\"")))
+(defun gearup-dired-copy-path-as-kill (arg)
+  "Copy the absolute or project root relative path of file at point to the kill ring.
 
-(defun gearup--allow-edit-file-permissions ()
-  "Make file permisions editable in wdired mode."
-  (custom-set-variables '(wdired-allow-to-change-permissions t)))
-
-(defun gearup--use-system-trash ()
-  "Make deletion in dired move files to system trash."
-  (custom-set-variables '(delete-by-moving-to-trash t)))
-  
-(setq dired-dwim-target 'dired-dwim-target-recent) ;; prefere most recent viewed buffer as dired target
-  
-(defun gearup-find-dired--speedup-formatting ()
-  "By default Emacs will pass -exec to find and that makes it very slow. It is better to collate the matches and then use xargs to run the command. See URL `https://www.masteringemacs.org/article/working-multiple-files-dired'."
-  (custom-set-variables '(find-ls-option (quote ("-print0 | xargs -0 ls -ld" . "-ld")))))
+If called with a prefix arg C-u, use the file path relative to
+the project root (e.g. the root directory of the git repository)."
+  (interactive "p")
+  (let ((full-path (dired-copy-filename-as-kill 0)))
+    (if (<= arg 1)
+        full-path
+      (let* ((project-root (projectile-project-root))
+             (relative-path (substring full-path (length project-root) nil)))
+        (message relative-path)
+        relative-path))))
 
 (defun gearup-find-file-ace-window ()
   "Select a window to open a file using ace window."
@@ -54,25 +51,25 @@
     (unless (eq original-buffer (current-buffer))
       (kill-buffer original-buffer))))
 
-(defun gearup-dired--bind-buffer-reusing-visiting-commands ()
-  "Bind directory visiting commands that reuse the current buffer."
-  (define-key dired-mode-map (kbd "RET") 'gearup-dired-find-file-maybe-reuse-buffer)
-  (define-key dired-mode-map (kbd "e") 'gearup-dired-find-file-maybe-reuse-buffer)
-  (define-key dired-mode-map (kbd "f") 'gearup-dired-find-file-maybe-reuse-buffer)
-  (define-key dired-mode-map (kbd "^") 'gearup-dired-up-directory-reuse-buffer))
+(custom-set-variables '(wdired-allow-to-change-permissions t) ;; make file permisions editable in wdired mode
+                      '(delete-by-moving-to-trash t) ;; make deletion in dired move files to system trash
+                      '(dired-dwim-target 'dired-dwim-target-recent) ;; prefere most recent viewed buffer as dired target
+                      '(find-ls-option (quote ("-print0 | xargs -0 ls -ld" . "-ld"))) ;; by default Emacs will pass -exec to find and that makes it very slow. It is better to collate the matches and then use xargs to run the command. See URL `https://www.masteringemacs.org/article/working-multiple-files-dired'.
+                      '(dired-guess-shell-alist-user '(("\.mp3$" "vlc.exe --one-instance --playlist-enqueue")
+                                                       ("\.pdf$" "\"C:/Program Files (x86)/Foxit Software/Foxit Reader/FoxitReader.exe\"")
+                                                       ("\.exe$" "start \"\"")))
+                      )
 
 (with-eval-after-load 'dired
   (load "dired-x")
-  (gearup--use-system-trash)
-  (gearup-dired--bind-buffer-reusing-visiting-commands)
-  (gearup--dired-initially-hide-details)
-  (define-key dired-mode-map "o" 'gearup-find-file-ace-window))
-
-(with-eval-after-load 'wdired 
-  (gearup--allow-edit-file-permissions))
-
-(with-eval-after-load 'find-dired
-  (gearup-find-dired--speedup-formatting))
+  (add-hook 'dired-mode-hook 'dired-hide-details-mode) ;; initially hide details (e.g. file permissions) in dired buffers
+  (define-key dired-mode-map (kbd "RET") 'gearup-dired-find-file-maybe-reuse-buffer)
+  (define-key dired-mode-map (kbd "e") 'gearup-dired-find-file-maybe-reuse-buffer)
+  (define-key dired-mode-map (kbd "f") 'gearup-dired-find-file-maybe-reuse-buffer)
+  (define-key dired-mode-map (kbd "^") 'gearup-dired-up-directory-reuse-buffer)
+  (define-key dired-mode-map (kbd "o") 'gearup-find-file-ace-window)
+  (define-key dired-mode-map (kbd "C-s") 'dired-isearch-filenames)
+  (define-key dired-mode-map (kbd "W") 'gearup-dired-copy-path-as-kill))
 
 (provide 'gearup-dired)
 ;;; gearup-dired.el ends here
