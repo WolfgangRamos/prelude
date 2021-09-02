@@ -82,6 +82,7 @@ _f_ decrease   _d_ shrink               _s_ shrink
           (if this-win-2nd (other-window 1))))))
 
 (global-set-key (kbd "C-x |") 'toggle-window-split)
+(global-set-key (kbd "C-c |") 'window-swap-states)
 
 (push "Hit <C-x |> to toggle between vertical and horizontal window split." prelude-tips)
 

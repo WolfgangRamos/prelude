@@ -60,4 +60,19 @@
 ;(require 'gearup-svn)
 ;(require 'gearup-host-config) ;; load this last
 
+
+(defun gearup-powershell-new ()
+  (interactive)
+  (let* ((powerhell-buffer-count (length (seq-filter (lambda (buf) (string-prefix-p "*PowerShell-" (buffer-name buf)))
+                                                     (buffer-list))))
+         (name (concat "*PowerShell-" (number-to-string powerhell-buffer-count) "*")))
+    (powershell name)))
+
+(defun mingw64-shell ()
+  "Run cygwin bash in shell mode."
+  (interactive)
+  (let ((explicit-shell-file-name "C:\\msys64\\usr\\bin\\bash.exe")
+        (explicit-bash.exe-args '("--login" "-i")))
+    (shell "*bash*")))
+
 ;;; wra-init.el ends here
