@@ -59,6 +59,10 @@ the project root (e.g. the root directory of the git repository)."
                                                        ("\.pdf$" "\"C:/Program Files (x86)/Foxit Software/Foxit Reader/FoxitReader.exe\"")
                                                        ("\.exe$" "start \"\"")))
                       )
+;; fix find on windows
+(when (equal system-type 'windows-nt)
+  (setq find-program "c:\\msys64\\usr\\bin\\find.exe")
+  (setq find-ls-option '("-ls" . "-dilsb")))
 
 (with-eval-after-load 'dired
   (load "dired-x")
@@ -69,7 +73,9 @@ the project root (e.g. the root directory of the git repository)."
   (define-key dired-mode-map (kbd "^") 'gearup-dired-up-directory-reuse-buffer)
   (define-key dired-mode-map (kbd "o") 'gearup-find-file-ace-window)
   (define-key dired-mode-map (kbd "C-s") 'dired-isearch-filenames)
-  (define-key dired-mode-map (kbd "W") 'gearup-dired-copy-path-as-kill))
+  (define-key dired-mode-map (kbd "W") 'gearup-dired-copy-path-as-kill)
+  (define-key dired-mode-map (kbd "M-n") 'dired-next-marked-file)
+  (define-key dired-mode-map (kbd "M-p") 'dired-prev-marked-file))
 
 (provide 'gearup-dired)
 ;;; gearup-dired.el ends here
