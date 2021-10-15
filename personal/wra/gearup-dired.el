@@ -62,6 +62,12 @@ the project root (e.g. the root directory of the git repository)."
                                                        ("\.\(png\|jpg\)" "mspaint")
                                                        ("\.sln$" "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\Common7\\IDE\\devenv.exe\"")))
                       )
+
+;; fix find on windows
+(when (equal system-type 'windows-nt)
+  (setq find-program "c:\\msys64\\usr\\bin\\find.exe")
+  (setq find-ls-option '("-ls" . "-dilsb")))
+
 ;; Dired provides no function to do isearch on filenames in backward direction.
 ;; Therefore I define it myself
 (defun gearup-dired-isearch-filenames-reverse ()
@@ -69,6 +75,7 @@ the project root (e.g. the root directory of the git repository)."
   (interactive)
   (setq-local dired-isearch-filenames t)
   (isearch-backward nil t))
+
 
 (with-eval-after-load 'dired
   (load "dired-x")
@@ -80,7 +87,9 @@ the project root (e.g. the root directory of the git repository)."
   (define-key dired-mode-map (kbd "o") 'gearup-find-file-ace-window)
   (define-key dired-mode-map (kbd "C-s") 'dired-isearch-filenames)
   (define-key dired-mode-map (kbd "C-r") 'gearup-dired-isearch-filenames-reverse)
-  (define-key dired-mode-map (kbd "W") 'gearup-dired-copy-path-as-kill))
+  (define-key dired-mode-map (kbd "W") 'gearup-dired-copy-path-as-kill)
+  (define-key dired-mode-map (kbd "M-n") 'dired-next-marked-file)
+  (define-key dired-mode-map (kbd "M-p") 'dired-prev-marked-file))
 
 (provide 'gearup-dired)
 ;;; gearup-dired.el ends here

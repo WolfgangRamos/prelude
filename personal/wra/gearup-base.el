@@ -8,6 +8,10 @@
 (setq-default tab-width 4)
 (menu-bar-mode 1)
 
+;; improve performance
+(custom-set-variables '(gc-cons-threshold 100000000)
+                      '(read-process-output-max 1048576))
+
 ;; Show clock in mode line
 (setq display-time-default-load-average nil)
 (setq display-time-format "%a, %d.%m.%Y %H:%M")
