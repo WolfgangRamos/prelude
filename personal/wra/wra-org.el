@@ -314,6 +314,12 @@
 ;;(require 'org-mime)
 ;(custom-set-variables '(epg-gpg-program "c:/Program Files (x86)/GnuPG/bin/gpg.exe"))
 
+;; export to markdown
+(require 'ox-md)
+
+;; export to github flavored markdown
+(prelude-require-package 'ox-gfm)
+(require 'ox-gfm)
 
 ;; export to confluence
 (require 'ox-confluence)

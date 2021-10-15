@@ -5,6 +5,7 @@
 ;;; Code:
 
 (prelude-require-packages '(ace-window wdired find-dired))
+(require 'ace-window)
 
 (defun gearup-dired-copy-path-as-kill (arg)
   "Copy the absolute or project root relative path of file at point to the kill ring.
@@ -57,8 +58,17 @@ the project root (e.g. the root directory of the git repository)."
                       '(find-ls-option (quote ("-print0 | xargs -0 ls -ld" . "-ld"))) ;; by default Emacs will pass -exec to find and that makes it very slow. It is better to collate the matches and then use xargs to run the command. See URL `https://www.masteringemacs.org/article/working-multiple-files-dired'.
                       '(dired-guess-shell-alist-user '(("\.mp3$" "vlc.exe --one-instance --playlist-enqueue")
                                                        ("\.pdf$" "\"C:/Program Files (x86)/Foxit Software/Foxit Reader/FoxitReader.exe\"")
-                                                       ("\.exe$" "start \"\"")))
+                                                       ("\.exe$" "start \"\"")
+                                                       ("\.\(png\|jpg\)" "mspaint")
+                                                       ("\.sln$" "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\Common7\\IDE\\devenv.exe\"")))
                       )
+;; Dired provides no function to do isearch on filenames in backward direction.
+;; Therefore I define it myself
+(defun gearup-dired-isearch-filenames-reverse ()
+  "Search for a string using Isearch only in file names in the Dired buffer."
+  (interactive)
+  (setq-local dired-isearch-filenames t)
+  (isearch-backward nil t))
 
 (with-eval-after-load 'dired
   (load "dired-x")
@@ -69,6 +79,7 @@ the project root (e.g. the root directory of the git repository)."
   (define-key dired-mode-map (kbd "^") 'gearup-dired-up-directory-reuse-buffer)
   (define-key dired-mode-map (kbd "o") 'gearup-find-file-ace-window)
   (define-key dired-mode-map (kbd "C-s") 'dired-isearch-filenames)
+  (define-key dired-mode-map (kbd "C-r") 'gearup-dired-isearch-filenames-reverse)
   (define-key dired-mode-map (kbd "W") 'gearup-dired-copy-path-as-kill))
 
 (provide 'gearup-dired)
