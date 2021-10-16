@@ -28,7 +28,7 @@
 
 ;; CONTINUE CLEANUP HERE
 (custom-set-variables '(grep-command "grep --with-filename --line-number --recursive --ignore-case --regexp <REGEX> <FILES>"))
-(global-set-key (kbd "C-,") 'just-one-space)
+(global-set-key (kbd "C-,") 'cycle-spacing)
 
 (defconst smerge-begin-re "^<<<<<<< \\{0,1\\}\\(.*\\)\r\\{0,1\\}\n")
 (defconst smerge-end-re "^>>>>>>> \\{0,1\\}\\(.*\\)\r\\{0,1\\}\n")
