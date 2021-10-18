@@ -31,7 +31,7 @@
 ;(require 'wra-auctex)
 ;(require 'wra-cdlatex)
 ;(require 'wra-shell)
-;(require 'wra-company)
+(require 'wra-company)
 ;(require 'x-dict)
 (require 'restclient)
 ;; (require 'wra-restclient)

@@ -25,10 +25,19 @@
 (global-set-key (kbd "C-S-p") 'move-text-up)
 (global-set-key (kbd "C-S-n") 'move-text-down)
 
+;; Sometimes I want to separate the characters I am currently typing
+;; from some follow-up characters by one space without moving the
+;; curser (aka point) forward.
+(defun gearup-shove-one-space-forward (arg)
+  (interactive "p")
+  (save-excursion
+    (insert (make-string arg ? ))))
+
+(global-set-key (kbd "S-SPC") 'gearup-shove-one-space-forward)
 
 ;; CONTINUE CLEANUP HERE
 (custom-set-variables '(grep-command "grep --with-filename --line-number --recursive --ignore-case --regexp <REGEX> <FILES>"))
-(global-set-key (kbd "C-,") 'just-one-space)
+(global-set-key (kbd "C-,") 'cycle-spacing)
 
 (defconst smerge-begin-re "^<<<<<<< \\{0,1\\}\\(.*\\)\r\\{0,1\\}\n")
 (defconst smerge-end-re "^>>>>>>> \\{0,1\\}\\(.*\\)\r\\{0,1\\}\n")
