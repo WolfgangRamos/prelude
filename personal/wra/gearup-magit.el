@@ -70,7 +70,9 @@
 (gearup-magit--revision-buffer-wrap-lines)
 
 (with-eval-after-load 'magit
-  (gearup-magit--bind-keys))
+  (gearup-magit--bind-keys)
+  (setq git-commit-major-mode 'markdown-mode)
+  (add-hook 'git-commit-setup-hook (lambda () (setq-local comment-start ";"))))
 
 ;; tips
 (setq prelude-tips
