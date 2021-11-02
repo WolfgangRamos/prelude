@@ -8,6 +8,7 @@
 ;;; Code:
 (load-file (expand-file-name "wra/gearup-set-load-path.el" prelude-personal-dir)) ;; load this first
 (menu-bar-mode t)
+(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
 (require 'gearup-ms-windows) 
 (require 'gearup-utils) ;; load this second
 (require 'gearup-base)  ;; load this third
@@ -54,6 +55,8 @@
 (require 'gearup-magit)
 (require 'gearup-iedit)
 (require 'gearup-atomic-chrome)
+(prelude-require-package 'tiny)
+(prelude-require-package 'register-list)
 ;(require 'gearup-gnus)
 ;(require 'gearup-org-attach-screenshot)
 ;(require 'gearup-cc-mode)
