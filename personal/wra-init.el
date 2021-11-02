@@ -56,7 +56,6 @@
 (require 'gearup-iedit)
 (require 'gearup-atomic-chrome)
 (prelude-require-package 'tiny)
-(prelude-require-package 'register-list)
 ;(require 'gearup-gnus)
 ;(require 'gearup-org-attach-screenshot)
 ;(require 'gearup-cc-mode)
