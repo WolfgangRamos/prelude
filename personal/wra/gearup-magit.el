@@ -5,6 +5,7 @@
 ;;; Code:
 (require 'gearup-utils)
 (require 'magit)
+(prelude-require-package 'forge)
 
 (defun geraup-magit--revision-buffer-hide-additional-refs ()
   "Do not show parent commit ref in revision buffer."
@@ -70,6 +71,7 @@
 (gearup-magit--revision-buffer-wrap-lines)
 
 (with-eval-after-load 'magit
+  (require 'forge)
   (gearup-magit--bind-keys)
   (setq git-commit-major-mode 'markdown-mode)
   (add-hook 'git-commit-setup-hook (lambda () (setq-local comment-start ";"))))

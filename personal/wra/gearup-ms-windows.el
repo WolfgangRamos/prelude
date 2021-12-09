@@ -18,5 +18,11 @@
 (prelude-require-packages '(powershell w32-browser))
 (require 'w32-browser)
 
+;; setting GPG related variables
+(custom-set-variables
+ '(epg-gpg-home-directory "~/.gnupg")
+ '(epg-gpg-program "c:/msys64/usr/bin/gpg.exe")
+ '(epg-gpgconf-program "c:/msys64/usr/bin/gpgconf.exe"))
+
 (provide 'gearup-ms-windows)
 ;;; gearup-ms-windows.el ends here
