@@ -18,7 +18,7 @@
 ;(require 'gearup-easy-kill)
 (require 'gearup-hippie-expand)
 (require 'gearup-ace-window)
-;(require 'gearup-avy)
+(require 'gearup-avy)
 ;(require 'gearup-sql)
 (require 'wra-helm)
 ;(require 'wra-image)
@@ -49,7 +49,7 @@
 ;(require 'gearup-misc-prelude-tips)
 (require 'gearup-csharp-mode)
 (require 'gearup-undo-tree)
-;(require 'gearup-projectile)
+(require 'gearup-projectile)
 (require 'gearup-multiple-cursors)
 (require 'gearup-magit)
 (require 'gearup-iedit)
@@ -75,4 +75,10 @@
         (explicit-bash.exe-args '("--login" "-i")))
     (shell "*bash*")))
 
+(require 'yarn)
+
+(require 'helm-fd)
+(global-set-key (kbd "C-c p n") 'helm-fd) ; used in addition to projectile-find-file because projectile's cache get outdated quickly
+
+(prelude-require-package 'dotnet)
 ;;; wra-init.el ends here
