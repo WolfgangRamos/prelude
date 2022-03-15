@@ -53,6 +53,7 @@
 (require 'gearup-projectile)
 (require 'gearup-multiple-cursors)
 (require 'gearup-magit)
+(add-to-list 'forge-alist '("gitlab.serverfls.com" "gitlab.serverfls.com/api/v4" "gitlab.serverfls.com" forge-gitlab-repository))
 (require 'gearup-iedit)
 (require 'gearup-atomic-chrome)
 (prelude-require-package 'tiny)

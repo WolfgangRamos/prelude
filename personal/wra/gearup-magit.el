@@ -70,11 +70,19 @@
 (geraup-magit--revision-buffer-hide-additional-refs)
 (gearup-magit--revision-buffer-wrap-lines)
 
+(setq magit-branch-adjust-remote-upstream-alist '(("origin/master" . ("master" "master-net4"))))
+
 (with-eval-after-load 'magit
   (require 'forge)
   (gearup-magit--bind-keys)
+  (define-key forge-pullreq-section-map (kbd "C-c C-S-w") 'forge-copy-url-at-point-as-kill)
   (setq git-commit-major-mode 'markdown-mode)
-  (add-hook 'git-commit-setup-hook (lambda () (setq-local comment-start ";"))))
+  (setq magit-revision-use-hash-sections nil) ; avoid revision mode freezing
+  (setq magit-revision-fill-summary-line nil) ; avoid revision mode freezing
+  (setq magit-diff-highlight-keywords nil)    ; avoid revision mode freezing
+  (add-hook 'git-commit-setup-hook (lambda () (setq-local comment-start ";")))
+  (add-hook 'git-commit-mode-hook (lambda () (move-end-of-line nil)))
+  (add-hook 'magit-revision-mode-hook (lambda () (setq-local comment-start ";"))))
 
 ;; tips
 (setq prelude-tips
