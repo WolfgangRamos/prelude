@@ -80,8 +80,5 @@
 
 (require 'yarn)
 
-(require 'helm-fd)
-(global-set-key (kbd "C-c p n") 'helm-fd) ; used in addition to projectile-find-file because projectile's cache get outdated quickly
-
 (prelude-require-package 'dotnet)
 ;;; wra-init.el ends here
