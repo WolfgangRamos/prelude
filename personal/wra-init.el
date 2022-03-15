@@ -81,4 +81,7 @@
 (require 'yarn)
 
 (prelude-require-package 'dotnet)
+(prelude-require-package 'gitlab-pipeline)
+(global-set-key (kbd "C-S-<left>") 'winner-undo)
+(global-set-key (kbd "C-S-<right>") 'winner-redo)
 ;;; wra-init.el ends here
