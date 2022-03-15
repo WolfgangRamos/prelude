@@ -60,7 +60,7 @@
 ;(require 'gearup-gnus)
 ;(require 'gearup-org-attach-screenshot)
 ;(require 'gearup-cc-mode)
-;(require 'gearup-svn)
+(require 'gearup-docker)
 ;(require 'gearup-host-config) ;; load this last
 
 
