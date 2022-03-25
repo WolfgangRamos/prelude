@@ -4,20 +4,18 @@
 ;;; Commentary:
 
 ;;; Code
-(prelude-require-package 'org-plus-contrib)
+(prelude-require-package 'org-contrib)
 (require 'org)
 ;;(require 'yasnippet)
 ;;(require 'cdlatex)
 ;;(prelude-require-package 'org-wc)
 ;;(require 'org-wc) ;; provides function 'org-word-count
-;;(prelude-require-package 'org-ref)
 (prelude-require-package 'ob-restclient)
 (require 'ob-restclient)
 (require 'ob-sql)
 ;;(require 'org-inlinetask)
 
-(define-key org-mode-map (kbd "C-,") nil)
-;;(global-set-key (kbd "C-c b") nil)
+(define-key org-mode-map (kbd "C-,") nil) ; this is set to one-space command in my base configuration
 
 (setq org-log-into-drawer t)
 
