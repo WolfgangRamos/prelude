@@ -3,7 +3,6 @@
 ;;; Commentary:
 
 ;;; Code:
-
 (defun gearup--turn-off-flycheck-mode-in-large-buffers ()
   "Disable flychecking large buffers."
   (when (> (buffer-size) 80000)

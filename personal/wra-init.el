@@ -19,7 +19,7 @@
 ;(require 'gearup-easy-kill)
 (require 'gearup-hippie-expand)
 (require 'gearup-ace-window)
-;(require 'gearup-avy)
+(require 'gearup-avy)
 ;(require 'gearup-sql)
 (require 'wra-helm)
 ;(require 'wra-image)
@@ -77,4 +77,54 @@
         (explicit-bash.exe-args '("--login" "-i")))
     (shell "*bash*")))
 
+
+;; tying out flyspell (might be useful for commit message buffers as it provides immediate feedback)
+;(define-key flyspell-mode-map (kbd "C-.") nil)
+;(global-unset-key (kbd "C-M-."))
+;(define-key flyspell-mode-map (kbd "C-M-.") 'flyspell-auto-correct-word)
+;(define-key flyspell-mode-map (kbd "C-,") nil) ;; was flyspell-next-error
+;(define-key flyspell-mode-map (kbd "C-;") nil)
+
+
+;; trying out spellchecking with flycheck and languagetool
+(prelude-require-package 'flycheck-languagetool)
+(setq flycheck-languagetool-server-jar (expand-file-name "assets/language_tool/languagetool-server.jar" prelude-personal-dir))
+(add-hook 'org-mode-hook 'flycheck-languagetool-setup)
+
+(defun gearup-flycheck-enable-checker (checker)
+  (setq-local flycheck-checkers (append `(,checker) flycheck-checkers)))
+
+(defun gearup-flycheck-enable-languagetool ()
+  (gearup-flycheck-enable-checker 'langueagetool))
+
+(add-hook 'org-mode-hook 'gearup-flycheck-enable-languagetool)
+
+(global-set-key (kbd "C-M-.") 'ispell-word)
+(define-key flyspell-mode-map (kbd "C-,") nil) ;; was flyspell-next-error
+(global-set-key (kbd "C-M-,") 'flycheck-previous-error)
+(global-set-key (kbd "C-M--") 'flycheck-next-error)
+(global-set-key (kbd "C-M-/") 'flycheck-next-error)
+
+
+;; trying out a dictionary package
+(prelude-require-package 'define-word)
+(global-set-key (kbd "C-c ? ?") 'define-word-at-point)
+(define-key org-mode-map (kbd "C-c ?") nil)
+
+
+;; trying out a web search package
+(prelude-require-package 'search-web)
+(require 'search-web)
+(setq search-web-in-emacs-browser 'eww-browse-url)
+(custom-set-variables '(search-web-engines
+                        (quote (("duck" "https://duckduckgo.com/lite/?q=%s" In-Emacs)
+                                ("duck external" "https://duckduckgo.com/?q=%s" External)
+                                ("google" "http://www.google.com/search?q=%s" In-Emacs)
+                                ("google external" "http://www.google.com/search?q=%s" External)
+                                ("youtube" "http://www.youtube.com/results?search_type=&search_query=%s&aq=f" External)
+                                ("wiki" "http://www.wikipedia.org/search-redirect.php?search=%s&language=en" In-Emacs)
+                                ("wiktionary (en)" "http://en.wiktionary.org/wiki/%s" In-Emacs)
+                                ("wiktionary (de)" "http://de.wiktionary.org/wiki/%s" In-Emacs)))))
+(global-set-key (kbd "C-c ? w") 'search-web-dwim)
+(global-set-key (kbd "C-c ? W") 'search-web)
 ;;; wra-init.el ends here

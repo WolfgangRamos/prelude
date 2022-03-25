@@ -5,7 +5,7 @@
 ;;; Code:
 (prelude-require-package 'hippie-exp)
 
-(global-set-key (kbd "M-SPC") 'hippie-expand)
+(global-set-key (kbd "S-SPC") 'hippie-expand)
 
 (provide 'gearup-hippie-expand)
 ;;; gearup-hippie-expand.el ends here
