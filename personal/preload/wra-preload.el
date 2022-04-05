@@ -14,5 +14,8 @@
 ;; disable global whitespace-mode
 (setq prelude-whitespace nil)
 
+;; https://emacs-lsp.github.io/lsp-mode/page/performance/
+(setq lsp-use-plists t)
+
 (provide 'wra-preload)
 ;;; wra-preload.el ends here

@@ -14,5 +14,17 @@
 (global-set-key (kbd "C-.") 'avy-goto-char-timer)
 (define-key isearch-mode-map (kbd "C-.") 'avy-isearch)
 
+(defun avy-action-embark (pt)
+  (unwind-protect
+      (save-excursion
+        (goto-char pt)
+        (embark-act))
+    (select-window
+     (cdr (ring-ref avy-ring 0))))
+  t)
+
+(setf (alist-get ?. avy-dispatch-alist) 'avy-action-embark)
+(setf (alist-get ?z avy-dispatch-alist) 'zop-to-char)
+
 (provide 'gearup-avy)
 ;;; gearup-avy.el ends here

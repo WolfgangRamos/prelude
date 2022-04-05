@@ -49,16 +49,17 @@
 ;(require 'gearup-misc-prelude-tips)
 (require 'gearup-csharp-mode)
 (require 'gearup-undo-tree)
-;(require 'gearup-projectile)
+(require 'gearup-projectile)
 (require 'gearup-multiple-cursors)
 (require 'gearup-magit)
+(add-to-list 'forge-alist '("gitlab.serverfls.com" "gitlab.serverfls.com/api/v4" "gitlab.serverfls.com" forge-gitlab-repository))
 (require 'gearup-iedit)
 (require 'gearup-atomic-chrome)
 (prelude-require-package 'tiny)
 ;(require 'gearup-gnus)
 ;(require 'gearup-org-attach-screenshot)
 ;(require 'gearup-cc-mode)
-;(require 'gearup-svn)
+(require 'gearup-docker)
 ;(require 'gearup-host-config) ;; load this last
 
 
@@ -75,7 +76,6 @@
   (let ((explicit-shell-file-name "C:\\msys64\\usr\\bin\\bash.exe")
         (explicit-bash.exe-args '("--login" "-i")))
     (shell "*bash*")))
-
 
 ;; tying out flyspell (might be useful for commit message buffers as it provides immediate feedback)
 ;(define-key flyspell-mode-map (kbd "C-.") nil)
@@ -126,4 +126,14 @@
                                 ("wiktionary (de)" "http://de.wiktionary.org/wiki/%s" In-Emacs)))))
 (global-set-key (kbd "C-c ? w") 'search-web-dwim)
 (global-set-key (kbd "C-c ? W") 'search-web)
+
+;; yarn
+(require 'yarn)
+
+;; other
+(prelude-require-package 'dotnet)
+(prelude-require-package 'gitlab-pipeline)
+(global-set-key (kbd "C-S-<left>") 'winner-undo)
+(global-set-key (kbd "C-S-<right>") 'winner-redo)
+
 ;;; wra-init.el ends here

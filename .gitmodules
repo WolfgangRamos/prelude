@@ -12,15 +12,12 @@
 [submodule "personal/modules/sqlparser"]
 	path = personal/modules/sqlparser
 	url = https://github.com/WolfgangRamos/sqlparser.git
-[submodule "personal/modules/fls"]
-	path = personal/modules/fls
-	url = http://172.16.20.43/wolfgang.ramos/fls.el.git
-[submodule "personal/modules/codecaser"]
-	path = personal/modules/codecaser
-	url = https://github.com/WolfgangRamos/codecaser-el.git
-[submodule "personal/modules/dsvn"]
-	path = personal/modules/dsvn
-	url = https://github.com/emacsmirror/dsvn.git
 [submodule "personal/modules/ob-charp"]
 	path = personal/modules/ob-charp
 	url = https://github.com/thomas-villagers/ob-csharp.git
+[submodule "personal/modules/yarn"]
+	path = personal/modules/yarn
+	url = git@github.com:jmfirth/yarn.el.git
+[submodule "personal/modules/helm-fd"]
+	path = personal/modules/helm-fd
+	url = git@github.com:lerouxrgd/helm-fd.git
