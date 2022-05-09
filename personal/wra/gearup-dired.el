@@ -18,6 +18,7 @@ the project root (e.g. the root directory of the git repository)."
         full-path
       (let* ((project-root (projectile-project-root))
              (relative-path (substring full-path (length project-root) nil)))
+        (kill-new relative-path)
         (message relative-path)
         relative-path))))
 
