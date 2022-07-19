@@ -60,7 +60,7 @@
 ;(require 'gearup-org-attach-screenshot)
 ;(require 'gearup-cc-mode)
 (require 'gearup-docker)
-;(require 'gearup-host-config) ;; load this last
+(require 'gearup-host-config) ;; load this last
 
 
 (defun gearup-powershell-new ()
