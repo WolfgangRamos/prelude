@@ -87,16 +87,22 @@
 
 ;; trying out spellchecking with flycheck and languagetool
 (prelude-require-package 'flycheck-languagetool)
+(require 'flycheck-languagetool)
 (setq flycheck-languagetool-server-jar (expand-file-name "assets/language_tool/languagetool-server.jar" prelude-personal-dir))
-(add-hook 'org-mode-hook 'flycheck-languagetool-setup)
+
+(flycheck-add-mode 'languagetool 'gfm-mode) ;; associate languagetool with gfm mode
 
 (defun gearup-flycheck-enable-checker (checker)
-  (setq-local flycheck-checkers (append `(,checker) flycheck-checkers)))
+  (when (not (member checker flycheck-checkers))
+    (setq-local flycheck-checkers (append `(,checker) flycheck-checkers))))
 
 (defun gearup-flycheck-enable-languagetool ()
   (gearup-flycheck-enable-checker 'langueagetool))
 
 (add-hook 'org-mode-hook 'gearup-flycheck-enable-languagetool)
+(add-hook 'org-mode-hook 'flycheck-languagetool-setup)
+(add-hook 'markdown-mode-hook 'gearup-flycheck-enable-languagetool)
+(add-hook 'markdown-mode-hook 'flycheck-languagetool-setup)
 
 (global-set-key (kbd "C-M-.") 'ispell-word)
 (define-key flyspell-mode-map (kbd "C-,") nil) ;; was flyspell-next-error
