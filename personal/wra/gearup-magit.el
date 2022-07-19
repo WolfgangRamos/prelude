@@ -82,7 +82,8 @@
   (setq magit-diff-highlight-keywords nil)    ; avoid revision mode freezing
   (add-hook 'git-commit-setup-hook (lambda () (setq-local comment-start ";")))
   (add-hook 'git-commit-mode-hook (lambda () (move-end-of-line nil)))
-  (add-hook 'magit-revision-mode-hook (lambda () (setq-local comment-start ";"))))
+  (add-hook 'magit-revision-mode-hook (lambda () (setq-local comment-start ";")
+  (transient-append-suffix 'magit-push "-u" '(1 "=s" "Skip gitlab pipeline" "--push-option=ci.skip")))))
 
 ;; tips
 (setq prelude-tips

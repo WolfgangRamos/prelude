@@ -271,29 +271,31 @@
 ;;(require 'ox-beamer)
 
 ;; functions to publish my cs_wiki
-;;(require 'ox-publish)
+(require 'ox-publish)
+(prelude-require-package 'citeproc)
+(require 'oc-csl)
 
 ;; (setq org-publish-project-alist
 ;;       '(
 ;;         ("org-wra-cs-wiki"
-;;          ;; Path to your org files.
-;;          :base-directory "~/wiki/cs_wiki/org/"
+;;          Path to your org files.
+;;          :base-directory "~/cs_wiki/org/"
 ;;          :base-extension "org"
 
-;;          ;; Path to your Jekyll project.
-;;          :publishing-directory "~/wiki/cs_wiki/"
+;;          Path to your Jekyll project.
+;;          :publishing-directory "~/cs_wiki/"
 ;;          :recursive t
 ;;          :publishing-function org-html-publish-to-html
 ;;          :headline-levels 4
 ;;          :html-extension "html"
-;;          :body-only t ;; Only export section between <body> </body>
+;;          :body-only t Only export section between <body> </body>
 ;;          )
 
 
 ;;         ("org-static-wra-cs-wiki"
-;;          :base-directory "~/wiki/cs_wiki/org/"
+;;          :base-directory "~/cs_wiki/org/"
 ;;          :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf\\|php\\|java\\|hs\\|erl"
-;;          :publishing-directory "~/wiki/cs_wiki/"
+;;          :publishing-directory "~/cs_wiki/"
 ;;          :recursive t
 ;;          :publishing-function org-publish-attachment)
 
