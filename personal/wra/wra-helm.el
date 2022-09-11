@@ -25,7 +25,8 @@
 
 (advice-add 'helm-occur-init-source :after #'gearup-helm--occur-add-isearch-keybinding)
 
-(setq helm-ag-base-command "c:/msys64/mingw64/bin/ag.exe --vimgrep")
+(when (equal system-type 'windows-nt)
+  (setq helm-ag-base-command "c:/msys64/mingw64/bin/ag.exe --vimgrep"))
 
 ;; TODO make C-u C-u C-SPC another way to jump to a specific mark: helm-mark-ring
 ;; (global-set-key (kbd "C-u C-u C-SPC") 'helm-mark-ring)
