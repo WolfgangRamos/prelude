@@ -154,6 +154,7 @@ Toggles between: “all lower”, “Init Caps”, “ALL CAPS”."
 (gearup--immediately-show-register-preview)
 (gearup-base--show-fringe-indicators-in-visual-line-mode)
 (gearup--assert-savefile-dir-exists)
+(set-face-attribute 'region nil :background "lightgoldenrod2")
 
 (provide 'gearup-base)
 ;;; gearup-base.el ends here
