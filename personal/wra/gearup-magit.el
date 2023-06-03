@@ -54,6 +54,7 @@
 (defun gearup-magit--bind-keys ()
   "Set keybindings for magit."
   (define-key magit-status-mode-map (kbd "C-c C-f") 'gearup-magit--toggle-revision-buffer-follow-status-buffer)
+  (define-key magit-status-mode-map (kbd "M-W") 'forge-copy-url-at-point-as-kill)
   (define-key magit-log-mode-map (kbd "C-c C-f") 'gearup-magit--toggle-revision-buffer-follow-log-buffer))
 
 (defun gearup-magit--revision-buffer-wrap-lines ()

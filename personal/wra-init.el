@@ -96,8 +96,15 @@
   (when (not (member checker flycheck-checkers))
     (setq-local flycheck-checkers (append `(,checker) flycheck-checkers))))
 
+(defun gearup-flycheck-disable-checker (checker)
+  (when (member checker flycheck-checkers)
+    (setq-local flycheck-checkers (remove `(,checker) flycheck-checkers))))
+
 (defun gearup-flycheck-enable-languagetool ()
   (gearup-flycheck-enable-checker 'langueagetool))
+
+(defun gearup-flycheck-disable-languagetool ()
+  (gearup-flycheck-disable-checker 'langueagetool))
 
 (add-hook 'org-mode-hook 'gearup-flycheck-enable-languagetool)
 (add-hook 'org-mode-hook 'flycheck-languagetool-setup)
@@ -142,4 +149,16 @@
 (global-set-key (kbd "C-S-<left>") 'winner-undo)
 (global-set-key (kbd "C-S-<right>") 'winner-redo)
 
+;; env-file mode
+(prelude-require-package 'dotenv-mode)
+
+(setq sql-ms-program "/opt/mssql-tools/bin/sqlcmd")
+
+;; To allow entering keys for gpg en-/decryption in emacs
+;; add these lines to ~/.gnupg/gpg-agent.conf:
+;;
+;; allow-emacs-pinentry
+;; allow-loopback-pinentry
+(setq epa-pinentry-mode 'loopback)
+(pinentry-start)
 ;;; wra-init.el ends here
