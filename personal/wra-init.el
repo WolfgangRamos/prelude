@@ -160,5 +160,6 @@
 ;; allow-emacs-pinentry
 ;; allow-loopback-pinentry
 (setq epa-pinentry-mode 'loopback)
+(prelude-require-package 'pinentry)
 (pinentry-start)
 ;;; wra-init.el ends here
