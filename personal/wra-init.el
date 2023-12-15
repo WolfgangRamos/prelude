@@ -27,7 +27,7 @@
 ;(require 'wra-ess)
 (require 'gearup-dired)
 (require 'wra-org)
-;(require 'wra-yasnippet) ;; must be loaded before auto complete?
+(require 'wra-yasnippet) ;; must be loaded before auto complete?
 ;(require 'wra-auctex)
 ;(require 'wra-cdlatex)
 ;(require 'wra-shell)
@@ -162,4 +162,65 @@
 (setq epa-pinentry-mode 'loopback)
 (prelude-require-package 'pinentry)
 (pinentry-start)
+
+(setq ag-group-matches nil) ;; print file name for each match
+
+(prelude-require-package 'hcl-mode)
+
+(prelude-require-package 'graphviz-dot-mode)
+(setq graphviz-dot-preview-extension "svg")
+
+;; Oauth2 token via Emacs
+(prelude-require-package 'oauth2)
+(defun gearup-wsl-browse-url-handler (url &rest args)
+  "Work around reserved character issue of WSL default browser cmd.exe /c start."
+  (call-process "/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe" nil 0 nil "start" (concat "\"" url "\"")))
+
+(setq browse-url-handlers '(("https://.+/realms/.+/protocol/openid-connect/auth.*" . gearup-wsl-browse-url-handler)))
+
+(defvar gearup-keycloak-hostname-history nil
+  "History of Keycloak URLs.")
+
+(defvar gearup-keycloak-realm-history nil
+  "History of Keycloak Realms.")
+
+(defvar gearup-keycloak-client-id-history nil
+  "History of Keycloak Client IDs.")
+
+(defvar gearup-keycloak-client-secrets-history nil
+  "History of Keycloak Client Secrets.")
+
+(defvar gearup-keycloak-scope-history nil
+  "History of Keycloak Scopes.")
+
+(defvar gearup-keycloak-realms-relative-path-history nil
+  "History of Keycloak HTTP relative paths to realms.
+See https://www.keycloak.org/server/all-config#category-http")
+
+(defun gearup-keycloak-get-token (protocol-and-hostname realms-relative-path realm client-id client-secret scope)
+  "Get a token from a keycloak instance."
+  (interactive
+   (let ((protocol-and-hostname (read-string "Keycloak protocol and hostname (default is \"https://idp.fls-dev.cloud\"): " nil 'gearup-keycloak-hostname-history "https://idp.fls-dev.cloud"))
+         (realms-relative-path (read-string "HTTP relative path to realms (default is \"\", sometime \"/auth\" is needed): " nil ''gearup-keycloak-realms-relative-path-history ""))
+         (realm (read-string "Realm (default is \"development\"): " nil 'gearup-keycloak-realm-history "development"))
+         (client-id (read-string "Client-ID (default is \"visitour-api\"): " nil 'gearup-keycloak-client-id-history "visitour-api"))
+         (client-secret (read-string "Client secret (default is \"714c4e31-074d-4aef-925e-bd43efe50a2c\"): " nil 'gearup-keycloak-client-secrets-history "714c4e31-074d-4aef-925e-bd43efe50a2c"))
+         (scope (read-string "Scope (default is \"openid): " nil 'gearup-keycloak-scope-history "openid")))
+     (list protocol-and-hostname realms-relative-path realm client-id client-secret scope)))
+  (let* ((base-url (concat protocol-and-hostname realms-relative-path "/realms/" realm "/protocol/openid-connect"))
+         (auth-url (concat base-url "/auth"))
+         (token-url (concat base-url "/token"))
+         (token-object (oauth2-auth auth-url token-url client-id client-secret scope nil "http://oauth.pstmn.io/v1/callback"))
+         (token (oauth2-token-access-token token-object)))
+    (kill-new token)
+    (message (concat "Copied to clipboard token \"" (substring token 0 9) "..." (substring token -10) "\""))))
+
+;; (setq token
+;;       (let ((auth-url "https://localhost:8443/auth/realms/Zinier/protocol/openid-connect/auth")
+;;             (token-url "https://localhost:8443/auth/realms/Zinier/protocol/openid-connect/token")
+;;             (client-id "scheduling-api")
+;;             (client-secret "Y71TVTkjCWpXhEpe9GmuWsu3Awl3IYE2")
+;;             (scope "openid"))
+;;         (oauth2-auth-and-store auth-url token-url scope client-id client-secret "http://localhost:8888/foo")))
+;; (oauth2-token-access-token token)
 ;;; wra-init.el ends here
