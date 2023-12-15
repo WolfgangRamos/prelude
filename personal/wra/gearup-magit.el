@@ -7,6 +7,8 @@
 (require 'magit)
 (prelude-require-package 'forge)
 
+(setq magit-status-initial-section '(((unstaged) (status)) 1))
+
 (defun geraup-magit--revision-buffer-hide-additional-refs ()
   "Do not show parent commit ref in revision buffer."
   (custom-set-variables '(magit-revision-insert-related-refs nil)))
@@ -72,6 +74,12 @@
 (gearup-magit--revision-buffer-wrap-lines)
 
 (setq magit-branch-adjust-remote-upstream-alist '(("origin/master" . ("master" "master-net4"))))
+;(setq magit-branch-prefer-remote-upstream '("master"))
+;(setq magit-prefer-remote-upstream 't)
+
+;; TODO Create command to copy MR ID to Windows clipboard
+;; powershell.exe -Command 'echo "<a href="https://jira-prod.vt-fls.com/browse/SCD-24598">SCD-88</a>" | Set-Clipboard -AsHtml'
+
 
 (with-eval-after-load 'magit
   (require 'forge)
@@ -82,7 +90,10 @@
   (setq magit-revision-fill-summary-line nil) ; avoid revision mode freezing
   (setq magit-diff-highlight-keywords nil)    ; avoid revision mode freezing
   (add-hook 'git-commit-setup-hook (lambda () (setq-local comment-start ";")))
-  (add-hook 'git-commit-mode-hook (lambda () (move-end-of-line nil)))
+  (add-hook 'git-commit-mode-hook (lambda ()
+                                    (progn
+                                      (gearup-flycheck-disable-languagetool)
+                                      (move-end-of-line nil))))
   (add-hook 'magit-revision-mode-hook (lambda () (setq-local comment-start ";")
   (transient-append-suffix 'magit-push "-u" '(1 "=s" "Skip gitlab pipeline" "--push-option=ci.skip")))))
 
