@@ -77,10 +77,15 @@ the project root (e.g. the root directory of the git repository)."
   (setq-local dired-isearch-filenames t)
   (isearch-backward nil t))
 
+;; Add tree-displaying functionality to Dired
+(prelude-require-package 'dired-subtree)
+
+(setq dired-subtree-use-backgrounds nil)
 
 (with-eval-after-load 'dired
   (load "dired-x")
   (add-hook 'dired-mode-hook 'dired-hide-details-mode) ;; initially hide details (e.g. file permissions) in dired buffers
+  (define-key dired-mode-map (kbd "TAB") 'dired-subtree-toggle)
   (define-key dired-mode-map (kbd "RET") 'gearup-dired-find-file-maybe-reuse-buffer)
   (define-key dired-mode-map (kbd "e") 'gearup-dired-find-file-maybe-reuse-buffer)
   (define-key dired-mode-map (kbd "f") 'gearup-dired-find-file-maybe-reuse-buffer)
