@@ -223,4 +223,15 @@ See https://www.keycloak.org/server/all-config#category-http")
 ;;             (scope "openid"))
 ;;         (oauth2-auth-and-store auth-url token-url scope client-id client-secret "http://localhost:8888/foo")))
 ;; (oauth2-token-access-token token)
+
+;; discover Keycloak endpoints at:
+;; https://idp.fls-dev.cloud/auth/realms/development/.well-known/openid-configuration
+
+(prelude-require-package 'adoc-mode)
+
+;; Disable whitespace mode
+(remove-hook 'yaml-mode-hook 'whitespace-mode)
+
+;; Prevent Emacs to go responseless when accidentially pressing C-z
+(global-unset-key (kbd "C-z"))
 ;;; wra-init.el ends here
